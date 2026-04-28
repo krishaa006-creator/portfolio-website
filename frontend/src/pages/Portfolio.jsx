@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navbar from "../components/portfolio/Navbar";
 import Hero from "../components/portfolio/Hero";
 import About from "../components/portfolio/About";
-import Brain from "../components/portfolio/Brain";
 import Projects from "../components/portfolio/Projects";
 import ProjectModal from "../components/portfolio/ProjectModal";
 import Experience from "../components/portfolio/Experience";
@@ -21,7 +20,6 @@ export default function Portfolio() {
         <Hero />
         <Marquee />
         <About />
-        <Brain />
         <Projects onOpen={setActiveProject} />
         <Experience />
         <Community />

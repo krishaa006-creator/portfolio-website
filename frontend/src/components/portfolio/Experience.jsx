@@ -4,7 +4,7 @@ import { Squiggle, Star } from "./Doodles";
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative px-5 md:px-10 py-24 md:py-32 bg-[#EFE6D2] border-y border-[#1A1A1A]/10">
+    <section id="resume" className="relative px-5 md:px-10 py-24 md:py-32 bg-[#EFE6D2] border-y border-[#1A1A1A]/10">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5">

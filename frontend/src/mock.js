@@ -222,8 +222,7 @@ export const projects = [
 
 export const navLinks = [
   { label: "about", href: "#about" },
-  { label: "brain", href: "#brain" },
   { label: "work", href: "#work" },
-  { label: "xp", href: "#experience" },
+  { label: "resume", href: "#resume" },
   { label: "say hi", href: "#contact" },
 ];

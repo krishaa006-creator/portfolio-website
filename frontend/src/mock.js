@@ -216,6 +216,21 @@ export const projects = [
     tags: ["Mobile App", "Sharing Economy", "Urban Mobility"],
     accent: "#E8532C",
     bg: "#F3E7D9",
+    coverImage: "/propark/05.png",
+    slides: [
+      { src: "/propark/06.png", section: "Context Setting & Design Brief" },
+      { src: "/propark/07.png", section: "Empathising with Our Users" },
+      { src: "/propark/08.png", section: "UX Perspective on Indian Parking" },
+      { src: "/propark/09.png", section: "Information Architecture" },
+      { src: "/propark/10.png", section: "The Final Product" },
+      { src: "/propark/11.png", section: "Onboarding Screens" },
+      { src: "/propark/12.png", section: "Home Screen" },
+      { src: "/propark/13.png", section: "Parking Locator Screens" },
+      { src: "/propark/14.png", section: "Parking Booking Screens" },
+      { src: "/propark/15.png", section: "Other Screens" },
+      { src: "/propark/16.png", section: "Notification Screen" },
+      { src: "/propark/17.png", section: "Final Showcase" },
+    ],
     hmw:
       "How might we make parking spaces more accessible in urban cities by unlocking unused private parking spots \u2014 reducing frustration and turning idle space into opportunity?",
     context: [

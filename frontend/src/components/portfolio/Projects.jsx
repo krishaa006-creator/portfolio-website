@@ -46,35 +46,75 @@ export default function Projects({ onOpen }) {
                   </p>
                 </div>
 
-                <div className="md:col-span-7 p-8 md:p-10 bg-[#FFFBF2] border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 flex flex-col justify-between">
-                  <div>
-                    <p className="text-base md:text-lg leading-relaxed text-[#1A1A1A]/85">
-                      {p.description}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {p.tags.map((t) => (
-                        <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mt-8 flex items-center justify-between gap-4">
-                    <div className="flex gap-5 text-sm">
-                      <div>
-                        <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
-                        <div className="font-medium">{p.role}</div>
+                <div className="md:col-span-7 bg-[#FFFBF2] border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 flex flex-col justify-between overflow-hidden">
+                  {p.coverImage ? (
+                    <>
+                      <div className="flex-1 overflow-hidden">
+                        <img
+                          src={p.coverImage}
+                          alt={`${p.title} cover`}
+                          className="w-full h-full object-cover object-center"
+                          style={{ maxHeight: 280 }}
+                        />
                       </div>
+                      <div className="p-6 md:p-8">
+                        <div className="flex flex-wrap gap-2 mb-5">
+                          {p.tags.map((t) => (
+                            <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex gap-5 text-sm">
+                            <div>
+                              <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
+                              <div className="font-medium">{p.role}</div>
+                            </div>
+                            <div>
+                              <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">duration</div>
+                              <div className="font-medium">{p.duration}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
+                            open case study
+                            <Arrow color="currentColor" width={50} />
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="p-8 md:p-10 flex flex-col justify-between h-full">
                       <div>
-                        <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">duration</div>
-                        <div className="font-medium">{p.duration}</div>
+                        <p className="text-base md:text-lg leading-relaxed text-[#1A1A1A]/85">
+                          {p.description}
+                        </p>
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {p.tags.map((t) => (
+                            <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="mt-8 flex items-center justify-between gap-4">
+                        <div className="flex gap-5 text-sm">
+                          <div>
+                            <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
+                            <div className="font-medium">{p.role}</div>
+                          </div>
+                          <div>
+                            <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">duration</div>
+                            <div className="font-medium">{p.duration}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
+                          open case study
+                          <Arrow color="currentColor" width={50} />
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
-                      open case study
-                      <Arrow color="currentColor" width={50} />
-                    </div>
-                  </div>
+                  )}
                 </div>
               </article>
               {idx === 0 && (

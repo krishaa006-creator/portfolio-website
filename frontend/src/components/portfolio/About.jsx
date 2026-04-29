@@ -7,7 +7,7 @@ const BRAIN_IMG =
 
 export default function About() {
   return (
-    <section id="about" className="relative px-5 md:px-10 py-24 md:py-32">
+    <section id="about" className="relative px-5 md:px-10 pt-24 md:pt-32 pb-10 md:pb-14">
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14 items-start">
         <div className="md:col-span-5 md:sticky md:top-32">
           <span className="font-hand text-xl text-[#E8532C]">§ about</span>
@@ -80,7 +80,7 @@ export default function About() {
       </div>
 
       {/* What's in my brain — image based */}
-      <div className="max-w-7xl mx-auto mt-20 md:mt-28">
+      <div className="max-w-7xl mx-auto mt-14 md:mt-20">
         <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
           <div className="md:col-span-5 order-2 md:order-1">
             <span className="font-hand text-xl text-[#E8532C]">§ what's rattling around in here</span>
@@ -102,14 +102,14 @@ export default function About() {
           </div>
 
           <div className="md:col-span-7 order-1 md:order-2">
-            <div className="relative group max-w-[640px] mx-auto md:mx-0">
+            <div className="relative group max-w-[380px] mx-auto md:mx-0">
               {/* tape strips */}
               <div className="absolute -top-3 left-10 z-20 tape" style={{ transform: "rotate(-6deg)" }} />
               <div className="absolute -top-3 right-10 z-20 tape" style={{ transform: "rotate(5deg)" }} />
 
               {/* polaroid */}
               <div
-                className="relative bg-[#FFFBF2] p-3 pb-14 rounded-[6px] shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-0"
+                className="relative bg-[#FFFBF2] p-3 pb-12 rounded-[6px] shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-0"
                 style={{ transform: "rotate(-1.5deg)" }}
               >
                 <img
@@ -119,12 +119,12 @@ export default function About() {
                   loading="lazy"
                 />
                 <div className="absolute left-0 right-0 bottom-3 px-4 flex items-center justify-between">
-                  <span className="font-hand text-xl text-[#1A1A1A]">candid. unfiltered. mostly accurate.</span>
-                  <span className="font-hand text-base text-[#1A1A1A]/60">'25</span>
+                  <span className="font-hand text-base text-[#1A1A1A]">candid. unfiltered. mostly accurate.</span>
+                  <span className="font-hand text-sm text-[#1A1A1A]/60">'25</span>
                 </div>
               </div>
 
-              <div className="mt-5 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
+              <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
                 <span>fig. 01 — Krishaa's brain, mapped</span>
                 <span>circa right now</span>
               </div>

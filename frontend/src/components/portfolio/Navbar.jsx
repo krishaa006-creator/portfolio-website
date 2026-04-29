@@ -36,13 +36,27 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
-          href={`mailto:${personal.email}`}
-          className="hidden md:inline-flex items-center gap-2 btn-ink px-4 py-2 rounded-full text-sm font-medium"
-        >
-          let's chat
-          <span className="text-base">→</span>
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href={personal.resumeUrl}
+            download
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium border border-[#1A1A1A]/30 text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#F7F2E7] hover:border-[#1A1A1A] transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            resume
+          </a>
+          <a
+            href={`mailto:${personal.email}`}
+            className="inline-flex items-center gap-2 btn-ink px-4 py-2 rounded-full text-sm font-medium"
+          >
+            let's chat
+            <span className="text-base">→</span>
+          </a>
+        </div>
 
         <button
           aria-label="menu"
@@ -66,8 +80,20 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-            <li>
-              <a href={`mailto:${personal.email}`} className="inline-flex btn-ink px-4 py-2 rounded-full text-sm mt-2">
+            <li className="flex flex-col gap-2 mt-2">
+              <a
+                href={personal.resumeUrl}
+                download
+                className="inline-flex items-center gap-1.5 btn-outline px-4 py-2 rounded-full text-sm font-medium border border-[#1A1A1A]/30"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                download resume
+              </a>
+              <a href={`mailto:${personal.email}`} className="inline-flex btn-ink px-4 py-2 rounded-full text-sm">
                 let's chat →
               </a>
             </li>

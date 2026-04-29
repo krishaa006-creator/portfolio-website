@@ -11,6 +11,7 @@ export const personal = {
   email: "k.ravishankar@strate.design",
   phone: "+91 94839 00764",
   linkedin: "https://www.linkedin.com/in/krishaa-ravishankar",
+  resumeUrl: "#",
   pitch:
     "I take complex problems and craft seamless solutions that work beautifully\u2014 whether you're holding it or clicking it.",
   longIntro:

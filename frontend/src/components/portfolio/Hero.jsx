@@ -1,13 +1,12 @@
 import React from "react";
 import { personal, funFacts } from "../../mock";
-import { Underline, Star, Sparkle, Arrow, EyeBlink, Lightning } from "./Doodles";
+import { Underline, Sparkle, Arrow, EyeBlink, Lightning } from "./Doodles";
 
 export default function Hero() {
   return (
     <section id="top" className="relative pt-32 md:pt-40 pb-16 md:pb-24 px-5 md:px-10">
-      {/* floating doodles */}
-      <Star className="absolute top-28 right-[8%] anim-floaty" color="#E8532C" size={28} />
-      <Sparkle className="absolute top-[38%] left-[6%] anim-spinslow" color="#2D5F3F" size={16} />
+      {/* floating doodles — kept clear of headline text */}
+      <Sparkle className="absolute top-[62%] left-[2%] anim-spinslow" color="#2D5F3F" size={16} />
       <Lightning className="absolute bottom-16 right-[14%] anim-wiggle" color="#F4C430" size={26} />
 
       <div className="max-w-7xl mx-auto">

@@ -7,8 +7,10 @@ const BRAIN_IMG =
 
 export default function About() {
   return (
-    <section id="about" className="relative px-5 md:px-10 pt-24 md:pt-32 pb-10 md:pb-14">
+    <section id="about" className="relative px-5 md:px-10 py-20 md:py-28">
+      {/* ── Top block: bio + skills ── */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14 items-start">
+        {/* Left: heading + superpower card */}
         <div className="md:col-span-5 md:sticky md:top-32">
           <span className="font-hand text-xl text-[#E8532C]">§ about</span>
           <h2 className="mt-2 font-display text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
@@ -29,6 +31,7 @@ export default function About() {
           </div>
         </div>
 
+        {/* Right: bio text + skills boxes */}
         <div className="md:col-span-7 flex flex-col gap-8">
           <div>
             <p className="text-xl md:text-2xl leading-[1.55] text-[#1A1A1A]/85">
@@ -79,12 +82,13 @@ export default function About() {
         </div>
       </div>
 
-      {/* What's in my brain — image based */}
-      <div className="max-w-7xl mx-auto mt-14 md:mt-20">
+      {/* ── Brain polaroid block ── */}
+      <div className="max-w-7xl mx-auto mt-20 md:mt-28 border-t border-[#1A1A1A]/10 pt-16 md:pt-20">
         <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
+          {/* Left: brain copy */}
           <div className="md:col-span-5 order-2 md:order-1">
             <span className="font-hand text-xl text-[#E8532C]">§ what's rattling around in here</span>
-            <h3 className="mt-2 font-display text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight">
+            <h3 className="mt-2 font-display text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight">
               roughly 87% <span className="italic">design</span>,<br />
               13% <span className="marker">snack planning</span>
             </h3>
@@ -101,13 +105,14 @@ export default function About() {
             </div>
           </div>
 
-          <div className="md:col-span-7 order-1 md:order-2">
-            <div className="relative group max-w-[380px] mx-auto md:mx-0">
+          {/* Right: polaroid — centered within its column */}
+          <div className="md:col-span-7 order-1 md:order-2 flex justify-center">
+            <div className="relative group w-full max-w-[420px]">
               {/* tape strips */}
               <div className="absolute -top-3 left-10 z-20 tape" style={{ transform: "rotate(-6deg)" }} />
               <div className="absolute -top-3 right-10 z-20 tape" style={{ transform: "rotate(5deg)" }} />
 
-              {/* polaroid */}
+              {/* polaroid frame */}
               <div
                 className="relative bg-[#FFFBF2] p-3 pb-12 rounded-[6px] shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-0"
                 style={{ transform: "rotate(-1.5deg)" }}

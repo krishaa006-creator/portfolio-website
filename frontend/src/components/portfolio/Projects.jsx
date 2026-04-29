@@ -4,7 +4,7 @@ import { Arrow, Underline, Sparkle } from "./Doodles";
 
 export default function Projects({ onOpen }) {
   return (
-    <section id="work" className="relative px-5 md:px-10 py-24 md:py-32">
+    <section id="work" className="relative px-5 md:px-10 pt-14 md:pt-20 pb-24 md:pb-32">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between gap-6 mb-10 md:mb-14 flex-wrap">
           <div>

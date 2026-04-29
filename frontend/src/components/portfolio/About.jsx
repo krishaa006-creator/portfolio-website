@@ -7,7 +7,7 @@ const BRAIN_IMG =
 
 export default function About() {
   return (
-    <section id="about" className="relative px-5 md:px-10 py-20 md:py-28">
+    <section id="about" className="relative px-5 md:px-10 pt-20 md:pt-28 pb-8 md:pb-12">
       {/* ── Top block: bio + skills ── */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14 items-start">
         {/* Left: heading + superpower card */}

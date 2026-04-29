@@ -115,12 +115,6 @@ function CollabCard({ c }) {
         </div>
       </div>
 
-      <div
-        className="mt-4 font-hand text-base text-[#F4C430] transition-opacity duration-300"
-        style={{ opacity: open ? 0 : 1 }}
-      >
-        hover for the story →
-      </div>
     </div>
   );
 }

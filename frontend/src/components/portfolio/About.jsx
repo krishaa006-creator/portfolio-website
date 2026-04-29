@@ -36,43 +36,50 @@ export default function About() {
           <p className="mt-6 font-display italic text-3xl md:text-4xl text-[#E8532C] leading-[1.15]">
             “{personal.happyPlace}”
           </p>
+        </div>
+      </div>
 
-          <div className="mt-12 grid sm:grid-cols-2 gap-6">
-            <div className="bg-[#FFFBF2] border border-[#1A1A1A]/12 rounded-2xl p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Dots color="#E8532C" count={4} />
-                <span className="font-hand text-lg">core skills</span>
-              </div>
-              <ul className="flex flex-wrap gap-2">
-                {skills.core.map((s) => (
-                  <li key={s} className="px-3 py-1.5 rounded-full border border-[#1A1A1A]/25 text-sm bg-white/60 hover:bg-[#1A1A1A] hover:text-[#F7F2E7] transition-colors">
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-[#1A1A1A] text-[#F7F2E7] rounded-2xl p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Dots color="#F4C430" count={4} />
-                <span className="font-hand text-lg text-[#F4C430]">tools i hug daily</span>
-              </div>
-              <ul className="flex flex-wrap gap-2">
-                {skills.software.map((s) => (
-                  <li key={s} className="px-3 py-1.5 rounded-full border border-[#F7F2E7]/30 text-sm hover:bg-[#E8532C] hover:border-[#E8532C] transition-colors">
-                    {s}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-5 text-sm text-[#F7F2E7]/70 font-hand text-lg">
-                also: sticky notes, whiteboards, and way too many tabs.
-              </div>
-            </div>
+      {/* Skills row — full width so chips can fit many per line */}
+      <div className="max-w-7xl mx-auto mt-16 md:mt-20 grid md:grid-cols-2 gap-6">
+        <div className="bg-[#FFFBF2] border border-[#1A1A1A]/12 rounded-2xl p-6 md:p-7">
+          <div className="flex items-center gap-2 mb-4">
+            <Dots color="#E8532C" count={4} />
+            <span className="font-hand text-lg">core skills</span>
+          </div>
+          <ul className="flex flex-wrap gap-2">
+            {skills.core.map((s) => (
+              <li
+                key={s}
+                className="px-3 py-1.5 rounded-full border border-[#1A1A1A]/25 text-sm bg-white/60 hover:bg-[#1A1A1A] hover:text-[#F7F2E7] transition-colors whitespace-nowrap"
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-[#1A1A1A] text-[#F7F2E7] rounded-2xl p-6 md:p-7">
+          <div className="flex items-center gap-2 mb-4">
+            <Dots color="#F4C430" count={4} />
+            <span className="font-hand text-lg text-[#F4C430]">tools i hug daily</span>
+          </div>
+          <ul className="flex flex-wrap gap-2">
+            {skills.software.map((s) => (
+              <li
+                key={s}
+                className="px-3 py-1.5 rounded-full border border-[#F7F2E7]/30 text-sm hover:bg-[#E8532C] hover:border-[#E8532C] transition-colors whitespace-nowrap"
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5 text-sm text-[#F7F2E7]/70 font-hand text-lg">
+            also: sticky notes, whiteboards, and way too many tabs.
           </div>
         </div>
       </div>
 
       {/* What's in my brain — image based */}
-      <div className="max-w-7xl mx-auto mt-24 md:mt-32">
+      <div className="max-w-7xl mx-auto mt-20 md:mt-28">
         <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
           <div className="md:col-span-5 order-2 md:order-1">
             <span className="font-hand text-xl text-[#E8532C]">§ what's rattling around in here</span>

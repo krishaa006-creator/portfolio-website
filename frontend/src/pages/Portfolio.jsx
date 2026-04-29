@@ -4,7 +4,8 @@ import Hero from "../components/portfolio/Hero";
 import About from "../components/portfolio/About";
 import Projects from "../components/portfolio/Projects";
 import ProjectModal from "../components/portfolio/ProjectModal";
-import Resume from "../components/portfolio/Resume";
+import Experience from "../components/portfolio/Experience";
+import Community from "../components/portfolio/Community";
 import Contact from "../components/portfolio/Contact";
 import Footer from "../components/portfolio/Footer";
 import Marquee from "../components/portfolio/Marquee";
@@ -20,7 +21,8 @@ export default function Portfolio() {
         <Marquee />
         <About />
         <Projects onOpen={setActiveProject} />
-        <Resume />
+        <Experience />
+        <Community />
         <Contact />
       </main>
       <Footer />

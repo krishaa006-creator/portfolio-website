@@ -45,11 +45,11 @@ export default function About() {
                 <Dots color="#E8532C" count={4} />
                 <span className="font-hand text-lg">core skills</span>
               </div>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="flex flex-wrap gap-1.5">
                 {skills.core.map((s) => (
                   <li
                     key={s}
-                    className="px-3 py-1.5 rounded-full border border-[#1A1A1A]/25 text-sm bg-white/60 hover:bg-[#1A1A1A] hover:text-[#F7F2E7] transition-colors whitespace-nowrap"
+                    className="px-2.5 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-white/60 hover:bg-[#1A1A1A] hover:text-[#F7F2E7] transition-colors"
                   >
                     {s}
                   </li>
@@ -61,11 +61,11 @@ export default function About() {
                 <Dots color="#F4C430" count={4} />
                 <span className="font-hand text-lg text-[#F4C430]">tools i hug daily</span>
               </div>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="flex flex-wrap gap-1.5">
                 {skills.software.map((s) => (
                   <li
                     key={s}
-                    className="px-3 py-1.5 rounded-full border border-[#F7F2E7]/30 text-sm hover:bg-[#E8532C] hover:border-[#E8532C] transition-colors whitespace-nowrap"
+                    className="px-2.5 py-1 rounded-full border border-[#F7F2E7]/30 text-xs hover:bg-[#E8532C] hover:border-[#E8532C] transition-colors"
                   >
                     {s}
                   </li>

@@ -35,50 +35,92 @@ export const brainPieces = [
   { label: "Hunger pangs", value: 3, color: "#C45A3F" },
 ];
 
+export const summary =
+  "UX and Service Designer with over 3 years of experience in user-centred design, service design strategy, and research-led problem solving across MNC internships, freelance projects, and full-time roles. Specialised in translating qualitative and quantitative research into actionable design strategy, with a strong focus on cross-functional collaboration and stakeholder management.";
+
 export const skills = {
   core: [
     "User Research",
-    "Interaction Design",
+    "Qualitative & Quantitative Research",
     "Usability Testing",
+    "Heuristic Evaluation",
+    "Affinity Mapping",
+    "Journey Mapping",
+    "Service Mapping",
+    "Information Architecture",
+    "Interaction Design",
     "Wireframing & Prototyping",
     "Design Thinking",
-    "Journey Mapping",
-    "System Design",
+    "Systems Thinking",
     "Storytelling",
+    "CMF Strategy",
   ],
-  software: ["Figma", "Adobe Illustrator", "Procreate", "Miro"],
+  software: [
+    "Figma",
+    "Adobe Illustrator",
+    "Procreate",
+    "Miro",
+    "Rhino",
+    "Keyshot",
+    "Notion",
+  ],
 };
 
 export const experience = [
   {
     company: "Harman Connected Services",
     role: "Associate Designer",
-    period: "Nov 2024 \u2014 Present",
-    blurb: "Crafting in-car and connected-product experiences.",
+    period: "Nov 2024 \u2014 Oct 2025",
+    blurb: "Trend research \u2192 design strategy across 6 client industries.",
+    bullets: [
+      "Delivered market research and trend studies across 6 client industries including healthcare, automotive, consumer and lifestyle, manufacturing, audio and media, and hospitality, synthesising findings into 70+ insight reports that directly informed design strategy and business decisions.",
+      "Mapped end-to-end user journeys and service blueprints to identify pain points and opportunity areas, applying user-centered design principles throughout the process.",
+      "Collaborated with presales and engineering teams to translate research outputs into design recommendations for client-facing sales pitches, demonstrating strong cross-functional collaboration and stakeholder management.",
+      "Built a personal trend insight repository spanning 6+ sectors to accelerate research cycles and shorten pitch delivery timelines.",
+      "Enhanced visual consistency of presales materials across diverse industries through standardised design systems.",
+    ],
   },
   {
     company: "Bosch Siemens Home Appliances",
-    role: "Design Intern",
+    role: "UX Research Intern",
     period: "Jul 2022 \u2014 May 2024",
-    blurb: "Appliance UX + service touchpoints for home cooks.",
+    blurb: "End-to-end research delivery across 7 countries in the REM region.",
+    bullets: [
+      "Owned end-to-end delivery of 25+ qualitative and quantitative research studies across 7 countries in the REM region \u2014 from participant recruitment and session moderation to insight prioritisation and structured report delivery to cross-functional and stakeholder teams.",
+      "Presented research insights to senior stakeholders across 10 projects, facilitating alignment on design direction and accelerating decision-making at key project milestones.",
+      "Conducted workshops for efficient handover of insights to design teams through ideation workshops.",
+    ],
   },
   {
     company: "Futuring Design Pvt Ltd",
-    role: "Design Intern",
-    period: "Feb \u2014 Jul 2022",
-    blurb: "Future-forward concepting & scenario building.",
+    role: "Product Design and Research Intern",
+    period: "Feb 2022 \u2014 Jul 2022",
+    blurb: "Trend research + 75+ physical prototypes for a major Indian brand.",
+    bullets: [
+      "Delivered a comprehensive market research and trend study for a major Indian interior brand, identifying 13 key innovation opportunities across a targeted product range.",
+      "Built 75+ physical prototypes across multiple material types including foam and wood, enabling rapid concept validation and iterative refinement during the design development phase.",
+    ],
   },
   {
     company: "Newcycl / Rawbin",
     role: "Freelance Designer",
-    period: "2021 \u2014 2024",
-    blurb: "Brand + UX for circular-economy startups.",
+    period: "Apr 2021 \u2014 Apr 2024",
+    blurb: "Early-stage product, brand, and web for a circular-economy startup.",
+    bullets: [
+      "Led early-stage product development for a startup across 24 months, defining the core architecture and functional workability of a home composter, progressing the concept through 8 rounds of prototyping and redesign iterations.",
+      "Logo design including the Brand guide.",
+      "Designing and building their website through Wix, implementing the newly formulated brand language.",
+    ],
   },
   {
     company: "Think Ocean India",
-    role: "Design Intern",
-    period: "Apr \u2014 Jun 2021",
-    blurb: "Awareness campaigns for marine conservation.",
+    role: "Branding and Social Media Intern",
+    period: "Apr 2021 \u2014 Jun 2021",
+    blurb: "Quarterly social strategy + brand mascot for marine conservation.",
+    bullets: [
+      "Developed a quarterly social media strategy for the brand, planning and producing over 20 posts worth of visual content and copy across 2 platforms.",
+      "Creating a brand mascot to be used as an interactive brand feature.",
+    ],
   },
 ];
 
@@ -88,31 +130,69 @@ export const collaborations = [
     year: "2024",
     label: "Selective Student Project",
     role: "Research Plan, Primary & Secondary Research, Report Creation & Service Strategy",
+    bullets: [
+      "Designed and led a comprehensive research plan spanning both primary and secondary methodologies to uncover user needs and service gaps.",
+      "Performed in-depth user research and synthesised findings into a structured report that directly influenced strategic recommendations.",
+      "Developed a service strategy grounded in research insights, contributing a scalable, evidence-based direction to Ikea's design process.",
+    ],
   },
   {
     brand: "Alstom",
     year: "2023",
-    label: "Shortlisted for Development",
+    label: "Project Shortlisted for Development",
     role: "Research Methodology, AI Explorations, Analysis & CMF Strategy, Service Mapping",
+    bullets: [
+      "Defined and executed a rigorous research methodology to map user and stakeholder needs within a complex mobility context by primarily experiencing rail commute for a span of 2 months.",
+      "Transformed research insights into prioritized design actions that defined emerging creative solutions.",
+      "Explored AI-driven design directions, translating emerging possibilities into actionable strategic additions for the project where needed. Led creative analysis and developed a CMF strategy to suit the target audience.",
+      "Built a service blueprint and project plan that shaped its development trajectory and was shortlisted for advancement by the company.",
+    ],
   },
   {
     brand: "Decathlon",
     year: "2021",
-    label: "Shortlisted for Development",
+    label: "Project Shortlisted for Development",
     role: "Context Setting, Secondary Research, Ideation & Quick Prototyping",
+    bullets: [
+      "Executed thorough context-setting and secondary research to establish a strong analytical foundation for ideation.",
+      "Generated and evaluated design concepts through structured ideation, contributing ideas that were carried forward into prototyping.",
+      "Built quick prototypes to validate concepts early, supporting a project outcome that was shortlisted for development consideration.",
+    ],
   },
 ];
 
 export const community = [
   {
-    title: "Speaker \u2014 W Summit x Accenture Song",
-    date: "March 2025",
-    detail: "Invited to speak on service design for the next billion users.",
+    title: "UX India \u2014 UMO Design Foundation",
+    role: "Volunteer, Bangalore Ambassador",
+    date: "Sep 2023 \u2014 Present",
+    bullets: [
+      "Hosted speaker interviews with design professionals, facilitating conversations around UX practice, design careers, research methods and topics pertaining to their keynotes.",
+      "Planned and managed multiple events as part of the Bangalore chapter, coordinating logistics and ensuring seamless execution.",
+      "Created social media content and visual creatives that grew the chapter's online presence and community engagement.",
+    ],
   },
   {
-    title: "Bangalore Ambassador \u2014 UX India (Umo Design Foundation)",
-    date: "Sep 2023 \u2014 Present",
-    detail: "Speaker interviews, social creatives, event planning & management.",
+    title: "W Summit x Accenture Song",
+    role: "Speaker",
+    date: "March 2025",
+    bullets: [
+      "Delivered a talk on \u201cDesigning for the Aftermath\u201d to an audience of design and business professionals, students, and industry leaders.",
+      "Explored the idea of decentralized medical care and its implications for the waste management industry that has not been equipped to manage household medical waste.",
+    ],
+  },
+];
+
+export const certifications = [
+  {
+    title: "Google UX Design Certificate",
+    issuer: "Google, Coursera",
+    detail: "Completed foundational modules covering UX research, wireframing, prototyping and usability testing.",
+  },
+  {
+    title: "Design Thinking for Innovation",
+    issuer: "University of Michigan, Coursera",
+    detail: "2023",
   },
 ];
 

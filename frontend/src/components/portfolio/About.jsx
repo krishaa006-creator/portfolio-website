@@ -3,7 +3,7 @@ import { personal, skills } from "../../mock";
 import { CircleDoodle, Heart, Underline, Dots, Sparkle, Squiggle } from "./Doodles";
 
 const BRAIN_IMG =
-  "https://customer-assets.emergentagent.com/job_quirky-portfolio-1/artifacts/rs86p5k3_brain%20map.png";
+  "https://customer-assets.emergentagent.com/job_quirky-portfolio-1/artifacts/iwwtv6hz_brain%20map.png";
 
 export default function About() {
   return (
@@ -94,27 +94,29 @@ export default function About() {
           </div>
 
           <div className="md:col-span-7 order-1 md:order-2">
-            <div className="relative group">
+            <div className="relative group max-w-[640px] mx-auto md:mx-0">
               {/* tape strips */}
-              <div className="absolute -top-3 left-12 tape z-10" style={{ transform: "rotate(-5deg)" }} />
-              <div className="absolute -top-3 right-12 tape z-10" style={{ transform: "rotate(4deg)" }} />
+              <div className="absolute -top-3 left-10 z-20 tape" style={{ transform: "rotate(-6deg)" }} />
+              <div className="absolute -top-3 right-10 z-20 tape" style={{ transform: "rotate(5deg)" }} />
 
+              {/* polaroid */}
               <div
-                className="relative rounded-[26px] overflow-hidden bg-[#0E0E0E] border border-[#1A1A1A]/30 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)] transition-transform duration-500 group-hover:-translate-y-1"
-                style={{ transform: "rotate(-1deg)" }}
+                className="relative bg-[#FFFBF2] p-3 pb-14 rounded-[6px] shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-0"
+                style={{ transform: "rotate(-1.5deg)" }}
               >
                 <img
                   src={BRAIN_IMG}
-                  alt="What's inside Krishaa's brain — a chart showing the breakdown: 32% user journey mapping, 22% whiteboarding in my mind, 20% questioning everything, 11% UX evaluation, 7% future casting, 5% mental mixtape, 3% hunger pangs."
-                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
+                  alt="What's inside Krishaa's brain — 32% user journey mapping, 22% whiteboarding in my mind, 20% questioning everything, 11% UX evaluation, 7% future casting, 5% mental mixtape, 3% hunger pangs."
+                  className="w-full h-auto block"
                   loading="lazy"
                 />
-                <div className="absolute bottom-3 right-4 font-hand text-base text-[#F4C430]/80">
-                  candid. unfiltered. mostly accurate.
+                <div className="absolute left-0 right-0 bottom-3 px-4 flex items-center justify-between">
+                  <span className="font-hand text-xl text-[#1A1A1A]">candid. unfiltered. mostly accurate.</span>
+                  <span className="font-hand text-base text-[#1A1A1A]/60">'25</span>
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
+              <div className="mt-5 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
                 <span>fig. 01 — Krishaa's brain, mapped</span>
                 <span>circa right now</span>
               </div>

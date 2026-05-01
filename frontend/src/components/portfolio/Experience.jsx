@@ -5,8 +5,9 @@ import {
   education,
   collaborations,
   certifications,
+  skills,
 } from "../../mock";
-import { Squiggle, Star, Sparkle } from "./Doodles";
+import { Squiggle, Star, Sparkle, Dots } from "./Doodles";
 
 /* Job card with hover-expand */
 function JobCard({ job, isFirst }) {
@@ -169,6 +170,51 @@ export default function Experience() {
             {collaborations.map((c) => (
               <CollabCard key={c.brand} c={c} />
             ))}
+          </div>
+        </div>
+
+        {/* skills & software — moved here from About */}
+        <div className="mt-16">
+          <div className="flex items-center gap-3 mb-6">
+            <Dots color="#E8532C" count={4} />
+            <span className="font-hand text-xl text-[#E8532C]">§ skills & tools</span>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div className="bg-[#FFFBF2] border border-[#1A1A1A]/12 rounded-2xl p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Dots color="#E8532C" count={4} />
+                <span className="font-hand text-lg">core skills</span>
+              </div>
+              <ul className="flex flex-wrap gap-1.5">
+                {skills.core.map((s) => (
+                  <li
+                    key={s}
+                    className="px-2.5 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-white/60 hover:bg-[#1A1A1A] hover:text-[#F7F2E7] transition-colors"
+                  >
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-[#1A1A1A] text-[#F7F2E7] rounded-2xl p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Dots color="#F4C430" count={4} />
+                <span className="font-hand text-lg text-[#F4C430]">tools i hug daily</span>
+              </div>
+              <ul className="flex flex-wrap gap-1.5">
+                {skills.software.map((s) => (
+                  <li
+                    key={s}
+                    className="px-2.5 py-1 rounded-full border border-[#F7F2E7]/30 text-xs hover:bg-[#E8532C] hover:border-[#E8532C] transition-colors"
+                  >
+                    {s}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5 text-[#F7F2E7]/70 font-hand text-lg">
+                also: sticky notes, whiteboards, and way too many tabs.
+              </div>
+            </div>
           </div>
         </div>
 

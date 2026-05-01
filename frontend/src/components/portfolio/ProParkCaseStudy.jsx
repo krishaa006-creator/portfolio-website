@@ -109,7 +109,7 @@ export default function ProParkCaseStudy() {
         <SectionHeader n="02" label="Empathising with Our Users" />
 
         {/* Persona photos banner */}
-        <div className="rounded-2xl overflow-hidden mb-8 bg-black">
+        <div className="rounded-2xl overflow-hidden mb-8 bg-[#111111]">
           <img src="/propark/personas.png" alt="Persona portraits" className="w-full h-auto block" loading="lazy" />
         </div>
 
@@ -228,13 +228,13 @@ export default function ProParkCaseStudy() {
       {/* ── 04. INFORMATION ARCHITECTURE ── */}
       <div className="px-8 md:px-12 py-10">
         <SectionHeader n="04" label="Information Architecture for Mobile App" />
-        <div className="rounded-2xl overflow-hidden border border-[#1A1A1A]/10 shadow-sm bg-white">
+        <div className="rounded-2xl overflow-hidden border border-[#1A1A1A]/10 shadow-sm bg-[#F0ECE4]">
           <img src="/propark/ia.png" alt="Information Architecture" className="w-full h-auto block" loading="lazy" />
         </div>
       </div>
 
       {/* ── 05. THE FINAL PRODUCT ── */}
-      <div className="px-8 md:px-12 py-10 bg-[#111] rounded-none">
+      <div className="px-8 md:px-12 py-10 bg-[#111111] rounded-none">
         <SectionHeader n="05" label="The Final Product" />
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
@@ -250,8 +250,8 @@ export default function ProParkCaseStudy() {
               <span className="font-hand text-lg text-[#F4C430]">built in 1 week · dark mode first</span>
             </div>
           </div>
-          <div>
-            <img src="/propark/product.png" alt="ProPark final product screens" className="w-full h-auto block drop-shadow-2xl" loading="lazy" />
+          <div className="rounded-2xl overflow-hidden bg-[#111111]">
+            <img src="/propark/product.png" alt="ProPark final product screens" className="w-full h-auto block" loading="lazy" />
           </div>
         </div>
       </div>
@@ -331,20 +331,22 @@ export default function ProParkCaseStudy() {
             </div>
           </div>
           <div className="flex justify-center">
-            <img
-              src="/propark/notification.png"
-              alt="Notification on lock screen"
-              className="w-full max-w-[280px] h-auto block rounded-3xl shadow-2xl"
-              loading="lazy"
-            />
+            <div className="rounded-2xl overflow-hidden bg-[#111111] p-6 flex items-center justify-center">
+              <img
+                src="/propark/notification.png"
+                alt="Notification on lock screen"
+                className="w-full max-w-[240px] h-auto block rounded-2xl"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── 12. FINAL SHOWCASE ── */}
-      <div className="px-8 md:px-12 py-10 bg-[#0D0D0D]">
+      <div className="px-8 md:px-12 py-10 bg-[#111111]">
         <SectionHeader n="12" label="Final Showcase" />
-        <div className="rounded-2xl overflow-hidden">
+        <div className="rounded-2xl overflow-hidden bg-[#111111]">
           <img src="/propark/showcase.png" alt="ProPark all screens showcase" className="w-full h-auto block" loading="lazy" />
         </div>
       </div>
@@ -368,13 +370,13 @@ function ScreenSection({ n, label, title, subtitle, description, image, imageAlt
   );
 
   const img = (
-    <div>
-      <img src={image} alt={imageAlt} className="w-full h-auto block drop-shadow-xl" loading="lazy" />
+    <div className="rounded-2xl overflow-hidden bg-[#111111]">
+      <img src={image} alt={imageAlt} className="w-full h-auto block" loading="lazy" />
     </div>
   );
 
   return (
-    <div className="px-8 md:px-12 py-10 bg-[#111]">
+    <div className="px-8 md:px-12 py-10 bg-[#111111]">
       <SectionHeader n={n} label={label} />
       <div className="grid md:grid-cols-2 gap-10 items-center">
         {imgRight ? <>{text}{img}</> : <>{img}{text}</>}

@@ -46,18 +46,18 @@ export default function Projects({ onOpen }) {
                   </p>
                 </div>
 
-                <div className="md:col-span-7 bg-[#FFFBF2] border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 flex flex-col justify-between overflow-hidden">
+                <div className="md:col-span-7 border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 flex flex-col justify-between overflow-hidden" style={{ background: p.coverImage ? "#111111" : "#FFFBF2" }}>
                   {p.coverImage ? (
                     <>
-                      <div className="flex-1 overflow-hidden">
+                      {/* Image shown at full natural proportions — no cropping */}
+                      <div className="flex items-center justify-center px-6 pt-6 pb-2">
                         <img
                           src={p.coverImage}
                           alt={`${p.title} cover`}
-                          className="w-full h-full object-cover object-center"
-                          style={{ maxHeight: 280 }}
+                          className="w-full h-auto block"
                         />
                       </div>
-                      <div className="p-6 md:p-8">
+                      <div className="p-6 md:p-8 bg-[#FFFBF2] border-t border-[#1A1A1A]/10">
                         <div className="flex flex-wrap gap-2 mb-5">
                           {p.tags.map((t) => (
                             <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">

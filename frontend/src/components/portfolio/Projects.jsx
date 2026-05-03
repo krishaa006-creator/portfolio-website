@@ -44,6 +44,11 @@ export default function Projects({ onOpen }) {
                   <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: p.accent }}>
                     {p.subtitle}
                   </p>
+                  {p.coverImage && (
+                    <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/70 max-w-xs">
+                      {p.description}
+                    </p>
+                  )}
                 </div>
 
                 <div className="md:col-span-7 border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 flex flex-col justify-between overflow-hidden" style={{ background: p.coverImage ? "#111111" : "#FFFBF2" }}>

@@ -29,79 +29,47 @@ export default function Projects({ onOpen }) {
               className="group text-left block relative"
             >
               <article
-                className="rounded-[28px] border border-[#1A1A1A]/15 overflow-hidden grid md:grid-cols-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)]"
+                className="rounded-[28px] border border-[#1A1A1A]/15 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)]"
                 style={{ background: p.bg }}
               >
-                <div className="md:col-span-5 p-8 md:p-10 relative">
-                  <div className="flex items-center gap-3">
-                    <span className="font-hand text-2xl" style={{ color: p.accent }}>{p.number}</span>
-                    <div className="h-px flex-1 bg-[#1A1A1A]/25" />
-                    <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/60">{p.year}</span>
-                  </div>
-                  <h3 className="mt-6 font-display text-5xl md:text-6xl font-semibold leading-[1.02] tracking-tight">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: p.accent }}>
-                    {p.subtitle}
-                  </p>
-                  {p.coverImage && (
-                    <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/70 max-w-xs">
-                      {p.description}
-                    </p>
-                  )}
-                </div>
+                {p.coverImage ? (
+                  /* ── Cover-image card: image left, text right ── */
+                  <div className="grid md:grid-cols-[5fr_7fr]">
+                    {/* Left — image fills the column naturally */}
+                    <div className="flex items-center justify-center p-8 md:p-10">
+                      <img
+                        src={p.coverImage}
+                        alt={`${p.title} cover`}
+                        className="w-full h-auto block"
+                      />
+                    </div>
 
-                <div className="md:col-span-7 border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 flex flex-col justify-between overflow-hidden" style={{ background: p.coverImage ? "#111111" : "#FFFBF2" }}>
-                  {p.coverImage ? (
-                    <>
-                      {/* Image shown at full natural proportions — no cropping */}
-                      <div className="flex items-center justify-center px-6 pt-6 pb-2">
-                        <img
-                          src={p.coverImage}
-                          alt={`${p.title} cover`}
-                          className="w-full h-auto block"
-                        />
-                      </div>
-                      <div className="p-6 md:p-8 bg-[#FFFBF2] border-t border-[#1A1A1A]/10">
-                        <div className="flex flex-wrap gap-2 mb-5">
-                          {p.tags.map((t) => (
-                            <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex gap-5 text-sm">
-                            <div>
-                              <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
-                              <div className="font-medium">{p.role}</div>
-                            </div>
-                            <div>
-                              <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">duration</div>
-                              <div className="font-medium">{p.duration}</div>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
-                            open case study
-                            <Arrow color="currentColor" width={50} />
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="p-8 md:p-10 flex flex-col justify-between h-full">
+                    {/* Right — all text, left-aligned */}
+                    <div className="border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 p-8 md:p-10 flex flex-col justify-between">
                       <div>
-                        <p className="text-base md:text-lg leading-relaxed text-[#1A1A1A]/85">
+                        <div className="flex items-center gap-3">
+                          <span className="font-hand text-2xl" style={{ color: p.accent }}>{p.number}</span>
+                          <div className="h-px flex-1 bg-[#1A1A1A]/25" />
+                          <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/60">{p.year}</span>
+                        </div>
+                        <h3 className="mt-6 font-display text-5xl md:text-6xl font-semibold leading-[1.02] tracking-tight">
+                          {p.title}
+                        </h3>
+                        <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: p.accent }}>
+                          {p.subtitle}
+                        </p>
+                        <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/70">
                           {p.description}
                         </p>
                         <div className="mt-5 flex flex-wrap gap-2">
                           {p.tags.map((t) => (
-                            <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">
+                            <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-white/50">
                               {t}
                             </span>
                           ))}
                         </div>
                       </div>
+
                       <div className="mt-8 flex items-center justify-between gap-4">
                         <div className="flex gap-5 text-sm">
                           <div>
@@ -119,8 +87,56 @@ export default function Projects({ onOpen }) {
                         </div>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  /* ── Standard card: text left, content right ── */
+                  <div className="grid md:grid-cols-12">
+                    <div className="md:col-span-5 p-8 md:p-10 relative">
+                      <div className="flex items-center gap-3">
+                        <span className="font-hand text-2xl" style={{ color: p.accent }}>{p.number}</span>
+                        <div className="h-px flex-1 bg-[#1A1A1A]/25" />
+                        <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/60">{p.year}</span>
+                      </div>
+                      <h3 className="mt-6 font-display text-5xl md:text-6xl font-semibold leading-[1.02] tracking-tight">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: p.accent }}>
+                        {p.subtitle}
+                      </p>
+                    </div>
+
+                    <div className="md:col-span-7 border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 bg-[#FFFBF2] flex flex-col justify-between">
+                      <div className="p-8 md:p-10">
+                        <p className="text-base md:text-lg leading-relaxed text-[#1A1A1A]/85">
+                          {p.description}
+                        </p>
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {p.tags.map((t) => (
+                            <span key={t} className="px-3 py-1 rounded-full border border-[#1A1A1A]/25 text-xs bg-[#F7F2E7]">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="px-8 md:px-10 pb-8 md:pb-10 flex items-center justify-between gap-4">
+                        <div className="flex gap-5 text-sm">
+                          <div>
+                            <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
+                            <div className="font-medium">{p.role}</div>
+                          </div>
+                          <div>
+                            <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">duration</div>
+                            <div className="font-medium">{p.duration}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
+                          open case study
+                          <Arrow color="currentColor" width={50} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </article>
               {idx === 0 && (
                 <span className="absolute -top-3 -right-2 bg-[#E8532C] text-[#F7F2E7] text-xs px-3 py-1 rounded-full rotate-6 font-hand text-lg">

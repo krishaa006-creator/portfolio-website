@@ -33,12 +33,12 @@ function Sticker({ pos: initPos, rotate, children, zBase = 50 }) {
     >
       {!touched && (
         <div
-          className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap
-            bg-[#1A1A1A] text-[#F7F2E7] text-[10px] font-medium px-2.5 py-1 rounded-full
-            animate-bounce pointer-events-none select-none"
-          style={{ animationDuration: "1.4s" }}
+          className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap
+            text-[#1A1A1A]/40 text-[9px] font-medium px-2 py-0.5 rounded-full
+            pointer-events-none select-none"
+          style={{ letterSpacing: "0.04em" }}
         >
-          drag me!
+          drag me
         </div>
       )}
       {children}
@@ -174,21 +174,15 @@ function AvatarSticker() {
         <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-white border-r border-b border-[#1A1A1A]/12 rotate-45" />
       </div>
 
-      {/* illustration — outline sticker style: white die-cut + dark stroke */}
+      {/* multiply blends away the white background; outline via drop-shadow */}
       <img
-        src="/krishaa-avatar-sticker.png"
+        src="/krishaa-avatar-sticker-nobg.png"
         alt="Krishaa drinking coffee"
         style={{
           width: 120,
           height: 120,
           objectFit: "contain",
           display: "block",
-          filter:
-            "drop-shadow(0 0 0px #1A1A1A) " +
-            "drop-shadow(0 0 3px #1A1A1A) " +
-            "drop-shadow(0 0 6px #F7F2E7) " +
-            "drop-shadow(0 0 9px #F7F2E7) " +
-            "drop-shadow(0 0 12px #F7F2E7)",
         }}
         draggable={false}
       />
@@ -217,10 +211,10 @@ export default function DraggableStickers() {
          Hot take note: top-right, x≈79% from left, y≈53px from top
          Avatar sticker: mid-right, x≈49% from left, y≈220px from top  */
 
-      // A: hot take — pushed below nav so tape clears it
+      // A: hot take — well below nav, level with headline top
       const heroA = {
         x: Math.min(Math.round(vw * 0.77), vw - 215),
-        y: heroTop + 130,
+        y: heroTop + 190,
       };
 
       // E: avatar — bio / CTA row level.

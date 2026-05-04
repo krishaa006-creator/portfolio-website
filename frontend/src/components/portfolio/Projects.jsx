@@ -34,18 +34,18 @@ export default function Projects({ onOpen }) {
               >
                 {p.coverImage ? (
                   /* ── Cover-image card: image left, text right ── */
-                  <div className="grid md:grid-cols-[5fr_7fr]">
-                    {/* Left — image fills the column naturally */}
-                    <div className="flex items-center justify-center p-8 md:p-10">
+                  <div className="grid md:grid-cols-[5fr_7fr] items-stretch">
+                    {/* Left — slightly lighter background so the image pops */}
+                    <div className="flex items-center justify-center p-8 md:p-10 max-h-[420px]" style={{ background: "#FBF7EE" }}>
                       <img
                         src={p.coverImage}
                         alt={`${p.title} cover`}
-                        className="w-full h-auto block"
+                        className="w-full h-full object-contain block"
                       />
                     </div>
 
                     {/* Right — all text, left-aligned */}
-                    <div className="border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 p-8 md:p-10 flex flex-col justify-between">
+                    <div className="border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 p-8 md:p-10 flex flex-col">
                       <div>
                         <div className="flex items-center gap-3">
                           <span className="font-hand text-2xl" style={{ color: p.accent }}>{p.number}</span>
@@ -70,7 +70,7 @@ export default function Projects({ onOpen }) {
                         </div>
                       </div>
 
-                      <div className="mt-8 flex items-center justify-between gap-4">
+                      <div className="mt-auto pt-6 flex items-center justify-between gap-4">
                         <div className="flex gap-5 text-sm">
                           <div>
                             <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>

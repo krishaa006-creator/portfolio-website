@@ -47,37 +47,7 @@ export default function ProjectModal({ project, onClose }) {
              PROPARK — full custom case study
           ════════════════════════════════════ */
           <>
-            {/* Cover hero — dark background to show phone mockups cleanly */}
-            <div className="w-full overflow-hidden bg-[#0D0D0D]">
-              <img
-                src={project.coverImage}
-                alt="ProPark cover"
-                className="w-full h-auto block"
-              />
-            </div>
-
-            {/* Meta strip */}
-            <div className="px-8 md:px-12 py-6 border-b border-[#1A1A1A]/10 flex flex-wrap items-center gap-4 bg-[#F7F2E7]">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-1">
-                  <span className="font-hand text-xl" style={{ color: project.accent }}>{project.number}</span>
-                  <div className="h-px w-10 bg-[#1A1A1A]/25" />
-                  <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/55">{project.year} · case study</span>
-                </div>
-                <h2 className="font-display text-4xl md:text-5xl font-semibold leading-[1] tracking-tight">
-                  {project.title}
-                </h2>
-                <p className="mt-1 font-display italic text-lg md:text-xl" style={{ color: project.accent }}>
-                  {project.subtitle}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Meta label="role" value={project.role} />
-                <Meta label="duration" value={project.duration} />
-              </div>
-            </div>
-
-            {/* All 12 case study sections */}
+            {/* Case study opens directly — no repeated cover/meta */}
             <ProParkCaseStudy />
 
             {/* Footer */}

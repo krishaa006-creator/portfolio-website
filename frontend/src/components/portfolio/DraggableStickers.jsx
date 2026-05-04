@@ -46,47 +46,27 @@ function Sticker({ pos: initPos, rotate, children, zBase = 50 }) {
   );
 }
 
-/* ─── Sticker A: hot-take sticky note (outline sticker style) ─── */
+/* ─── Sticker A: hot-take sticky note ─────────────────────────── */
 function HotTakeNote() {
   return (
     <div
-      className="relative p-4 pt-5"
-      style={{
-        width: 196,
-        background: "transparent",
-        /* multi-layer outline: thick white die-cut, then dark stroke */
-        outline: "none",
-        borderRadius: 14,
-        boxShadow:
-          "0 0 0 4px #F7F2E7, 0 0 0 6px #1A1A1A",
-      }}
+      className="relative rounded-[14px] border border-[#1A1A1A]/10 p-4 pt-5"
+      style={{ background: "#FFFBF2", width: 196 }}
     >
-      {/* tape */}
       <div className="tape absolute -top-3 left-1/2 -translate-x-1/2" />
-
       <div className="flex items-center gap-1.5 mb-2">
         <span className="text-base leading-none">🔥</span>
         <span className="font-hand text-[15px] text-[#E8532C]">hot take →</span>
       </div>
-
-      {/* dashed divider for outline feel */}
-      <div
-        className="mb-3"
-        style={{
-          height: 1,
-          background: "repeating-linear-gradient(to right, #1A1A1A33 0, #1A1A1A33 5px, transparent 5px, transparent 9px)",
-        }}
-      />
-
+      <div className="h-px bg-[#1A1A1A]/10 mb-3" />
       <p className="text-[12px] leading-snug text-[#1A1A1A]/80">
         UX, product, service — pick your favourite label. I'll be over here making things make sense.
       </p>
-
-      <div className="mt-3 flex items-center gap-1">
+      <div className="mt-3 flex items-center gap-1 opacity-40">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-px flex-1 bg-[#1A1A1A]" style={{ opacity: 0.18 - i * 0.02 }} />
+          <div key={i} className="h-px flex-1 bg-[#1A1A1A]" style={{ opacity: 0.5 - i * 0.08 }} />
         ))}
-        <span className="text-[10px] opacity-30">✦</span>
+        <span className="text-[10px]">✦</span>
       </div>
     </div>
   );
@@ -194,7 +174,7 @@ function AvatarSticker() {
         <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-white border-r border-b border-[#1A1A1A]/12 rotate-45" />
       </div>
 
-      {/* illustration — natural sticker shape, no circle crop */}
+      {/* illustration — outline sticker style: white die-cut + dark stroke */}
       <img
         src="/krishaa-avatar-sticker.png"
         alt="Krishaa drinking coffee"
@@ -203,8 +183,12 @@ function AvatarSticker() {
           height: 120,
           objectFit: "contain",
           display: "block",
-          /* white outline glow mimics sticker die-cut border */
-          filter: "drop-shadow(0 0 5px #FFFBF2) drop-shadow(0 0 5px #FFFBF2)",
+          filter:
+            "drop-shadow(0 0 0px #1A1A1A) " +
+            "drop-shadow(0 0 3px #1A1A1A) " +
+            "drop-shadow(0 0 6px #F7F2E7) " +
+            "drop-shadow(0 0 9px #F7F2E7) " +
+            "drop-shadow(0 0 12px #F7F2E7)",
         }}
         draggable={false}
       />

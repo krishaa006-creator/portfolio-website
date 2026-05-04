@@ -9,66 +9,107 @@ const BRAIN_IMG =
 /* ── Tired laptop SVG sticker ─────────────────────────────────── */
 function LaptopSticker() {
   return (
-    <div className="relative select-none" style={{ width: 200 }}>
-      {/* speech bubble */}
-      <div
-        className="absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap
-          bg-[#FFFBF2] border border-[#1A1A1A]/15 rounded-[12px] px-3 py-2
-          font-hand text-[12px] text-[#1A1A1A] shadow-sm z-10"
-        style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.10))" }}
+    <div className="select-none" style={{ width: 220, position: "relative" }}>
+      <svg
+        viewBox="0 0 220 150"
+        width="220"
+        height="150"
+        style={{ display: "block", overflow: "visible" }}
+        aria-hidden
       >
-        ask her to give me a break!
-        {/* bubble tail */}
-        <div className="absolute -bottom-[7px] left-1/2 -translate-x-1/2 w-3 h-3
-          bg-[#FFFBF2] border-r border-b border-[#1A1A1A]/15 rotate-45" />
-      </div>
+        {/* ── screen lid ── */}
+        <rect x="14" y="2" width="192" height="118" rx="10" fill="#D9D6CF" stroke="#1A1A1A" strokeWidth="2.5" />
+        {/* camera bump */}
+        <circle cx="110" cy="11" r="3.5" fill="#B0ADA6" />
+        {/* display */}
+        <rect x="22" y="17" width="176" height="96" rx="6" fill="#1C1C1E" />
 
-      {/* laptop illustration */}
-      <svg viewBox="0 0 200 140" width="200" height="140" aria-hidden>
-        {/* screen housing */}
-        <rect x="14" y="4" width="172" height="110" rx="10" fill="#D8D5CE" stroke="#1A1A1A" strokeWidth="2.5"/>
-        {/* camera dot */}
-        <circle cx="100" cy="11" r="3" fill="#A9A6A0"/>
-        {/* display area */}
-        <rect x="22" y="16" width="156" height="92" rx="6" fill="#1C1C1E"/>
+        {/* ── face ── */}
+        {/* left eye white */}
+        <ellipse cx="78" cy="57" rx="20" ry="15" fill="#1A1A1E" />
+        <ellipse cx="78" cy="60" rx="14" ry="10" fill="#FFFBF2" />
+        <circle  cx="78" cy="62"  r="6"  fill="#1C1C1E" />
+        <circle  cx="81" cy="60"  r="2"  fill="white" opacity="0.75" />
+        {/* left droopy eyelid — heavy, covering top half of eye */}
+        <path d="M58 57 Q78 43 98 57" fill="#1C1C1E" />
 
-        {/* — tired face on screen — */}
-        {/* left eye socket */}
-        <ellipse cx="72" cy="52" rx="17" ry="13" fill="#2C2C2E"/>
-        <ellipse cx="72" cy="55" rx="12" ry="9" fill="#FFFBF2"/>
-        <circle cx="72" cy="57" r="5" fill="#1C1C1E"/>
-        <circle cx="74" cy="55" r="1.5" fill="white" opacity="0.7"/>
-        {/* left droopy eyelid */}
-        <path d="M55 52 Q72 40 89 52" fill="#1C1C1E"/>
-
-        {/* right eye socket */}
-        <ellipse cx="128" cy="52" rx="17" ry="13" fill="#2C2C2E"/>
-        <ellipse cx="128" cy="55" rx="12" ry="9" fill="#FFFBF2"/>
-        <circle cx="128" cy="57" r="5" fill="#1C1C1E"/>
-        <circle cx="130" cy="55" r="1.5" fill="white" opacity="0.7"/>
+        {/* right eye white */}
+        <ellipse cx="142" cy="57" rx="20" ry="15" fill="#1A1A1E" />
+        <ellipse cx="142" cy="60" rx="14" ry="10" fill="#FFFBF2" />
+        <circle  cx="142" cy="62"  r="6"  fill="#1C1C1E" />
+        <circle  cx="145" cy="60"  r="2"  fill="white" opacity="0.75" />
         {/* right droopy eyelid */}
-        <path d="M111 52 Q128 40 145 52" fill="#1C1C1E"/>
+        <path d="M122 57 Q142 43 162 57" fill="#1C1C1E" />
 
         {/* tired mouth — downward curve */}
-        <path d="M82 80 Q100 74 118 80" stroke="#FFFBF2" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+        <path d="M90 88 Q110 81 130 88"
+          stroke="#FFFBF2" strokeWidth="2.5" fill="none" strokeLinecap="round" />
 
-        {/* sweat drop left */}
-        <path d="M52 38 Q50 30 54 25 Q58 30 56 38 Q54 43 52 38Z" fill="#88C8F0" opacity="0.85"/>
-        {/* sweat drop right */}
-        <path d="M148 36 Q146 29 150 24 Q154 29 152 36 Q150 41 148 36Z" fill="#88C8F0" opacity="0.85"/>
+        {/* sweat drop (right side) */}
+        <path d="M155 28 Q153 19 157 13 Q162 19 160 28 Q158 34 155 28Z"
+          fill="#88C8F0" opacity="0.9" />
 
-        {/* zzz */}
-        <text x="155" y="28" fill="#FFFBF2" fontSize="11" fontWeight="600" opacity="0.55">z</text>
-        <text x="163" y="21" fill="#FFFBF2" fontSize="9" fontWeight="600" opacity="0.4">z</text>
-        <text x="169" y="16" fill="#FFFBF2" fontSize="7" fontWeight="600" opacity="0.25">z</text>
+        {/* zzz rising */}
+        <text x="34" y="36" fill="#FFFBF2" fontSize="13" fontWeight="700" opacity="0.55"
+          fontFamily="serif">z</text>
+        <text x="26" y="26" fill="#FFFBF2" fontSize="10" fontWeight="700" opacity="0.35"
+          fontFamily="serif">z</text>
+        <text x="20" y="18" fill="#FFFBF2" fontSize="7" fontWeight="700" opacity="0.2"
+          fontFamily="serif">z</text>
 
-        {/* keyboard base */}
-        <rect x="8" y="114" width="184" height="16" rx="5" fill="#C8C5BE" stroke="#1A1A1A" strokeWidth="2.5"/>
+        {/* ── keyboard base ── */}
+        <rect x="8"  y="120" width="204" height="17" rx="5"
+          fill="#C8C5BE" stroke="#1A1A1A" strokeWidth="2.5" />
         {/* trackpad */}
-        <rect x="76" y="117" width="48" height="9" rx="3" fill="#B4B1AA"/>
+        <rect x="82" y="123" width="56" height="10" rx="3" fill="#B5B2AB" />
+        {/* hinge line */}
+        <line x1="8" y1="120" x2="212" y2="120" stroke="#1A1A1A" strokeWidth="1" opacity="0.4" />
         {/* bottom foot bar */}
-        <rect x="2" y="128" width="196" height="8" rx="4" fill="#BEBBB4" stroke="#1A1A1A" strokeWidth="2"/>
+        <rect x="2" y="135" width="216" height="10" rx="4"
+          fill="#BFBCB5" stroke="#1A1A1A" strokeWidth="2" />
+
+        {/* low battery indicator — bottom right of screen */}
+        <rect x="160" y="102" width="24" height="10" rx="2"
+          fill="none" stroke="#FFFBF2" strokeWidth="1.5" opacity="0.5" />
+        <rect x="162" y="104" width="6" height="6" rx="1"
+          fill="#E8532C" opacity="0.7" />
+        <rect x="184" y="105" width="3" height="5" rx="1"
+          fill="#FFFBF2" opacity="0.5" />
       </svg>
+
+      {/* speech bubble — floats to the right, always on top */}
+      <div
+        style={{
+          position: "absolute",
+          top: "8px",
+          right: "-145px",
+          zIndex: 30,
+          background: "#FFFBF2",
+          border: "1.5px solid rgba(26,26,26,0.14)",
+          borderRadius: "14px",
+          padding: "8px 12px",
+          fontSize: "11px",
+          fontFamily: "Caveat, cursive",
+          color: "#1A1A1A",
+          whiteSpace: "nowrap",
+          boxShadow: "0 3px 10px rgba(0,0,0,0.10)",
+          lineHeight: 1.4,
+        }}
+      >
+        ask her to give me a break!
+        {/* tail pointing left */}
+        <div style={{
+          position: "absolute",
+          left: "-7px",
+          top: "50%",
+          transform: "translateY(-50%) rotate(45deg)",
+          width: "12px",
+          height: "12px",
+          background: "#FFFBF2",
+          borderLeft: "1.5px solid rgba(26,26,26,0.14)",
+          borderBottom: "1.5px solid rgba(26,26,26,0.14)",
+        }} />
+      </div>
     </div>
   );
 }
@@ -80,19 +121,22 @@ export default function About() {
   const brainRightRef = useReveal("right", 100);
 
   const [dangled, setDangled] = useState(false);
+  const wrapperRef  = useRef(null);
   const polaroidRef = useRef(null);
 
+  /* trigger dangle once wrapper is 30% in view */
   useEffect(() => {
-    const el = polaroidRef.current;
+    const el = wrapperRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setDangled(true);
+          /* slight delay so scroll-reveal opacity is done first */
+          setTimeout(() => setDangled(true), 400);
           obs.disconnect();
         }
       },
-      { threshold: 0.45 }
+      { threshold: 0.3 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -158,30 +202,31 @@ export default function About() {
             </div>
           </div>
 
-          <div ref={brainRightRef} className="md:col-span-7 order-1 md:order-2 flex justify-center">
-            {/* wrapper — laptop lives behind polaroid here */}
-            <div className="relative group w-full max-w-[420px]">
+          <div ref={brainRightRef} className="md:col-span-7 order-1 md:order-2">
+            {/*
+              Visual stack (normal flow, no absolute tricks):
+              ┌─────────────────────────────┐  ← tapes (absolute on polaroid wrapper)
+              │       polaroid (z-10)        │  ← dangles on scroll
+              └─────────────────────────────┘
+              [  fig. caption  ]
+              ┌─────────────────────┐          ← overlaps polaroid by 20px via -mt-5
+              │  laptop screen+face │  z-0 (behind polaroid overlap)  [bubble →]
+              │  keyboard + base    │  clearly visible below
+              └─────────────────────┘
+            */}
+            <div ref={wrapperRef} className="relative">
 
               {/* tapes */}
-              <div className="absolute -top-3 left-10 z-20 tape" style={{ transform: "rotate(-6deg)" }} />
-              <div className="absolute -top-3 right-10 z-20 tape" style={{ transform: "rotate(5deg)" }} />
+              <div className="absolute -top-3 left-10 z-20 tape"
+                style={{ transform: "rotate(-6deg)" }} />
+              <div className="absolute -top-3 right-10 z-20 tape"
+                style={{ transform: "rotate(5deg)" }} />
 
-              {/* laptop sticker — behind the polaroid (z-0), peeks below-left */}
-              <div
-                className="absolute z-0 pointer-events-none"
-                style={{ bottom: "-60px", left: "-30px" }}
-              >
-                <LaptopSticker />
-              </div>
-
-              {/* polaroid card — on top (z-10) */}
+              {/* ── polaroid card ── */}
               <div
                 ref={polaroidRef}
                 className={`relative z-10 bg-[#FFFBF2] p-3 pb-12 rounded-[6px]
                   shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)]
-                  transition-all duration-500
-                  group-hover:-translate-y-2 group-hover:rotate-0
-                  group-hover:shadow-[0_32px_55px_-22px_rgba(0,0,0,0.35)]
                   ${dangled ? "polaroid-dangle" : ""}`}
                 style={dangled ? {} : { transform: "rotate(-1.5deg)" }}
               >
@@ -192,15 +237,27 @@ export default function About() {
                   loading="lazy"
                 />
                 <div className="absolute left-0 right-0 bottom-3 px-4 flex items-center justify-between">
-                  <span className="font-hand text-base text-[#1A1A1A]">candid. unfiltered. mostly accurate.</span>
+                  <span className="font-hand text-base text-[#1A1A1A]">
+                    candid. unfiltered. mostly accurate.
+                  </span>
                   <span className="font-hand text-sm text-[#1A1A1A]/60">'25</span>
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
+              {/* caption */}
+              <div className="mt-4 relative z-10 flex items-center justify-between
+                text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
                 <span>fig. 01 — Krishaa's brain, mapped</span>
                 <span>circa right now</span>
               </div>
+
+              {/* ── laptop sticker ──
+                  Sits below the caption in normal flow. No z-fighting.
+                  Speech bubble (z:30 inline) always floats above everything. */}
+              <div className="mt-2 pl-6">
+                <LaptopSticker />
+              </div>
+
             </div>
           </div>
         </div>

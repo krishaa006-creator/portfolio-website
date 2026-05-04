@@ -117,6 +117,7 @@ export default function Hero() {
           <div className="md:col-span-5 relative perspective-wrap" style={wordStyle(700)}>
             <div className="absolute -top-3 left-10 tape" style={{ transform: "rotate(-4deg)" }} />
             <div
+              id="hero-world-card"
               ref={noteRef}
               className="sticky-note bg-[#FFFBF2] border border-[#1A1A1A]/12 rounded-[20px] p-6 md:p-7 relative cursor-default"
               style={{ transformStyle: "preserve-3d", ...tiltStyle }}

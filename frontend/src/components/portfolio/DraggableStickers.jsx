@@ -217,13 +217,18 @@ export default function DraggableStickers() {
         y: heroTop + 190,
       };
 
-      // E: avatar — bio / CTA row level.
-      //    Use vh so it tracks where the bio starts regardless of headline wrapping.
-      const vh = window.innerHeight;
-      const heroE = {
-        x: Math.min(Math.round(vw * 0.57), vw - 135),
-        y: heroTop + Math.round(vh * 0.62),
-      };
+      // E: avatar — bottom-left corner of the "today in Krishaa's world" card
+      const card = document.getElementById("hero-world-card");
+      const cardRect = card ? card.getBoundingClientRect() : null;
+      const heroE = cardRect
+        ? {
+            x: Math.round(cardRect.left + window.scrollX) - 30,
+            y: Math.round(cardRect.bottom + window.scrollY) - 110,
+          }
+        : {
+            x: Math.min(Math.round(vw * 0.57), vw - 135),
+            y: heroTop + Math.round(window.innerHeight * 0.62),
+          };
 
       /* ── About "brain" section sticker positions ─────────────── */
 

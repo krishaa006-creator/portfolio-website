@@ -184,44 +184,44 @@ p { text-wrap: pretty; }
 /* Prevent centered App */
 .App { text-align: left; }
 
-/* ── Landing page micro-interaction keyframes ──────── */
-@keyframes heroWord {
-  from { opacity: 0; transform: translateY(20px) skewY(2deg); }
-  to   { opacity: 1; transform: translateY(0) skewY(0); }
-}
-@keyframes revealUp {
-  from { opacity: 0; transform: translateY(26px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes revealLeft {
-  from { opacity: 0; transform: translateX(-22px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes revealRight {
-  from { opacity: 0; transform: translateX(22px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes popIn {
-  0%   { opacity: 0; transform: scale(0.72) rotate(var(--rot, 0deg)); }
-  65%  { transform: scale(1.12) rotate(var(--rot, 0deg)); }
-  100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); }
-}
-@keyframes bounceBadge {
-  0%, 100% { transform: translateY(0) rotate(6deg); }
-  40%       { transform: translateY(-8px) rotate(6deg); }
-}
-@keyframes arrowNudge {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(7px); }
+/* ── Landing page micro-interaction animations ──────── */
+
+/* Hero word entrance — keyframe (used with inline style for reliable mount timing) */
+@keyframes heroWordIn {
+  from { opacity: 0; transform: translateY(28px) skewY(3deg); }
+  to   { opacity: 1; transform: translateY(0px)  skewY(0deg); }
 }
 
-.anim-hero-word    { animation: heroWord 0.7s cubic-bezier(0.22,1,0.36,1) both; }
-.anim-reveal-up    { animation: revealUp 0.65s cubic-bezier(0.22,1,0.36,1) both; }
-.anim-reveal-left  { animation: revealLeft 0.65s cubic-bezier(0.22,1,0.36,1) both; }
-.anim-reveal-right { animation: revealRight 0.65s cubic-bezier(0.22,1,0.36,1) both; }
-.anim-pop-in       { animation: popIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+/* Continuous badge bounce */
+@keyframes bounceBadge {
+  0%, 100% { transform: translateY(0)   rotate(6deg); }
+  40%       { transform: translateY(-10px) rotate(6deg); }
+}
+
+/* Arrow nudge on card hover */
+@keyframes arrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(8px); }
+}
+
+/* Continuous badge bounce class */
 .anim-bounce-badge { animation: bounceBadge 1.8s ease-in-out infinite; }
-.group:hover .anim-arrow { animation: arrowNudge 0.55s ease-in-out 2; }
+
+/* Arrow nudge triggered by group hover */
+.group:hover .anim-arrow { animation: arrowNudge 0.5s ease-in-out 2; }
+
+/* ── Scroll reveal — transition-based (reliable) ─────
+   Elements start hidden; add .is-revealed to animate in */
+.reveal-base {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+              transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-base.is-revealed { opacity: 1; transform: none !important; }
+
+.reveal-up    { transform: translateY(36px); }
+.reveal-left  { transform: translateX(-32px); }
+.reveal-right { transform: translateX(32px); }
 
 /* Marquee pause on hover */
 .marquee-track { animation: marquee 40s linear infinite; }

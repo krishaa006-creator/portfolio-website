@@ -8,8 +8,8 @@ export default function Contact() {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
-  const [leftRef, leftVisible]   = useReveal(0.08);
-  const [rightRef, rightVisible] = useReveal(0.08);
+  const leftRef  = useReveal("left",  0);
+  const rightRef = useReveal("right", 140);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -37,19 +37,11 @@ export default function Contact() {
       <Sparkle className="absolute bottom-16 left-[10%] anim-spinslow" color="#F4C430" size={20} />
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14">
-        <div
-          ref={leftRef}
-          className="md:col-span-6"
-          style={{
-            animation: leftVisible ? "revealLeft 0.65s cubic-bezier(0.22,1,0.36,1) both" : "none",
-            opacity: leftVisible ? undefined : 0,
-          }}
-        >
+        <div ref={leftRef} className="md:col-span-6">
           <span className="font-hand text-xl text-[#F4C430]">§ say hi, i'll say hi back</span>
           <h2 className="mt-2 font-display text-6xl md:text-8xl font-semibold leading-[0.98] tracking-tight">
             let's make<br />
-            <span className="italic text-[#E8532C]">something</span>
-            <br />
+            <span className="italic text-[#E8532C]">something</span><br />
             good.
           </h2>
           <Underline width={180} color="#F4C430" className="mt-4" />
@@ -60,17 +52,17 @@ export default function Contact() {
 
           <div className="mt-10 space-y-3">
             {[
-              { label: "email",    value: personal.email,              href: `mailto:${personal.email}` },
-              { label: "phone",    value: personal.phone,              href: `tel:${personal.phone.replace(/\s/g, "")}` },
-              { label: "linkedin", value: "@krishaa-ravishankar",      href: personal.linkedin },
-            ].map(({ label, value, href }, i) => (
+              { label: "email",    value: personal.email,         href: `mailto:${personal.email}` },
+              { label: "phone",    value: personal.phone,         href: `tel:${personal.phone.replace(/\s/g, "")}` },
+              { label: "linkedin", value: "@krishaa-ravishankar", href: personal.linkedin },
+            ].map(({ label, value, href }) => (
               <a
                 key={label}
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="flex items-baseline gap-4 py-3 border-b border-[#F7F2E7]/20 hover:border-[#E8532C] transition-colors group"
-                style={leftVisible ? { animation: `revealLeft 0.55s cubic-bezier(0.22,1,0.36,1) ${i * 90 + 200}ms both` } : { opacity: 0 }}
+                className="flex items-baseline gap-4 py-3 border-b border-[#F7F2E7]/20
+                  hover:border-[#E8532C] transition-colors group"
               >
                 <span className="text-xs uppercase tracking-widest text-[#F7F2E7]/55 w-20">{label}</span>
                 <span className="font-display text-2xl md:text-3xl font-medium group-hover:text-[#E8532C] transition-colors">
@@ -86,14 +78,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div
-          ref={rightRef}
-          className="md:col-span-6"
-          style={{
-            animation: rightVisible ? "revealRight 0.65s cubic-bezier(0.22,1,0.36,1) 120ms both" : "none",
-            opacity: rightVisible ? undefined : 0,
-          }}
-        >
+        <div ref={rightRef} className="md:col-span-6">
           <form
             onSubmit={onSubmit}
             className="relative bg-[#FFFBF2] text-[#1A1A1A] rounded-[24px] p-7 md:p-9 border border-[#F7F2E7]/10"
@@ -137,8 +122,7 @@ export default function Contact() {
               disabled={submitting}
               className="btn-ink w-full py-3.5 rounded-full font-medium inline-flex items-center justify-center gap-2 disabled:opacity-60"
             >
-              {submitting ? "sending..." : "send it my way"}
-              <span>{submitting ? "⏳" : "→"}</span>
+              {submitting ? "sending... ⏳" : "send it my way →"}
             </button>
             <p className="mt-3 text-center text-xs text-[#1A1A1A]/55">
               no spam, no ghosting — pinky promise.

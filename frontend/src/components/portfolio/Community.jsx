@@ -4,20 +4,12 @@ import { community } from "../../mock";
 import { Heart, Sparkle } from "./Doodles";
 import { useReveal } from "../../hooks/useReveal";
 
-function CommunityCard({ c, delay = 0 }) {
+function CommunityCard({ c, delay }) {
   const [open, setOpen] = useState(false);
-  const [ref, visible] = useReveal(0.1);
+  const ref = useReveal("up", delay);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        animation: visible
-          ? `revealUp 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}ms both`
-          : "none",
-        opacity: visible ? undefined : 0,
-      }}
-    >
+    <div ref={ref}>
       <div
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -26,8 +18,9 @@ function CommunityCard({ c, delay = 0 }) {
         onClick={() => setOpen((o) => !o)}
         tabIndex={0}
         className="group bg-[#FFFBF2] border border-[#1A1A1A]/12 rounded-2xl p-6 relative cursor-pointer
-          transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-22px_rgba(0,0,0,0.25)]
-          hover:border-[#1A1A1A]/30 outline-none focus:ring-2 focus:ring-[#E8532C]/40"
+          transition-all duration-300 hover:-translate-y-1
+          hover:shadow-[0_18px_40px_-22px_rgba(0,0,0,0.25)] hover:border-[#1A1A1A]/30
+          outline-none focus:ring-2 focus:ring-[#E8532C]/40"
       >
         <Sparkle className="absolute top-5 right-5 anim-spinslow" color="#F4C430" size={18} />
         <div className="text-xs uppercase tracking-widest text-[#1A1A1A]/55">{c.date}</div>
@@ -35,10 +28,8 @@ function CommunityCard({ c, delay = 0 }) {
         <div className="mt-1 text-sm text-[#1A1A1A]/70">{c.role}</div>
 
         <div className="mt-4 flex items-center justify-between">
-          <span
-            className="font-hand text-base text-[#E8532C] transition-opacity duration-300"
-            style={{ opacity: open ? 0 : 1 }}
-          >
+          <span className="font-hand text-base text-[#E8532C] transition-opacity duration-300"
+            style={{ opacity: open ? 0 : 1 }}>
             hover for the story →
           </span>
           <span
@@ -73,18 +64,12 @@ function CommunityCard({ c, delay = 0 }) {
 }
 
 export default function Community() {
-  const [headerRef, headerVisible] = useReveal(0.1);
+  const headerRef = useReveal("up", 0);
 
   return (
     <section className="relative px-5 md:px-10 py-20 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <div
-          ref={headerRef}
-          style={{
-            animation: headerVisible ? "revealUp 0.65s cubic-bezier(0.22,1,0.36,1) both" : "none",
-            opacity: headerVisible ? undefined : 0,
-          }}
-        >
+        <div ref={headerRef}>
           <div className="flex items-center gap-3 mb-6">
             <Heart color="#E8532C" size={20} />
             <span className="font-hand text-xl text-[#E8532C]">§ community & stages</span>
@@ -97,7 +82,7 @@ export default function Community() {
 
         <div className="grid md:grid-cols-2 gap-5">
           {community.map((c, i) => (
-            <CommunityCard key={c.title} c={c} delay={i * 100} />
+            <CommunityCard key={c.title} c={c} delay={i * 110} />
           ))}
         </div>
       </div>

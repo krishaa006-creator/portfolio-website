@@ -231,17 +231,19 @@ export default function DraggableStickers() {
       const aboutTop = about.getBoundingClientRect().top + window.scrollY;
       const vw       = window.innerWidth;
 
-      /* Hero safe zones (matches the screenshot layout):
-         A) Top-right, between greeting and headline          */
+      /* Hero positions — calibrated from reference screenshot:
+         A) Top-right: just below nav, before the headline begins
+            Reference shows sticker at ~64% from left, ~37px from top  */
       const heroA = {
-        x: Math.min(Math.round(vw * 0.70), vw - 210),
-        y: heroTop + 228,
+        x: Math.min(Math.round(vw * 0.63), vw - 210),
+        y: heroTop + 37,
       };
 
-      /* B) Bottom-left, below the 2-col grid                 */
+      /* B) Bottom-left: below the CTA buttons, left side
+            Reference shows badge at ~13% from left, ~670px from top   */
       const heroB = {
-        x: Math.max(8, Math.round(vw * 0.01)),
-        y: heroTop + 730,
+        x: Math.max(8, Math.round(vw * 0.10)),
+        y: heroTop + 668,
       };
 
       /* About "brain" section safe zones:

@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { personal } from "../../mock";
 import { Arrow, Star, Sparkle, Underline } from "./Doodles";
 import { useToast } from "../../hooks/use-toast";
+import { useReveal } from "../../hooks/useReveal";
 
 export default function Contact() {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [leftRef, leftVisible]   = useReveal(0.08);
+  const [rightRef, rightVisible] = useReveal(0.08);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +18,6 @@ export default function Contact() {
       return;
     }
     setSubmitting(true);
-    // Save locally for now (frontend-only)
     const existing = JSON.parse(localStorage.getItem("krishaa:messages") || "[]");
     existing.push({ ...form, at: new Date().toISOString() });
     localStorage.setItem("krishaa:messages", JSON.stringify(existing));
@@ -27,12 +29,22 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative px-5 md:px-10 py-24 md:py-32 bg-[#1A1A1A] text-[#F7F2E7] overflow-hidden">
+    <section
+      id="contact"
+      className="relative px-5 md:px-10 py-24 md:py-32 bg-[#1A1A1A] text-[#F7F2E7] overflow-hidden"
+    >
       <Star className="absolute top-10 right-[6%] anim-floaty" color="#E8532C" size={24} />
       <Sparkle className="absolute bottom-16 left-[10%] anim-spinslow" color="#F4C430" size={20} />
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14">
-        <div className="md:col-span-6">
+        <div
+          ref={leftRef}
+          className="md:col-span-6"
+          style={{
+            animation: leftVisible ? "revealLeft 0.65s cubic-bezier(0.22,1,0.36,1) both" : "none",
+            opacity: leftVisible ? undefined : 0,
+          }}
+        >
           <span className="font-hand text-xl text-[#F4C430]">§ say hi, i'll say hi back</span>
           <h2 className="mt-2 font-display text-6xl md:text-8xl font-semibold leading-[0.98] tracking-tight">
             let's make<br />
@@ -47,9 +59,25 @@ export default function Contact() {
           </p>
 
           <div className="mt-10 space-y-3">
-            <ContactLine label="email" value={personal.email} href={`mailto:${personal.email}`} />
-            <ContactLine label="phone" value={personal.phone} href={`tel:${personal.phone.replace(/\s/g, "")}`} />
-            <ContactLine label="linkedin" value="@krishaa-ravishankar" href={personal.linkedin} />
+            {[
+              { label: "email",    value: personal.email,              href: `mailto:${personal.email}` },
+              { label: "phone",    value: personal.phone,              href: `tel:${personal.phone.replace(/\s/g, "")}` },
+              { label: "linkedin", value: "@krishaa-ravishankar",      href: personal.linkedin },
+            ].map(({ label, value, href }, i) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className="flex items-baseline gap-4 py-3 border-b border-[#F7F2E7]/20 hover:border-[#E8532C] transition-colors group"
+                style={leftVisible ? { animation: `revealLeft 0.55s cubic-bezier(0.22,1,0.36,1) ${i * 90 + 200}ms both` } : { opacity: 0 }}
+              >
+                <span className="text-xs uppercase tracking-widest text-[#F7F2E7]/55 w-20">{label}</span>
+                <span className="font-display text-2xl md:text-3xl font-medium group-hover:text-[#E8532C] transition-colors">
+                  {value}
+                </span>
+              </a>
+            ))}
           </div>
 
           <div className="mt-10 font-hand text-2xl text-[#F4C430] flex items-center gap-2">
@@ -58,7 +86,14 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="md:col-span-6">
+        <div
+          ref={rightRef}
+          className="md:col-span-6"
+          style={{
+            animation: rightVisible ? "revealRight 0.65s cubic-bezier(0.22,1,0.36,1) 120ms both" : "none",
+            opacity: rightVisible ? undefined : 0,
+          }}
+        >
           <form
             onSubmit={onSubmit}
             className="relative bg-[#FFFBF2] text-[#1A1A1A] rounded-[24px] p-7 md:p-9 border border-[#F7F2E7]/10"
@@ -74,7 +109,7 @@ export default function Contact() {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="e.g. a future collaborator"
-                className="mt-1 w-full bg-transparent border-b-2 border-[#1A1A1A]/30 focus:border-[#E8532C] outline-none py-2 text-lg"
+                className="mt-1 w-full bg-transparent border-b-2 border-[#1A1A1A]/30 focus:border-[#E8532C] outline-none py-2 text-lg transition-colors"
               />
             </label>
             <label className="block mb-4">
@@ -84,7 +119,7 @@ export default function Contact() {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="you@somewhere.cool"
-                className="mt-1 w-full bg-transparent border-b-2 border-[#1A1A1A]/30 focus:border-[#E8532C] outline-none py-2 text-lg"
+                className="mt-1 w-full bg-transparent border-b-2 border-[#1A1A1A]/30 focus:border-[#E8532C] outline-none py-2 text-lg transition-colors"
               />
             </label>
             <label className="block mb-6">
@@ -94,7 +129,7 @@ export default function Contact() {
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="tell me about the problem, the team, the vibe..."
-                className="mt-1 w-full bg-transparent border-b-2 border-[#1A1A1A]/30 focus:border-[#E8532C] outline-none py-2 text-lg resize-none"
+                className="mt-1 w-full bg-transparent border-b-2 border-[#1A1A1A]/30 focus:border-[#E8532C] outline-none py-2 text-lg resize-none transition-colors"
               />
             </label>
             <button
@@ -103,7 +138,7 @@ export default function Contact() {
               className="btn-ink w-full py-3.5 rounded-full font-medium inline-flex items-center justify-center gap-2 disabled:opacity-60"
             >
               {submitting ? "sending..." : "send it my way"}
-              <span>→</span>
+              <span>{submitting ? "⏳" : "→"}</span>
             </button>
             <p className="mt-3 text-center text-xs text-[#1A1A1A]/55">
               no spam, no ghosting — pinky promise.
@@ -112,21 +147,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ContactLine({ label, value, href }) {
-  return (
-    <a
-      href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel="noreferrer"
-      className="flex items-baseline gap-4 py-3 border-b border-[#F7F2E7]/20 hover:border-[#E8532C] transition-colors group"
-    >
-      <span className="text-xs uppercase tracking-widest text-[#F7F2E7]/55 w-20">{label}</span>
-      <span className="font-display text-2xl md:text-3xl font-medium group-hover:text-[#E8532C] transition-colors">
-        {value}
-      </span>
-    </a>
   );
 }

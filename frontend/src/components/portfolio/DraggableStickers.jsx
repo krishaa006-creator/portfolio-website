@@ -211,16 +211,22 @@ export default function DraggableStickers() {
          Hot take note: top-right, x≈79% from left, y≈53px from top
          Avatar sticker: mid-right, x≈49% from left, y≈220px from top  */
 
-      // A: hot take — well below nav, level with headline top
-      const heroA = {
-        x: Math.min(Math.round(vw * 0.77), vw - 215),
-        y: heroTop + 190,
-      };
-
-      // E: avatar — fully outside the left edge of the "today in Krishaa's world" card,
-      //    sitting at the card's bottom so it peeks out beneath/beside it
+      // Measure the card first — used by both heroA and heroE
       const card = document.getElementById("hero-world-card");
       const cardRect = card ? card.getBoundingClientRect() : null;
+
+      // A: hot take — just above the card with 32px margin
+      //    so it shifts naturally with any layout changes
+      const hotTakeH = 210; // approximate rendered height of the note
+      const heroA = cardRect
+        ? {
+            x: Math.min(Math.round(vw * 0.77), vw - 215),
+            y: Math.round(cardRect.top + window.scrollY) - hotTakeH - 32,
+          }
+        : {
+            x: Math.min(Math.round(vw * 0.77), vw - 215),
+            y: heroTop + 260,
+          };
       const avatarW = 150;
       const heroE = cardRect
         ? {

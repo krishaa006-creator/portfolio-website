@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { projects } from "../../mock";
 import { Arrow, Underline, Sparkle } from "./Doodles";
 
 export default function Projects({ onOpen }) {
+  const navigate = useNavigate();
   return (
     <section id="work" className="relative px-5 md:px-10 pt-14 md:pt-20 pb-24 md:pb-32">
       <div className="max-w-7xl mx-auto">
@@ -25,7 +27,7 @@ export default function Projects({ onOpen }) {
           {projects.map((p, idx) => (
             <button
               key={p.id}
-              onClick={() => onOpen(p)}
+              onClick={() => p.id === "propark" ? navigate("/work/propark") : onOpen(p)}
               className="group text-left block relative"
             >
               <article
@@ -35,8 +37,8 @@ export default function Projects({ onOpen }) {
                 {p.coverImage ? (
                   /* ── Cover-image card: image left, text right ── */
                   <div className="grid md:grid-cols-[5fr_7fr] items-stretch">
-                    {/* Left — slightly lighter background so the image pops */}
-                    <div className="flex items-center justify-center p-8 md:p-10 max-h-[420px]" style={{ background: "#FBF7EE" }}>
+                    {/* Left — image column, inherits card background */}
+                    <div className="flex items-center justify-center p-8 md:p-10 max-h-[420px]">
                       <img
                         src={p.coverImage}
                         alt={`${p.title} cover`}

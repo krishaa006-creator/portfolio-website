@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { personal } from "../../mock";
 import { CircleDoodle, Heart, Underline, Sparkle, Squiggle } from "./Doodles";
 import { useReveal } from "../../hooks/useReveal";
@@ -6,11 +6,97 @@ import { useReveal } from "../../hooks/useReveal";
 const BRAIN_IMG =
   "https://customer-assets.emergentagent.com/job_quirky-portfolio-1/artifacts/iwwtv6hz_brain%20map.png";
 
+/* ── Tired laptop SVG sticker ─────────────────────────────────── */
+function LaptopSticker() {
+  return (
+    <div className="relative select-none" style={{ width: 200 }}>
+      {/* speech bubble */}
+      <div
+        className="absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap
+          bg-[#FFFBF2] border border-[#1A1A1A]/15 rounded-[12px] px-3 py-2
+          font-hand text-[12px] text-[#1A1A1A] shadow-sm z-10"
+        style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.10))" }}
+      >
+        ask her to give me a break!
+        {/* bubble tail */}
+        <div className="absolute -bottom-[7px] left-1/2 -translate-x-1/2 w-3 h-3
+          bg-[#FFFBF2] border-r border-b border-[#1A1A1A]/15 rotate-45" />
+      </div>
+
+      {/* laptop illustration */}
+      <svg viewBox="0 0 200 140" width="200" height="140" aria-hidden>
+        {/* screen housing */}
+        <rect x="14" y="4" width="172" height="110" rx="10" fill="#D8D5CE" stroke="#1A1A1A" strokeWidth="2.5"/>
+        {/* camera dot */}
+        <circle cx="100" cy="11" r="3" fill="#A9A6A0"/>
+        {/* display area */}
+        <rect x="22" y="16" width="156" height="92" rx="6" fill="#1C1C1E"/>
+
+        {/* — tired face on screen — */}
+        {/* left eye socket */}
+        <ellipse cx="72" cy="52" rx="17" ry="13" fill="#2C2C2E"/>
+        <ellipse cx="72" cy="55" rx="12" ry="9" fill="#FFFBF2"/>
+        <circle cx="72" cy="57" r="5" fill="#1C1C1E"/>
+        <circle cx="74" cy="55" r="1.5" fill="white" opacity="0.7"/>
+        {/* left droopy eyelid */}
+        <path d="M55 52 Q72 40 89 52" fill="#1C1C1E"/>
+
+        {/* right eye socket */}
+        <ellipse cx="128" cy="52" rx="17" ry="13" fill="#2C2C2E"/>
+        <ellipse cx="128" cy="55" rx="12" ry="9" fill="#FFFBF2"/>
+        <circle cx="128" cy="57" r="5" fill="#1C1C1E"/>
+        <circle cx="130" cy="55" r="1.5" fill="white" opacity="0.7"/>
+        {/* right droopy eyelid */}
+        <path d="M111 52 Q128 40 145 52" fill="#1C1C1E"/>
+
+        {/* tired mouth — downward curve */}
+        <path d="M82 80 Q100 74 118 80" stroke="#FFFBF2" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+
+        {/* sweat drop left */}
+        <path d="M52 38 Q50 30 54 25 Q58 30 56 38 Q54 43 52 38Z" fill="#88C8F0" opacity="0.85"/>
+        {/* sweat drop right */}
+        <path d="M148 36 Q146 29 150 24 Q154 29 152 36 Q150 41 148 36Z" fill="#88C8F0" opacity="0.85"/>
+
+        {/* zzz */}
+        <text x="155" y="28" fill="#FFFBF2" fontSize="11" fontWeight="600" opacity="0.55">z</text>
+        <text x="163" y="21" fill="#FFFBF2" fontSize="9" fontWeight="600" opacity="0.4">z</text>
+        <text x="169" y="16" fill="#FFFBF2" fontSize="7" fontWeight="600" opacity="0.25">z</text>
+
+        {/* keyboard base */}
+        <rect x="8" y="114" width="184" height="16" rx="5" fill="#C8C5BE" stroke="#1A1A1A" strokeWidth="2.5"/>
+        {/* trackpad */}
+        <rect x="76" y="117" width="48" height="9" rx="3" fill="#B4B1AA"/>
+        {/* bottom foot bar */}
+        <rect x="2" y="128" width="196" height="8" rx="4" fill="#BEBBB4" stroke="#1A1A1A" strokeWidth="2"/>
+      </svg>
+    </div>
+  );
+}
+
 export default function About() {
   const leftRef       = useReveal("left",  0);
   const rightRef      = useReveal("right", 120);
   const brainLeftRef  = useReveal("left",  0);
   const brainRightRef = useReveal("right", 100);
+
+  const [dangled, setDangled] = useState(false);
+  const polaroidRef = useRef(null);
+
+  useEffect(() => {
+    const el = polaroidRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setDangled(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.45 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <section id="about" className="relative px-5 md:px-10 pt-20 md:pt-28 pb-8 md:pb-12">
@@ -73,16 +159,31 @@ export default function About() {
           </div>
 
           <div ref={brainRightRef} className="md:col-span-7 order-1 md:order-2 flex justify-center">
+            {/* wrapper — laptop lives behind polaroid here */}
             <div className="relative group w-full max-w-[420px]">
+
+              {/* tapes */}
               <div className="absolute -top-3 left-10 z-20 tape" style={{ transform: "rotate(-6deg)" }} />
               <div className="absolute -top-3 right-10 z-20 tape" style={{ transform: "rotate(5deg)" }} />
+
+              {/* laptop sticker — behind the polaroid (z-0), peeks below-left */}
               <div
-                className="relative bg-[#FFFBF2] p-3 pb-12 rounded-[6px]
+                className="absolute z-0 pointer-events-none"
+                style={{ bottom: "-60px", left: "-30px" }}
+              >
+                <LaptopSticker />
+              </div>
+
+              {/* polaroid card — on top (z-10) */}
+              <div
+                ref={polaroidRef}
+                className={`relative z-10 bg-[#FFFBF2] p-3 pb-12 rounded-[6px]
                   shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)]
                   transition-all duration-500
                   group-hover:-translate-y-2 group-hover:rotate-0
-                  group-hover:shadow-[0_32px_55px_-22px_rgba(0,0,0,0.35)]"
-                style={{ transform: "rotate(-1.5deg)" }}
+                  group-hover:shadow-[0_32px_55px_-22px_rgba(0,0,0,0.35)]
+                  ${dangled ? "polaroid-dangle" : ""}`}
+                style={dangled ? {} : { transform: "rotate(-1.5deg)" }}
               >
                 <img
                   src={BRAIN_IMG}
@@ -95,6 +196,7 @@ export default function About() {
                   <span className="font-hand text-sm text-[#1A1A1A]/60">'25</span>
                 </div>
               </div>
+
               <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
                 <span>fig. 01 — Krishaa's brain, mapped</span>
                 <span>circa right now</span>

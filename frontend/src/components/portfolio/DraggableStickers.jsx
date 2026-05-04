@@ -113,53 +113,6 @@ function DesignStamp() {
   );
 }
 
-/* ─── Sticker C: confession note ──────────────────────────────── */
-function ConfessionNote() {
-  return (
-    <div
-      className="relative rounded-[13px] border border-[#1A1A1A]/10 p-4"
-      style={{ background: "#EFE6D2", width: 182 }}
-    >
-      <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
-        <div className="w-4 h-4 rounded-full bg-[#E8532C] border-2 border-[#1A1A1A]/20 shadow-[0_2px_4px_rgba(0,0,0,0.25)]" />
-        <div className="w-0.5 h-2.5 bg-[#1A1A1A]/40" />
-      </div>
-      <div className="mt-1 flex items-center gap-1.5 mb-2">
-        <span className="text-base leading-none">☕</span>
-        <span className="font-hand text-[15px] text-[#E8532C]">confession →</span>
-      </div>
-      <p className="text-[12px] leading-snug text-[#1A1A1A]/80">
-        I once mapped a coffee shop's entire service journey. unprompted. on a napkin.
-      </p>
-      <div className="mt-3 flex items-center justify-between">
-        <div className="flex gap-1">
-          {["☕","📍","🗺️"].map((e) => (
-            <span key={e} className="text-[11px] opacity-60">{e}</span>
-          ))}
-        </div>
-        <span className="font-hand text-[10px] text-[#1A1A1A]/50">true story</span>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Sticker D: tab-count pill ───────────────────────────────── */
-function TabPill() {
-  return (
-    <div className="rounded-full border-2 border-[#1A1A1A] px-5 py-3" style={{ background: "#F3E7D9" }}>
-      <div className="flex gap-1 mb-1.5 justify-center">
-        {[...Array(7)].map((_, i) => (
-          <div key={i} className="h-1.5 rounded-sm"
-            style={{ width: i === 2 ? 14 : 8, background: i === 2 ? "#E8532C" : "#1A1A1A", opacity: i === 2 ? 1 : 0.25 }} />
-        ))}
-        <span className="text-[9px] text-[#1A1A1A]/50 leading-none self-end">+10</span>
-      </div>
-      <div className="font-hand text-[14px] text-[#1A1A1A] whitespace-nowrap text-center leading-tight">
-        my brain has 17 tabs open 🧠
-      </div>
-    </div>
-  );
-}
 
 /* ─── Sticker E: Krishaa avatar doodle ────────────────────────── */
 function AvatarSticker() {
@@ -239,28 +192,14 @@ export default function DraggableStickers() {
             y: heroTop + Math.round(window.innerHeight * 0.62),
           };
 
-      /* ── About "brain" section sticker positions ─────────────── */
-
-      // C: left margin of brain section
-      const aboutC = {
-        x: Math.max(8, Math.round(vw * 0.01)),
-        y: aboutTop + 660,
-      };
-
-      // D: right side, below the polaroid
-      const aboutD = {
-        x: Math.min(Math.round(vw * 0.68), vw - 240),
-        y: aboutTop + 1020,
-      };
-
-      setPositions({ heroA, heroE, aboutC, aboutD });
+      setPositions({ heroA, heroE });
     }, 120);
 
     return () => clearTimeout(id);
   }, []);
 
   if (!positions) return null;
-  const { heroA, heroE, aboutC, aboutD } = positions;
+  const { heroA, heroE } = positions;
 
   return (
     <div
@@ -275,8 +214,6 @@ export default function DraggableStickers() {
     >
       <Sticker pos={heroA}  rotate="-5deg" zBase={46}><HotTakeNote /></Sticker>
       <Sticker pos={heroE}  rotate="-8deg" zBase={44}><AvatarSticker /></Sticker>
-      <Sticker pos={aboutC} rotate="-4deg" zBase={42}><ConfessionNote /></Sticker>
-      <Sticker pos={aboutD} rotate="3deg"  zBase={40}><TabPill /></Sticker>
     </div>
   );
 }

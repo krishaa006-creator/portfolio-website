@@ -163,33 +163,31 @@ function TabPill() {
 /* ─── Sticker E: Krishaa avatar doodle ────────────────────────── */
 function AvatarSticker() {
   return (
-    <div className="relative" style={{ width: 130 }}>
-      {/* sticker white outline effect */}
-      <div className="rounded-full overflow-hidden"
-        style={{
-          background: "#FFFBF2",
-          padding: 6,
-          boxShadow: "0 0 0 3px #FFFBF2, 0 0 0 4px rgba(0,0,0,0.08)",
-          borderRadius: 999,
-        }}>
-        <img
-          src="/krishaa-avatar-sticker.png"
-          alt="Krishaa drinking coffee"
-          style={{ width: 118, height: 118, objectFit: "cover", borderRadius: 999, display: "block" }}
-          draggable={false}
-        />
-      </div>
-      {/* speech bubble */}
+    <div className="relative" style={{ width: 120 }}>
+      {/* speech bubble above */}
       <div
-        className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap
-          bg-white border border-[#1A1A1A]/12 rounded-full px-3 py-1 font-hand text-[12px] text-[#1A1A1A]
-          shadow-sm"
-        style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }}
+        className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap
+          bg-white border border-[#1A1A1A]/12 rounded-full px-3 py-1
+          font-hand text-[12px] text-[#1A1A1A] shadow-sm"
       >
         coffee? ☕
-        {/* tail */}
         <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-white border-r border-b border-[#1A1A1A]/12 rotate-45" />
       </div>
+
+      {/* illustration — natural sticker shape, no circle crop */}
+      <img
+        src="/krishaa-avatar-sticker.png"
+        alt="Krishaa drinking coffee"
+        style={{
+          width: 120,
+          height: 120,
+          objectFit: "contain",
+          display: "block",
+          /* white outline glow mimics sticker die-cut border */
+          filter: "drop-shadow(0 0 5px #FFFBF2) drop-shadow(0 0 5px #FFFBF2)",
+        }}
+        draggable={false}
+      />
     </div>
   );
 }
@@ -209,28 +207,24 @@ export default function DraggableStickers() {
       const vw = window.innerWidth;
 
       /* ── Hero sticker positions ─────────────────────────────────
-         Calibrated from reference screenshot:
-         The screenshot shows the hot take note at mid-right of the hero,
-         roughly level with the headline end (y ≈ 90–130 below page top),
-         and x at about 50% from left.
-         The stamp badge sits bottom-left below the CTA buttons.       */
+         Calibrated precisely from the reference screenshot
+         (1029px wide viewport):
 
-      // A: hot take — right of headline, top area
+         Hot take note: top-right, x≈79% from left, y≈53px from top
+         Avatar sticker: mid-right, x≈49% from left, y≈220px from top  */
+
+      // A: hot take — top-right, tape peeking behind nav, note body visible below
       const heroA = {
-        x: Math.min(Math.round(vw * 0.52), vw - 210),
-        y: heroTop + 95,
+        x: Math.min(Math.round(vw * 0.77), vw - 215),
+        y: heroTop + 55,
       };
 
-      // B: stamp — bottom-left, below bio+buttons
-      const heroB = {
-        x: Math.max(8, Math.round(vw * 0.10)),
-        y: heroTop + 668,
-      };
-
-      // E: avatar — bottom-right of hero, outside the sticky-note card area
+      // E: avatar — bio / CTA row level.
+      //    Use vh so it tracks where the bio starts regardless of headline wrapping.
+      const vh = window.innerHeight;
       const heroE = {
-        x: Math.min(Math.round(vw * 0.82), vw - 145),
-        y: heroTop + 700,
+        x: Math.min(Math.round(vw * 0.57), vw - 135),
+        y: heroTop + Math.round(vh * 0.62),
       };
 
       /* ── About "brain" section sticker positions ─────────────── */
@@ -247,14 +241,14 @@ export default function DraggableStickers() {
         y: aboutTop + 1020,
       };
 
-      setPositions({ heroA, heroB, heroE, aboutC, aboutD });
+      setPositions({ heroA, heroE, aboutC, aboutD });
     }, 120);
 
     return () => clearTimeout(id);
   }, []);
 
   if (!positions) return null;
-  const { heroA, heroB, heroE, aboutC, aboutD } = positions;
+  const { heroA, heroE, aboutC, aboutD } = positions;
 
   return (
     <div
@@ -268,8 +262,7 @@ export default function DraggableStickers() {
       }}
     >
       <Sticker pos={heroA}  rotate="-5deg" zBase={46}><HotTakeNote /></Sticker>
-      <Sticker pos={heroB}  rotate="6deg"  zBase={44}><DesignStamp /></Sticker>
-      <Sticker pos={heroE}  rotate="-8deg" zBase={43}><AvatarSticker /></Sticker>
+      <Sticker pos={heroE}  rotate="-8deg" zBase={44}><AvatarSticker /></Sticker>
       <Sticker pos={aboutC} rotate="-4deg" zBase={42}><ConfessionNote /></Sticker>
       <Sticker pos={aboutD} rotate="3deg"  zBase={40}><TabPill /></Sticker>
     </div>

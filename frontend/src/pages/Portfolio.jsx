@@ -15,7 +15,7 @@ export default function Portfolio() {
   const [activeProject, setActiveProject] = useState(null);
 
   return (
-    <div className="min-h-screen bg-[#F7F2E7] text-[#1A1A1A] overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#F7F2E7] text-[#1A1A1A] overflow-x-hidden">
       <Navbar />
       <main>
         <Hero />

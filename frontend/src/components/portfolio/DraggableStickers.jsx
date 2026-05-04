@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDraggable } from "../../hooks/useDraggable";
 
-/* ── individual draggable sticker ─────────────────── */
-function Sticker({ initialPos, rotate, children, zBase = 50 }) {
-  const [pos, isDragging, handlers] = useDraggable(initialPos);
-  const [everDragged, setEverDragged] = useState(false);
+/* ─── individual draggable sticker ──────────────────────────────── */
+function Sticker({ pos: initPos, rotate, children, zBase = 50 }) {
+  const [pos, isDragging, handlers] = useDraggable(initPos);
+  const [touched, setTouched] = useState(false);
 
-  const onDown = (e) => {
-    setEverDragged(true);
-    handlers.onMouseDown(e);
-  };
-  const onTouch = (e) => {
-    setEverDragged(true);
-    handlers.onTouchStart(e);
-  };
+  const onDown = (e) => { setTouched(true); handlers.onMouseDown(e); };
+  const onTouch = (e) => { setTouched(true); handlers.onTouchStart(e); };
 
   return (
     <div
@@ -21,28 +15,29 @@ function Sticker({ initialPos, rotate, children, zBase = 50 }) {
       onMouseDown={onDown}
       onTouchStart={onTouch}
       style={{
-        position: "fixed",
+        position: "absolute",
         left: pos.x,
         top:  pos.y,
         zIndex: isDragging ? 9999 : zBase,
-        rotate: isDragging ? "1deg" : rotate,
+        rotate: isDragging ? "0deg" : rotate,
         cursor: isDragging ? "grabbing" : "grab",
         userSelect: "none",
         touchAction: "none",
-        transition: isDragging
-          ? "box-shadow 0.15s, rotate 0.15s"
-          : "rotate 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s",
         filter: isDragging
-          ? "drop-shadow(0 18px 28px rgba(0,0,0,0.22))"
-          : "drop-shadow(0 4px 10px rgba(0,0,0,0.13))",
+          ? "drop-shadow(0 20px 32px rgba(0,0,0,0.24))"
+          : "drop-shadow(0 4px 10px rgba(0,0,0,0.12))",
+        transition: isDragging
+          ? "filter 0.12s, rotate 0.12s"
+          : "filter 0.3s, rotate 0.55s cubic-bezier(0.22,1,0.36,1)",
       }}
     >
-      {!everDragged && (
+      {/* "drag me" hint — disappears after first touch */}
+      {!touched && (
         <div
           className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap
             bg-[#1A1A1A] text-[#F7F2E7] text-[10px] font-medium px-2 py-0.5 rounded-full
-            animate-bounce pointer-events-none"
-          style={{ animationDuration: "1.4s" }}
+            animate-bounce pointer-events-none select-none"
+          style={{ animationDuration: "1.3s" }}
         >
           drag me!
         </div>
@@ -52,118 +47,156 @@ function Sticker({ initialPos, rotate, children, zBase = 50 }) {
   );
 }
 
-/* ── sticker designs ────────────────────────────────── */
-
-function StickyNote({ color = "#FFFBF2", accent = "#E8532C", title, body, tape = true }) {
+/* ─── reusable sticker shapes ─────────────────────────────────── */
+function StickyNote({ bg = "#FFFBF2", accent = "#E8532C", title, body }) {
   return (
     <div
-      className="relative rounded-[12px] border border-[#1A1A1A]/12 p-4 w-[175px]"
-      style={{ background: color, fontFamily: "inherit" }}
+      className="relative rounded-[12px] border border-[#1A1A1A]/12 p-4 w-[168px]"
+      style={{ background: bg }}
     >
-      {tape && (
-        <div
-          className="tape absolute -top-3 left-1/2 -translate-x-1/2"
-          style={{ transform: "translateX(-50%) rotate(-2deg)" }}
-        />
-      )}
+      <div className="tape absolute -top-3 left-1/2 -translate-x-1/2" />
       <div className="font-hand text-base leading-snug" style={{ color: accent }}>{title}</div>
-      <div className="mt-1.5 text-[13px] leading-snug text-[#1A1A1A]/80">{body}</div>
+      <div className="mt-1.5 text-[12px] leading-snug text-[#1A1A1A]/80">{body}</div>
     </div>
   );
 }
 
-function RoundBadge({ bg = "#E8532C", text, subtext, emoji }) {
+function RoundBadge({ bg = "#F4C430", text, sub, emoji }) {
   return (
     <div
-      className="w-[120px] h-[120px] rounded-full border-[3px] border-dashed border-[#1A1A1A]/25
+      className="w-[108px] h-[108px] rounded-full border-[3px] border-dashed border-[#1A1A1A]/25
         flex flex-col items-center justify-center text-center gap-0.5 p-3"
       style={{ background: bg }}
     >
-      {emoji && <div className="text-2xl leading-none">{emoji}</div>}
-      <div className="font-hand text-[13px] leading-tight text-[#1A1A1A] font-medium">{text}</div>
-      {subtext && <div className="text-[10px] text-[#1A1A1A]/70 leading-tight">{subtext}</div>}
+      {emoji && <div className="text-xl leading-none">{emoji}</div>}
+      <div className="font-hand text-[12px] leading-tight text-[#1A1A1A] font-medium">{text}</div>
+      {sub && <div className="text-[9px] text-[#1A1A1A]/60 leading-tight">{sub}</div>}
     </div>
   );
 }
 
-function TagPill({ text, color = "#F4C430" }) {
+function Pill({ text, bg = "#F3E7D9" }) {
   return (
     <div
-      className="px-4 py-2 rounded-full border-2 border-[#1A1A1A] font-hand text-lg text-[#1A1A1A]
-        whitespace-nowrap"
-      style={{ background: color }}
+      className="px-4 py-2 rounded-full border-2 border-[#1A1A1A] font-hand text-base text-[#1A1A1A] whitespace-nowrap"
+      style={{ background: bg }}
     >
       {text}
     </div>
   );
 }
 
-function DesignCard() {
-  return (
-    <div className="bg-[#1A1A1A] text-[#F7F2E7] rounded-[14px] p-4 w-[160px] relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5"
-        style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 12px,#fff 12px,#fff 13px)" }} />
-      <div className="relative font-hand text-[#F4C430] text-base mb-2">design process</div>
-      <div className="relative space-y-1.5">
-        {["empathise", "define", "ideate", "prototype", "test"].map((s, i) => (
-          <div key={s} className="flex items-center gap-2 text-[12px] text-[#F7F2E7]/90">
-            <span className="w-4 h-4 rounded-full border border-[#F7F2E7]/40 flex items-center justify-center text-[9px]
-              font-bold text-[#F4C430]">{i + 1}</span>
-            {s}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ── layout: positions are % of viewport, set on first render ───── */
-function vw(pct) { return (window.innerWidth  * pct) / 100; }
-function vh(pct) { return (window.innerHeight * pct) / 100; }
-
+/* ─── main component ──────────────────────────────────────────── */
 export default function DraggableStickers() {
+  // We resolve section offsets after mount so positions are accurate.
+  // heroEl  → <section id="top">   (the hero)
+  // aboutEl → <section id="about"> (the about, which contains the brain section)
+  const [heroTop,  setHeroTop]  = useState(null);
+  const [aboutTop, setAboutTop] = useState(null);
+
+  useEffect(() => {
+    const hero  = document.getElementById("top");
+    const about = document.getElementById("about");
+    if (hero)  setHeroTop(hero.getBoundingClientRect().top   + window.scrollY);
+    if (about) setAboutTop(about.getBoundingClientRect().top + window.scrollY);
+  }, []);
+
+  // Don't render until we know where the sections are
+  if (heroTop === null || aboutTop === null) return null;
+
+  const vw = (pct) => window.innerWidth * pct / 100;
+
+  /* ── Hero section stickers ──────────────────────────────────
+     Layout: nav(64) → pt-32(128) → greeting(40) → headline(2 lines)
+             → mt-12(48) → 2-col grid [bio+buttons | sticky-note card]
+     Left col ends at ~7/12 of content width.
+     Safe zones:
+       A) Far RIGHT of "hi there" greeting row — above the headline
+       B) Below both columns (after the underline doodle, before marquee)
+  ─────────────────────────────────────────────────────────── */
+
+  // A) Top-right, in the gap between nav and the greeting line
+  //    y ≈ heroTop + 70px, x near right edge but not over nav buttons
+  const heroStickerA = {
+    x: Math.min(vw(72), window.innerWidth - 190),
+    y: heroTop + 72,
+  };
+
+  // B) Bottom-right — below the 2-col grid, right side margin
+  //    y ≈ heroTop + pt(128) + greeting(40) + gap(24) + headline(220) + mt(48) + grid(200) + mt(56) ≈ heroTop + 716
+  const heroStickerB = {
+    x: Math.min(vw(74), window.innerWidth - 130),
+    y: heroTop + 700,
+  };
+
+  /* ── About "snack planning" (brain) section stickers ────────
+     The About component has two halves:
+       1st half: bio text, sticky md:top-32
+       2nd half: brain map polaroid — starts after mt-20 md:mt-28 (≈112px gap)
+     Safe zones:
+       C) Left margin of the brain sub-section text column
+       D) Right edge of the polaroid card
+  ─────────────────────────────────────────────────────────── */
+
+  // About top half is roughly pt-20 md:pt-28 (≈112px) + grid (~420px) → brain section at +530px
+  const brainY = aboutTop + 530;
+
+  // C) Far left, beside the "snack planning" heading
+  const aboutStickerC = {
+    x: Math.max(8, vw(2)),
+    y: brainY + 60,
+  };
+
+  // D) Right side, beside or below the polaroid card
+  const aboutStickerD = {
+    x: Math.min(vw(78), window.innerWidth - 140),
+    y: brainY + 280,
+  };
+
   return (
-    <>
-      {/* 1 — sticky note top-right */}
-      <Sticker initialPos={{ x: vw(78), y: vh(14) }} rotate="-4deg" zBase={50}>
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        inset: 0,
+        pointerEvents: "none",
+        overflow: "visible",
+        zIndex: 40,
+      }}
+    >
+      {/* ── Hero sticker A: between nav and headline ── */}
+      <Sticker pos={heroStickerA} rotate="-4deg" zBase={45}>
         <StickyNote
-          color="#FFFBF2"
-          accent="#E8532C"
-          title="psst →"
-          body="ask me about my design process. i could talk about it forever."
+          accent="#2D5F3F"
+          title="for the record →"
+          body="every project starts with a sticky note. usually several hundred."
         />
       </Sticker>
 
-      {/* 2 — open-to-work badge bottom-left */}
-      <Sticker initialPos={{ x: vw(3), y: vh(62) }} rotate="6deg" zBase={48}>
+      {/* ── Hero sticker B: below the 2-col grid, right side ── */}
+      <Sticker pos={heroStickerB} rotate="5deg" zBase={43}>
         <RoundBadge
           bg="#F4C430"
           emoji="✨"
-          text="open to new projects!"
-          subtext="(yes, right now)"
+          text="open to new projects"
+          sub="(yes, right now!)"
         />
       </Sticker>
 
-      {/* 3 — design card mid-right */}
-      <Sticker initialPos={{ x: vw(82), y: vh(48) }} rotate="3deg" zBase={46}>
-        <DesignCard />
-      </Sticker>
-
-      {/* 4 — coffee tag */}
-      <Sticker initialPos={{ x: vw(5), y: vh(28) }} rotate="-5deg" zBase={44}>
+      {/* ── About sticker C: left of brain section text ── */}
+      <Sticker pos={aboutStickerC} rotate="-6deg" zBase={41}>
         <StickyNote
-          color="#EFE6D2"
-          accent="#2D5F3F"
-          title="☕ status"
-          body="3 coffees in. peak creativity mode. send snacks."
-          tape={true}
+          bg="#EFE6D2"
+          accent="#E8532C"
+          title="true story →"
+          body="the snack thing is 100% accurate. no notes."
         />
       </Sticker>
 
-      {/* 5 — tag pill */}
-      <Sticker initialPos={{ x: vw(70), y: vh(75) }} rotate="-3deg" zBase={42}>
-        <TagPill text="UX + service design 🎨" color="#F3E7D9" />
+      {/* ── About sticker D: right of polaroid ── */}
+      <Sticker pos={aboutStickerD} rotate="3deg" zBase={39}>
+        <Pill text="87% design 🧠  13% snacks 🍕" bg="#F3E7D9" />
       </Sticker>
-    </>
+    </div>
   );
 }

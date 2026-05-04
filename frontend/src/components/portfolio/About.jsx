@@ -6,92 +6,131 @@ import { useReveal } from "../../hooks/useReveal";
 const BRAIN_IMG =
   "https://customer-assets.emergentagent.com/job_quirky-portfolio-1/artifacts/iwwtv6hz_brain%20map.png";
 
-/* ── Animated face that overlays on the brain polaroid ──────────
-   Big cartoon eyes that blink + an expressive mouth.
-   Speech bubble floats to the upper-left of the polaroid.
-──────────────────────────────────────────────────────────────── */
+/* ── Googly-eye panic face — overlaid on the brain polaroid photo ─
+   Style ref: big cartoon eyes (pupils dart around), wide open mouth,
+   spiky starburst speech bubble with lightning bolts shaking.
+   All animation via CSS classes defined in index.css.
+──────────────────────────────────────────────────────────────────*/
 function BrainFace() {
+  /*
+    SVG viewBox "0 0 100 75" scales 1:1 with the image.
+    Face sits center-left on the image so the starburst bubble
+    (upper-right) has room and doesn't overflow.
+
+    Left eye  center: (27, 44)   sclera r=11
+    Right eye center: (50, 44)   sclera r=11
+    Mouth center:     (38, 60)
+    Starburst center: (76, 22)   8-point star
+  */
   return (
-    <>
-      {/* speech bubble — sits outside the polaroid to the left */}
-      <div
-        className="absolute z-30 pointer-events-none"
-        style={{ top: "22%", left: "-10px", transform: "translateX(-100%)" }}
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{ overflow: "visible" }}
+    >
+      <svg
+        viewBox="0 0 100 75"
+        width="100%"
+        height="100%"
+        style={{ display: "block", overflow: "visible" }}
+        aria-hidden
       >
-        <div
-          style={{
-            background: "#FFFBF2",
-            border: "2.5px solid #1A1A1A",
-            borderRadius: "16px",
-            padding: "10px 14px",
-            fontFamily: "Caveat, cursive",
-            fontSize: "15px",
-            fontWeight: 700,
-            color: "#1A1A1A",
-            whiteSpace: "nowrap",
-            lineHeight: 1.35,
-            position: "relative",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-          }}
-        >
-          pls ask her to stop 😭
-          {/* tail pointing right toward the polaroid */}
-          <div
-            style={{
-              position: "absolute",
-              right: "-9px",
-              top: "50%",
-              transform: "translateY(-50%) rotate(45deg)",
-              width: "13px",
-              height: "13px",
-              background: "#FFFBF2",
-              borderTop: "2.5px solid #1A1A1A",
-              borderRight: "2.5px solid #1A1A1A",
-            }}
+
+        {/* ══ STARBURST SPEECH BUBBLE (upper-right) ══ */}
+        {/* Lightning bolt 1 */}
+        <path
+          d="M88,5 L85.5,10 L88.5,10 L86,15.5"
+          stroke="#1A1A1A" strokeWidth="1.4" strokeLinecap="round"
+          strokeLinejoin="round" fill="none"
+        />
+        {/* Lightning bolt 2 */}
+        <path
+          d="M92,2.5 L89.5,8 L92.5,8 L90,14"
+          stroke="#1A1A1A" strokeWidth="1.4" strokeLinecap="round"
+          strokeLinejoin="round" fill="none"
+        />
+
+        {/* 8-point starburst — computed at center (76,22) outerR=15 innerR=9 */}
+        <g className="brain-bubble">
+          <path
+            d="M76,7 L79.5,13.7 L86.6,11.4 L84.3,18.6 L91,22
+               L84.3,25.5 L86.6,32.6 L79.5,30.3 L76,37
+               L72.6,30.3 L65.4,32.6 L67.7,25.5 L61,22
+               L67.7,18.6 L65.4,11.4 L72.6,13.7 Z"
+            fill="white"
+            stroke="#1A1A1A"
+            strokeWidth="1.3"
+            strokeLinejoin="round"
           />
-        </div>
-      </div>
+          {/* Text inside starburst */}
+          <text
+            x="76" y="19.5"
+            textAnchor="middle"
+            fontSize="3.8"
+            fontWeight="900"
+            fontFamily="'Arial Black', Impact, sans-serif"
+            fill="#1A1A1A"
+          >
+            SEND HELP
+          </text>
+          <text
+            x="76" y="25"
+            textAnchor="middle"
+            fontSize="3.8"
+            fontWeight="900"
+            fontFamily="'Arial Black', Impact, sans-serif"
+            fill="#1A1A1A"
+          >
+            FAST
+          </text>
+        </g>
 
-      {/* face SVG — absolutely fills the image, eyes blink, mouth moves */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg
-          viewBox="0 0 100 75"
-          width="100%"
-          height="100%"
-          style={{ display: "block" }}
-          aria-hidden
-        >
-          {/* ── left eye ── */}
-          <g className="brain-eye" style={{ transformOrigin: "32px 30px" }}>
-            {/* white of eye */}
-            <ellipse cx="32" cy="30" rx="10" ry="10" fill="white" opacity="0.92" />
-            {/* iris */}
-            <ellipse cx="32" cy="31" rx="6.5" ry="6.5" fill="#1A1A1A" />
-            {/* pupil shine */}
-            <ellipse cx="34.5" cy="29" rx="2.2" ry="2.2" fill="white" opacity="0.75" />
-            {/* eyelid (covers top, droopy-tired) */}
-            <ellipse cx="32" cy="24.5" rx="10.5" ry="5" fill="#C8A87E" opacity="0.55" />
-          </g>
+        {/* ══ LEFT EYE ══ */}
+        {/* sclera */}
+        <circle cx="27" cy="44" r="11" fill="white" stroke="#1A1A1A" strokeWidth="1.6" />
+        {/* upper eyelid arc (always visible — reference has prominent upper lids) */}
+        <path
+          d="M16.5 40 Q27 33 37.5 40"
+          fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round"
+        />
+        {/* iris + pupil + highlight — this whole group translates to look around */}
+        <g className="brain-iris">
+          <circle cx="27" cy="45" r="7"   fill="#5B8FB9" />
+          <circle cx="27" cy="45" r="4.2" fill="#1A1A1A" />
+          <circle cx="29.5" cy="42.8" r="2" fill="white" opacity="0.85" />
+        </g>
+        {/* eyelid — sweeps down from top to blink */}
+        <circle className="brain-lid" cx="27" cy="44" r="11.2" fill="#1A1A1A" opacity="0.9" />
 
-          {/* ── right eye ── */}
-          <g className="brain-eye" style={{ transformOrigin: "68px 30px", animationDelay: "0.12s" }}>
-            <ellipse cx="68" cy="30" rx="10" ry="10" fill="white" opacity="0.92" />
-            <ellipse cx="68" cy="31" rx="6.5" ry="6.5" fill="#1A1A1A" />
-            <ellipse cx="70.5" cy="29" rx="2.2" ry="2.2" fill="white" opacity="0.75" />
-            <ellipse cx="68" cy="24.5" rx="10.5" ry="5" fill="#C8A87E" opacity="0.55" />
-          </g>
+        {/* ══ RIGHT EYE ══ */}
+        <circle cx="50" cy="44" r="11" fill="white" stroke="#1A1A1A" strokeWidth="1.6" />
+        <path
+          d="M39.5 40 Q50 33 60.5 40"
+          fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round"
+        />
+        <g className="brain-iris brain-iris-r">
+          <circle cx="50" cy="45" r="7"   fill="#5B8FB9" />
+          <circle cx="50" cy="45" r="4.2" fill="#1A1A1A" />
+          <circle cx="52.5" cy="42.8" r="2" fill="white" opacity="0.85" />
+        </g>
+        <circle className="brain-lid brain-lid-r" cx="50" cy="44" r="11.2" fill="#1A1A1A" opacity="0.9" />
 
-          {/* ── mouth — open oval, slightly exasperated ── */}
-          <g className="brain-mouth" style={{ transformOrigin: "50px 56px" }}>
-            <ellipse cx="50" cy="56" rx="10" ry="6" fill="#1A1A1A" opacity="0.82" />
-            {/* inner mouth */}
-            <ellipse cx="50" cy="57" rx="7.5" ry="4" fill="#8B3A3A" opacity="0.75" />
-            {/* teeth */}
-            <rect x="44" y="53" width="12" height="3.5" rx="1.5" fill="white" opacity="0.85" />
-          </g>
-        </svg>
-      </div>
-    </>
+        {/* ══ MOUTH — wide open panicked ══ */}
+        <g className="brain-mouth-g">
+          {/* outer dark shape */}
+          <ellipse cx="38" cy="60" rx="13" ry="8.5" fill="#1A1A1A" />
+          {/* red inner */}
+          <ellipse cx="38" cy="61.5" rx="10.2" ry="6.5" fill="#C13030" />
+          {/* upper teeth */}
+          <rect x="27.5" y="54.5" width="21" height="5.5" rx="2.5" fill="white" />
+          {/* bottom lip shadow line */}
+          <path
+            d="M25.5 60 Q38 70 50.5 60"
+            fill="none" stroke="#1A1A1A" strokeWidth="1.3" strokeLinecap="round"
+          />
+        </g>
+
+      </svg>
+    </div>
   );
 }
 
@@ -163,7 +202,6 @@ export default function About() {
           </div>
 
           <div ref={brainRightRef} className="md:col-span-7 order-1 md:order-2">
-            {/* polaroid — the speech bubble is anchored relative to this wrapper */}
             <div className="relative">
 
               {/* tapes */}
@@ -186,7 +224,7 @@ export default function About() {
                     className="w-full h-auto block"
                     loading="lazy"
                   />
-                  {/* animated eyes + mouth + speech bubble */}
+                  {/* Googly eyes + panicked mouth + starburst bubble */}
                   <BrainFace />
                 </div>
 

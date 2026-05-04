@@ -233,29 +233,66 @@ p { text-wrap: pretty; }
 /* Active squish on buttons */
 .btn-ink:active, .btn-outline-ink:active { transform: scale(0.95) !important; box-shadow: none !important; }
 
-/* Brain face — eye blink */
-@keyframes brainEyeBlink {
-  0%, 80%, 100% { transform: scaleY(1); }
-  86%           { transform: scaleY(0.06); }
-  92%           { transform: scaleY(1); }
-  95%           { transform: scaleY(0.06); }
-  98%           { transform: scaleY(1); }
+/* ── Brain face animations ─────────────────────────────────────── */
+
+/* Pupils dart around nervously */
+@keyframes brainIrisLook {
+  0%,  10% { transform: translate(0px,    0px);   }
+  15%, 25% { transform: translate(2.8px, -1.8px); }
+  30%, 40% { transform: translate(-2px,   1.2px); }
+  45%, 55% { transform: translate(1.6px,  2.4px); }
+  60%, 70% { transform: translate(-2.8px,-1.6px); }
+  75%, 85% { transform: translate(1.2px, -2.2px); }
+  90%,100% { transform: translate(0px,    0px);   }
 }
-.brain-eye {
-  animation: brainEyeBlink 4.2s ease-in-out infinite;
+.brain-iris {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: brainIrisLook 4.8s ease-in-out infinite;
 }
-.brain-eye:nth-child(2) {
-  animation-delay: 0.12s;
+.brain-iris-r { animation-delay: 0.08s; }
+
+/* Eyelids sweep down to blink */
+@keyframes brainLidBlink {
+  0%, 84%, 100% { transform: scaleY(0);    }
+  89%           { transform: scaleY(1);    }
+  93%           { transform: scaleY(0);    }
+  96%           { transform: scaleY(0.9);  }
+  99%           { transform: scaleY(0);    }
+}
+.brain-lid {
+  transform-box: fill-box;
+  transform-origin: top;
+  transform: scaleY(0);
+  animation: brainLidBlink 4.8s ease-in-out infinite;
+}
+.brain-lid-r { animation-delay: 0.09s; }
+
+/* Mouth gapes open/closed */
+@keyframes brainMouthGape {
+  0%, 100% { transform: scaleY(1)    scaleX(1);    }
+  25%      { transform: scaleY(1.2)  scaleX(0.92); }
+  55%      { transform: scaleY(0.75) scaleX(1.06); }
+  80%      { transform: scaleY(1.1)  scaleX(0.96); }
+}
+.brain-mouth-g {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: brainMouthGape 1.6s ease-in-out infinite;
 }
 
-/* Brain face — mouth subtle pulse (open/close slightly) */
-@keyframes brainMouthPulse {
-  0%, 100% { transform: scaleY(1); }
-  40%       { transform: scaleY(0.6); }
-  70%       { transform: scaleY(1.15); }
+/* Starburst bubble shakes */
+@keyframes brainBubbleShake {
+  0%, 100% { transform: rotate(0deg)    scale(1);    }
+  12%      { transform: rotate(-2.5deg) scale(1.04); }
+  28%      { transform: rotate(2deg)    scale(0.97); }
+  44%      { transform: rotate(-1.5deg) scale(1.03); }
+  60%, 85% { transform: rotate(0deg)    scale(1);    }
 }
-.brain-mouth {
-  animation: brainMouthPulse 2.8s ease-in-out infinite;
+.brain-bubble {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: brainBubbleShake 2.2s ease-in-out infinite;
 }
 
 /* Polaroid dangle — swings from tape, damped oscillation */

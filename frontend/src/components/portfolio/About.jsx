@@ -6,109 +6,206 @@ import { useReveal } from "../../hooks/useReveal";
 const BRAIN_IMG =
   "https://customer-assets.emergentagent.com/job_quirky-portfolio-1/artifacts/iwwtv6hz_brain%20map.png";
 
-/* ── Tired laptop SVG sticker ─────────────────────────────────── */
-function LaptopSticker() {
+/* ── Brain Tabs Widget ─────────────────────────────────────────────
+   A tiny fake browser window showing "tabs open in Krishaa's brain"
+   Each tab is clickable and reveals a different inner thought.
+───────────────────────────────────────────────────────────────────*/
+const TABS = [
+  {
+    icon: "📐",
+    short: "figma v47 FINAL",
+    full: "figma file v47 (FINAL).fig",
+    thought: "no wait, v48. v49. ok this is the actual final one i promise",
+    type: "text",
+  },
+  {
+    icon: "🙋",
+    short: "did we test tho?",
+    full: "did we do user research tho?",
+    thought: "probably should. adding it to the list for the eighth time",
+    type: "text",
+  },
+  {
+    icon: "✨",
+    short: "what if we redesigned",
+    full: "what if we just... redesigned it?",
+    thought: "genuinely asking. what if we did tho. i'm serious. what if.",
+    type: "text",
+    default: true,
+  },
+  {
+    icon: "☕",
+    short: "coffee: 3 (send help)",
+    full: "coffee count: 3 (send help)",
+    thought: "at this point it's medicine, not caffeine",
+    type: "text",
+  },
+  {
+    icon: "📧",
+    short: "13 unread emails",
+    full: "13 unread emails (no guilt)",
+    thought: "",
+    type: "loading",
+  },
+  {
+    icon: "🔍",
+    short: "1px off. i see it.",
+    full: "why is this 1px off??",
+    thought: "it's always a 1px issue. every. single. time.",
+    type: "text",
+  },
+];
+
+function Spinner() {
   return (
-    <div className="select-none" style={{ width: 220, position: "relative" }}>
-      <svg
-        viewBox="0 0 220 150"
-        width="220"
-        height="150"
-        style={{ display: "block", overflow: "visible" }}
-        aria-hidden
-      >
-        {/* ── screen lid ── */}
-        <rect x="14" y="2" width="192" height="118" rx="10" fill="#D9D6CF" stroke="#1A1A1A" strokeWidth="2.5" />
-        {/* camera bump */}
-        <circle cx="110" cy="11" r="3.5" fill="#B0ADA6" />
-        {/* display */}
-        <rect x="22" y="17" width="176" height="96" rx="6" fill="#1C1C1E" />
+    <span
+      style={{
+        display: "inline-block",
+        width: 14,
+        height: 14,
+        border: "2px solid rgba(26,26,26,0.15)",
+        borderTop: "2px solid #E8532C",
+        borderRadius: "50%",
+        animation: "spin360 0.7s linear infinite",
+        verticalAlign: "middle",
+        marginRight: 6,
+      }}
+    />
+  );
+}
 
-        {/* ── face ── */}
-        {/* left eye white */}
-        <ellipse cx="78" cy="57" rx="20" ry="15" fill="#1A1A1E" />
-        <ellipse cx="78" cy="60" rx="14" ry="10" fill="#FFFBF2" />
-        <circle  cx="78" cy="62"  r="6"  fill="#1C1C1E" />
-        <circle  cx="81" cy="60"  r="2"  fill="white" opacity="0.75" />
-        {/* left droopy eyelid — heavy, covering top half of eye */}
-        <path d="M58 57 Q78 43 98 57" fill="#1C1C1E" />
+function BrainTabsWidget() {
+  const defaultIdx = TABS.findIndex((t) => t.default) ?? 2;
+  const [active, setActive] = useState(defaultIdx);
+  const [blink, setBlink] = useState(true);
 
-        {/* right eye white */}
-        <ellipse cx="142" cy="57" rx="20" ry="15" fill="#1A1A1E" />
-        <ellipse cx="142" cy="60" rx="14" ry="10" fill="#FFFBF2" />
-        <circle  cx="142" cy="62"  r="6"  fill="#1C1C1E" />
-        <circle  cx="145" cy="60"  r="2"  fill="white" opacity="0.75" />
-        {/* right droopy eyelid */}
-        <path d="M122 57 Q142 43 162 57" fill="#1C1C1E" />
+  /* blinking cursor */
+  useEffect(() => {
+    const id = setInterval(() => setBlink((b) => !b), 530);
+    return () => clearInterval(id);
+  }, []);
 
-        {/* tired mouth — downward curve */}
-        <path d="M90 88 Q110 81 130 88"
-          stroke="#FFFBF2" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+  const tab = TABS[active];
 
-        {/* sweat drop (right side) */}
-        <path d="M155 28 Q153 19 157 13 Q162 19 160 28 Q158 34 155 28Z"
-          fill="#88C8F0" opacity="0.9" />
-
-        {/* zzz rising */}
-        <text x="34" y="36" fill="#FFFBF2" fontSize="13" fontWeight="700" opacity="0.55"
-          fontFamily="serif">z</text>
-        <text x="26" y="26" fill="#FFFBF2" fontSize="10" fontWeight="700" opacity="0.35"
-          fontFamily="serif">z</text>
-        <text x="20" y="18" fill="#FFFBF2" fontSize="7" fontWeight="700" opacity="0.2"
-          fontFamily="serif">z</text>
-
-        {/* ── keyboard base ── */}
-        <rect x="8"  y="120" width="204" height="17" rx="5"
-          fill="#C8C5BE" stroke="#1A1A1A" strokeWidth="2.5" />
-        {/* trackpad */}
-        <rect x="82" y="123" width="56" height="10" rx="3" fill="#B5B2AB" />
-        {/* hinge line */}
-        <line x1="8" y1="120" x2="212" y2="120" stroke="#1A1A1A" strokeWidth="1" opacity="0.4" />
-        {/* bottom foot bar */}
-        <rect x="2" y="135" width="216" height="10" rx="4"
-          fill="#BFBCB5" stroke="#1A1A1A" strokeWidth="2" />
-
-        {/* low battery indicator — bottom right of screen */}
-        <rect x="160" y="102" width="24" height="10" rx="2"
-          fill="none" stroke="#FFFBF2" strokeWidth="1.5" opacity="0.5" />
-        <rect x="162" y="104" width="6" height="6" rx="1"
-          fill="#E8532C" opacity="0.7" />
-        <rect x="184" y="105" width="3" height="5" rx="1"
-          fill="#FFFBF2" opacity="0.5" />
-      </svg>
-
-      {/* speech bubble — floats to the right, always on top */}
+  return (
+    <div
+      className="select-none"
+      style={{
+        transform: "rotate(-1.5deg)",
+        filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.13))",
+        maxWidth: 460,
+      }}
+    >
+      {/* window chrome */}
       <div
         style={{
-          position: "absolute",
-          top: "8px",
-          right: "-145px",
-          zIndex: 30,
-          background: "#FFFBF2",
-          border: "1.5px solid rgba(26,26,26,0.14)",
-          borderRadius: "14px",
+          background: "#F0EDE7",
+          borderRadius: "12px 12px 0 0",
           padding: "8px 12px",
-          fontSize: "11px",
-          fontFamily: "Caveat, cursive",
-          color: "#1A1A1A",
-          whiteSpace: "nowrap",
-          boxShadow: "0 3px 10px rgba(0,0,0,0.10)",
-          lineHeight: 1.4,
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+          borderBottom: "1px solid rgba(26,26,26,0.09)",
         }}
       >
-        ask her to give me a break!
-        {/* tail pointing left */}
-        <div style={{
-          position: "absolute",
-          left: "-7px",
-          top: "50%",
-          transform: "translateY(-50%) rotate(45deg)",
-          width: "12px",
-          height: "12px",
+        <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#FF6058", display: "inline-block" }} />
+        <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#FFBD2E", display: "inline-block" }} />
+        <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28C840", display: "inline-block" }} />
+        <span
+          style={{
+            marginLeft: 8,
+            fontFamily: "Caveat, cursive",
+            fontSize: 12,
+            color: "rgba(26,26,26,0.45)",
+            letterSpacing: "0.02em",
+          }}
+        >
+          krishaa's brain.exe — {TABS.length} tabs open
+        </span>
+      </div>
+
+      {/* tab bar */}
+      <div
+        style={{
+          display: "flex",
+          overflowX: "auto",
+          background: "#E8E5DF",
+          borderBottom: "1px solid rgba(26,26,26,0.09)",
+          scrollbarWidth: "none",
+        }}
+      >
+        {TABS.map((t, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            title={t.full}
+            style={{
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              padding: "7px 12px",
+              fontSize: 11,
+              fontFamily: "Caveat, cursive",
+              letterSpacing: "0.01em",
+              whiteSpace: "nowrap",
+              border: "none",
+              borderRight: "1px solid rgba(26,26,26,0.08)",
+              cursor: "pointer",
+              transition: "background 0.15s",
+              background: active === i ? "#FFFBF2" : "transparent",
+              borderBottom: active === i ? "2px solid #E8532C" : "2px solid transparent",
+              color: active === i ? "#1A1A1A" : "rgba(26,26,26,0.5)",
+              fontWeight: active === i ? 700 : 400,
+              maxWidth: 120,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            <span style={{ fontSize: 13 }}>{t.icon}</span>
+            <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{t.short}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* content area */}
+      <div
+        style={{
           background: "#FFFBF2",
-          borderLeft: "1.5px solid rgba(26,26,26,0.14)",
-          borderBottom: "1.5px solid rgba(26,26,26,0.14)",
-        }} />
+          borderRadius: "0 0 12px 12px",
+          padding: "16px 18px 18px",
+          minHeight: 62,
+          fontFamily: "Caveat, cursive",
+          fontSize: 18,
+          color: "#1A1A1A",
+          lineHeight: 1.45,
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+        }}
+      >
+        {tab.type === "loading" ? (
+          <span style={{ color: "rgba(26,26,26,0.5)", fontSize: 16 }}>
+            <Spinner />
+            opening inbox… this may take a while
+          </span>
+        ) : (
+          <span>
+            {tab.thought}
+            <span
+              style={{
+                display: "inline-block",
+                width: 2,
+                height: "1em",
+                background: "#E8532C",
+                marginLeft: 3,
+                verticalAlign: "middle",
+                opacity: blink ? 1 : 0,
+                transition: "opacity 0.1s",
+              }}
+            />
+          </span>
+        )}
       </div>
     </div>
   );
@@ -124,14 +221,12 @@ export default function About() {
   const wrapperRef  = useRef(null);
   const polaroidRef = useRef(null);
 
-  /* trigger dangle once wrapper is 30% in view */
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          /* slight delay so scroll-reveal opacity is done first */
           setTimeout(() => setDangled(true), 400);
           obs.disconnect();
         }
@@ -183,7 +278,9 @@ export default function About() {
 
       {/* ── Brain polaroid block ── */}
       <div className="max-w-7xl mx-auto mt-20 md:mt-28 border-t border-[#1A1A1A]/10 pt-16 md:pt-20">
-        <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-start">
+
+          {/* left — text */}
           <div ref={brainLeftRef} className="md:col-span-5 order-2 md:order-1">
             <span className="font-hand text-xl text-[#E8532C]">§ what's rattling around in here</span>
             <h3 className="mt-2 font-display text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight">
@@ -202,27 +299,16 @@ export default function About() {
             </div>
           </div>
 
-          <div ref={brainRightRef} className="md:col-span-7 order-1 md:order-2">
-            {/*
-              Visual stack (normal flow, no absolute tricks):
-              ┌─────────────────────────────┐  ← tapes (absolute on polaroid wrapper)
-              │       polaroid (z-10)        │  ← dangles on scroll
-              └─────────────────────────────┘
-              [  fig. caption  ]
-              ┌─────────────────────┐          ← overlaps polaroid by 20px via -mt-5
-              │  laptop screen+face │  z-0 (behind polaroid overlap)  [bubble →]
-              │  keyboard + base    │  clearly visible below
-              └─────────────────────┘
-            */}
-            <div ref={wrapperRef} className="relative">
+          {/* right — polaroid + brain tabs widget */}
+          <div ref={brainRightRef} className="md:col-span-7 order-1 md:order-2 flex flex-col gap-6">
 
-              {/* tapes */}
+            {/* polaroid with tapes */}
+            <div ref={wrapperRef} className="relative">
               <div className="absolute -top-3 left-10 z-20 tape"
                 style={{ transform: "rotate(-6deg)" }} />
               <div className="absolute -top-3 right-10 z-20 tape"
                 style={{ transform: "rotate(5deg)" }} />
 
-              {/* ── polaroid card ── */}
               <div
                 ref={polaroidRef}
                 className={`relative z-10 bg-[#FFFBF2] p-3 pb-12 rounded-[6px]
@@ -244,21 +330,16 @@ export default function About() {
                 </div>
               </div>
 
-              {/* caption */}
-              <div className="mt-4 relative z-10 flex items-center justify-between
+              <div className="mt-4 flex items-center justify-between
                 text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
                 <span>fig. 01 — Krishaa's brain, mapped</span>
                 <span>circa right now</span>
               </div>
-
-              {/* ── laptop sticker ──
-                  Sits below the caption in normal flow. No z-fighting.
-                  Speech bubble (z:30 inline) always floats above everything. */}
-              <div className="mt-2 pl-6">
-                <LaptopSticker />
-              </div>
-
             </div>
+
+            {/* brain tabs widget — lives below the polaroid */}
+            <BrainTabsWidget />
+
           </div>
         </div>
       </div>

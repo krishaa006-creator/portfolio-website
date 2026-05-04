@@ -233,6 +233,9 @@ p { text-wrap: pretty; }
 /* Active squish on buttons */
 .btn-ink:active, .btn-outline-ink:active { transform: scale(0.95) !important; box-shadow: none !important; }
 
+/* Spinner for brain tabs loading state */
+@keyframes spin360 { to { transform: rotate(360deg); } }
+
 /* Polaroid dangle — swings from tape, damped oscillation */
 @keyframes polaroidDangle {
   0%   { transform: rotate(-1.5deg); }

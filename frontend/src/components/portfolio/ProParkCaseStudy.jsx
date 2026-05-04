@@ -1,5 +1,5 @@
 import React from "react";
-import { Arrow, Squiggle } from "./Doodles";
+import { Arrow } from "./Doodles";
 
 const ACCENT = "#E8532C";
 const PEACH  = "#F3E7D9";
@@ -7,12 +7,14 @@ const PAGE   = "#F7F2E7";
 const CREAM  = "#FFFBF2";
 const INK    = "#1A1A1A";
 
-/* ── Soft-edge image fade ─────────────────────────────── */
+/* ── Soft-edge image fade ─────────────────────────── */
 function FadeImage({ src, alt, className = "", style = {}, fadeDir = "radial" }) {
   const masks = {
-    radial: "radial-gradient(ellipse 88% 88% at 50% 50%, black 45%, transparent 100%)",
-    sides:  "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-    topbot: "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+    radial: "radial-gradient(ellipse 88% 88% at 50% 50%, black 48%, transparent 100%)",
+    sides:  "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+    topbot: "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
+    right:  "linear-gradient(to right, black 60%, transparent 100%)",
+    left:   "linear-gradient(to left, black 60%, transparent 100%)",
   };
   const mask = masks[fadeDir] || masks.radial;
   return (
@@ -24,386 +26,340 @@ function FadeImage({ src, alt, className = "", style = {}, fadeDir = "radial" })
   );
 }
 
-/* ── Arrow annotation ─────────────────────────────────── */
-function Annotation({ label, color = INK }) {
+/* ── Arrow annotation ─────────────────────────────── */
+function Note({ label, color = ACCENT }) {
   return (
-    <div className="flex items-center gap-2 mt-2 pl-4">
-      <Arrow color={color} width={55} />
-      <span className="font-hand text-base italic" style={{ color }}>{label}</span>
+    <div className="flex items-center gap-2 mt-3">
+      <Arrow color={color} width={48} />
+      <span className="font-hand italic text-base" style={{ color }}>{label}</span>
     </div>
   );
 }
 
-/* ── Small section eyebrow label ──────────────────────── */
-function Eyebrow({ n, children }) {
+/* ── Section eyebrow (no duplicate numbers) ──────── */
+function Eyebrow({ children }) {
   return (
-    <div className="mb-6">
-      <div className="flex items-center gap-3 mb-1.5">
-        <div className="h-[2px] w-8 rounded-full" style={{ background: ACCENT }} />
-        <span className="text-xs font-semibold tracking-[0.25em] uppercase" style={{ color: ACCENT }}>
-          {n} — {children}
-        </span>
-      </div>
+    <div className="flex items-center gap-3 mb-4">
+      <div className="h-[2px] w-6 rounded-full shrink-0" style={{ background: ACCENT }} />
+      <span className="text-[11px] font-bold tracking-[0.3em] uppercase" style={{ color: ACCENT }}>
+        {children}
+      </span>
     </div>
   );
 }
 
-/* ── Big section title (heavy + light italic pair) ────── */
-function BigTitle({ heavy, light, size = "text-4xl md:text-6xl" }) {
+/* ── Compound heading (heavy + italic light on same element) ── */
+function Heading({ heavy, light, size = "text-4xl md:text-6xl" }) {
   return (
     <h2 className={`font-display leading-[1.05] tracking-tight ${size}`}>
-      <span className="font-black text-[#1A1A1A]">{heavy}</span>
-      {light && (
-        <>
-          <br />
-          <span className="font-light italic" style={{ color: ACCENT }}>{light}</span>
-        </>
-      )}
+      <span className="font-black text-[#1A1A1A]">{heavy} </span>
+      {light && <span className="font-light italic" style={{ color: ACCENT }}>{light}</span>}
     </h2>
   );
 }
 
-/* ══════════════════════════════════════════════════
-   ROOT COMPONENT
-══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   ROOT
+═══════════════════════════════════════════════════ */
 export default function ProParkCaseStudy() {
   return (
     <div>
 
-      {/* ─── 01  CONTEXT & DESIGN BRIEF ─── */}
+      {/* ══ 01  CONTEXT & DESIGN BRIEF ══════════════════
+          Layout: text 55% left, image 45% right          */}
       <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
-        <Eyebrow n="01">Context Setting & Design Brief</Eyebrow>
-        <div className="grid md:grid-cols-[3fr_2fr] gap-12 items-start">
-
-          {/* Left — text */}
+        <div className="grid md:grid-cols-[11fr_9fr] gap-12 items-start">
           <div>
-            <BigTitle heavy="CONTEXT" light="Setting" size="text-4xl md:text-5xl" />
-            <p className="mt-6 text-lg leading-relaxed text-[#1A1A1A]/75 max-w-lg">
-              Urban areas face a growing parking shortage, with limited public spaces and increasing
-              vehicle numbers, forcing drivers to circle endlessly while many private spots remain
-              unused and inaccessible.
+            <Eyebrow>Context Setting</Eyebrow>
+            <Heading heavy="CONTEXT" light="Setting." size="text-5xl md:text-7xl" />
+            <p className="mt-6 text-lg leading-relaxed text-[#1A1A1A]/70 max-w-lg">
+              Urban areas face a growing parking shortage — limited public spaces, endless circling,
+              and many private spots sitting empty and inaccessible.
             </p>
-            <p className="mt-3 text-lg leading-relaxed font-semibold text-[#1A1A1A]">
-              These spaces are a missed opportunity for both income and utility.
+            <p className="mt-3 text-lg font-semibold text-[#1A1A1A]">
+              These idle spaces are a missed opportunity for both income and utility.
             </p>
 
             {/* Design Brief */}
-            <div className="mt-12">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-[2px] w-8 rounded-full" style={{ background: ACCENT }} />
-                <span className="text-xs font-semibold tracking-[0.25em] uppercase" style={{ color: ACCENT }}>Design Brief</span>
-              </div>
-              <p className="text-sm italic text-[#1A1A1A]/45 mb-5">How Might We — Design a peer to peer parking app that</p>
-              <div className="space-y-6">
-                <div className="pl-5 border-l-2" style={{ borderColor: ACCENT }}>
-                  <p className="font-display font-semibold text-[#1A1A1A]">
-                    MAKES PARKING SPACES MORE ACCESSIBLE in urban spaces
-                  </p>
-                  <Annotation label="The Goal" color={ACCENT} />
-                </div>
-                <div className="pl-5 border-l-2 border-[#1A1A1A]/15">
-                  <p className="font-display text-[#1A1A1A]">
-                    for a wide range of urban drivers and space owners by{" "}
-                    <strong>unlocking and connecting unused private parking spots</strong>
-                  </p>
-                  <Annotation label="How to achieve it?" color={INK} />
-                </div>
-                <div className="pl-5 border-l-2 border-[#1A1A1A]/15">
-                  <p className="font-display text-[#1A1A1A]">
-                    to reduce parking frustration and{" "}
-                    <strong>turn idle space into opportunity.</strong>
-                  </p>
-                  <Annotation label="The Why?" color={INK} />
-                </div>
+            <div className="mt-12 space-y-0">
+              <Eyebrow>Design Brief</Eyebrow>
+              <p className="text-sm italic text-[#1A1A1A]/40 mb-6">
+                How Might We — Design a peer to peer parking app that
+              </p>
+              <div className="space-y-5">
+                {[
+                  { text: <><strong style={{ color: INK }}>MAKES PARKING SPACES MORE ACCESSIBLE</strong> in urban spaces</>, note: "The Goal", color: ACCENT },
+                  { text: <>for a wide range of users by <strong>unlocking and connecting unused private parking spots</strong></>, note: "How to achieve it?" },
+                  { text: <>to reduce parking frustration and <strong>turn idle space into opportunity.</strong></>, note: "The Why?" },
+                ].map(({ text, note, color = INK }, i) => (
+                  <div key={i} className="pl-4 border-l-2" style={{ borderColor: i === 0 ? ACCENT : `${INK}22` }}>
+                    <p className="text-sm leading-relaxed text-[#1A1A1A]/80">{text}</p>
+                    <Note label={note} color={color} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Right — context image (has built-in left fade from Figma) */}
-          <div>
+          {/* Context image — built-in left fade from Figma */}
+          <div className="pt-10">
             <img src="/propark/context-bg.png" alt="Urban building with car" className="w-full h-auto block" loading="lazy" />
           </div>
         </div>
       </section>
 
-      {/* ─── STAT CALLOUT BREAK ─── */}
+      {/* ══ STAT MOMENT ════════════════════════════════
+          Full-width peach band, huge display number     */}
       <div className="border-y border-[#1A1A1A]/10" style={{ background: PEACH }}>
-        <div className="px-8 md:px-16 py-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8">
-          <div className="text-center md:text-left shrink-0">
-            <p className="text-xs tracking-[0.3em] uppercase text-[#1A1A1A]/45 mb-1">India parking reality</p>
-            <p
-              className="font-display font-black leading-none"
-              style={{ fontSize: "clamp(3.5rem, 11vw, 7rem)", color: ACCENT }}
-            >
-              1 : 3650
+        <div className="px-8 md:px-16 py-12 flex flex-col md:flex-row items-center gap-8 max-w-6xl mx-auto">
+          <div className="shrink-0 text-center md:text-left">
+            <p className="text-[10px] tracking-[0.35em] uppercase text-[#1A1A1A]/40 mb-0.5">India parking reality</p>
+            <p className="font-display font-black leading-none" style={{ fontSize: "clamp(4rem, 12vw, 8rem)", color: ACCENT }}>
+              1:3650
             </p>
-            <p className="font-hand text-lg mt-1 text-[#1A1A1A]/65">parking spots per car</p>
+            <p className="font-hand text-lg text-[#1A1A1A]/55 mt-1">parking spots per car</p>
           </div>
-          <div className="hidden md:block self-stretch w-px bg-[#1A1A1A]/12" />
-          <p className="text-base leading-relaxed text-[#1A1A1A]/70 max-w-sm">
-            Parking in India is more than just finding a spot — it's a daily test of patience,
-            intuition, and sometimes, creativity. The scarcity makes it chaotic, unpredictable
-            and deeply tied to local habits of <em>jugaad</em>.
+          <div className="hidden md:block w-px self-stretch bg-[#1A1A1A]/12" />
+          <p className="text-base leading-relaxed text-[#1A1A1A]/65 max-w-sm">
+            Parking in India is more than just finding a spot — it's a daily test of patience, intuition,
+            and <em>jugaad</em>. The scarcity makes it chaotic and deeply frustrating.
           </p>
         </div>
       </div>
 
-      {/* ─── 02  EMPATHISING WITH OUR USERS ─── */}
+      {/* ══ 02  EMPATHISING ════════════════════════════
+          Full-bleed persona image, then side-by-side cards */}
       <section className="py-16" style={{ background: PAGE }}>
-        <div className="px-8 md:px-16">
-          <Eyebrow n="02">Empathising with Our Users</Eyebrow>
-        </div>
-
-        {/* Persona illustration — full-bleed with side fades */}
-        <div className="px-4 md:px-8 mb-12">
+        {/* Full-bleed image — no horizontal padding */}
+        <div className="mb-10 overflow-hidden">
           <FadeImage src="/propark/personas.png" alt="Persona portraits" fadeDir="sides" />
         </div>
 
-        {/* Persona cards */}
-        <div className="px-8 md:px-16 grid md:grid-cols-2 gap-6">
-          {[
-            {
-              title: "Residents",
-              role: "The Space Providers",
-              intro: "Urban residential areas have unused parking spaces during most of the day when people are at work — often close to crowded commercial areas that lack parking.",
-              quotes: [
-                `I want to make some extra income, but I worry about strangers damaging my property.`,
-                `Trust is a big issue — how do I know the person parking won't misuse the space?`,
-              ],
-              drivers: ["Source of passive income", "Better Utilization of Space", "Control Over Availability"],
-              inhibitors: ["Trust and Security Concerns", "Liability and Legal Issues", "Lack of Flexibility"],
-            },
-            {
-              title: "Drivers",
-              role: "The Space Seekers",
-              intro: "In crowded Indian cities, finding parking around commercial centers is always a challenge. During peak hours, limited spots fill up, leaving drivers in a frustrated endless hunt.",
-              quotes: [
-                `I wish I could park in that empty compound. I'm tired of this wild goose chase.`,
-                `I avoid certain areas altogether because parking there is a nightmare and costs me time.`,
-              ],
-              drivers: ["Convenience and Proximity", "Real-Time Availability", "Cost-Effectiveness"],
-              inhibitors: ["Unsafe parking conditions", "Outdated payment systems", "Inflexible Booking Changes"],
-            },
-          ].map((p) => (
-            <div key={p.title} className="rounded-3xl overflow-hidden border border-[#1A1A1A]/10" style={{ background: CREAM }}>
-              {/* Card header */}
-              <div className="px-6 pt-6 pb-4 border-b border-[#1A1A1A]/10" style={{ background: PEACH }}>
-                <p className="font-display text-3xl font-black tracking-tight text-[#1A1A1A]">{p.title}</p>
-                <p className="font-display italic text-lg mt-0.5" style={{ color: ACCENT }}>{p.role}</p>
-              </div>
-              <div className="p-6">
-                <p className="text-sm leading-relaxed text-[#1A1A1A]/60 mb-5">{p.intro}</p>
-                {/* Pull quotes — big italic display style */}
-                <div className="space-y-3 mb-6">
-                  {p.quotes.map((q, i) => (
-                    <p key={i} className="font-display italic text-[1.1rem] leading-snug text-[#1A1A1A]">
-                      <span style={{ color: ACCENT }}>"</span>{q}<span style={{ color: ACCENT }}>"</span>
-                    </p>
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <p className="uppercase tracking-widest text-[#1A1A1A]/40 mb-2">Motivators</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {p.drivers.map((t) => (
-                        <span key={t} className="px-2.5 py-1 rounded-full text-xs text-[#1A1A1A]" style={{ background: PEACH }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="uppercase tracking-widest text-[#1A1A1A]/40 mb-2">Inhibitors</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {p.inhibitors.map((t) => (
-                        <span key={t} className="px-2.5 py-1 rounded-full border border-[#1A1A1A]/15 text-xs bg-white/70">{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="px-8 md:px-16">
+          <Eyebrow>Empathising with Our Users</Eyebrow>
 
-        {/* Common Goals — orange strip */}
-        <div className="mx-8 md:mx-16 mt-6 rounded-2xl px-6 py-5" style={{ background: ACCENT }}>
-          <p className="text-center text-[10px] uppercase tracking-[0.35em] text-white/60 mb-3">Common Design Goals</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {["Design for Trust", "Design for Security", "Systematic Scheduling", "Defined Pricing Models"].map((g) => (
-              <span key={g} className="px-4 py-2 rounded-full text-sm font-medium text-white border border-white/30" style={{ background: "rgba(255,255,255,0.12)" }}>
-                {g}
-              </span>
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              {
+                title: "Residents",
+                role: "The Space Providers",
+                intro: "Urban residential areas have unused parking spaces during most of the day — often close to crowded commercial zones that desperately lack parking.",
+                quotes: [
+                  `I want to make extra income, but I worry about strangers damaging my property.`,
+                  `Trust is a big issue — how do I know the person parking won't misuse the space?`,
+                ],
+                drivers: ["Passive income", "Better space utilization", "Control availability"],
+                inhibitors: ["Trust & security concerns", "Liability issues", "Lack of flexibility"],
+              },
+              {
+                title: "Drivers",
+                role: "The Space Seekers",
+                intro: "In crowded Indian cities, finding parking near commercial areas is a nightmare. During peak hours, limited spots vanish, leaving drivers in a frustrated endless loop.",
+                quotes: [
+                  `I wish I could park in that empty compound. I'm tired of this wild goose chase.`,
+                  `I avoid certain areas altogether because parking there is a nightmare every time.`,
+                ],
+                drivers: ["Convenience & proximity", "Real-time availability", "Cost-effectiveness"],
+                inhibitors: ["Unsafe conditions", "Outdated payments", "Inflexible bookings"],
+              },
+            ].map((p) => (
+              <div key={p.title} className="rounded-3xl overflow-hidden border border-[#1A1A1A]/10">
+                <div className="px-6 pt-5 pb-4" style={{ background: PEACH }}>
+                  <p className="font-display text-3xl font-black tracking-tight">{p.title}</p>
+                  <p className="font-display italic text-lg" style={{ color: ACCENT }}>{p.role}</p>
+                </div>
+                <div className="p-6" style={{ background: CREAM }}>
+                  <p className="text-sm text-[#1A1A1A]/55 leading-relaxed mb-4">{p.intro}</p>
+                  <div className="space-y-2 mb-5">
+                    {p.quotes.map((q, i) => (
+                      <p key={i} className="font-display italic text-[1.1rem] leading-snug text-[#1A1A1A]">
+                        <span style={{ color: ACCENT }}>"</span>{q}<span style={{ color: ACCENT }}>"</span>
+                      </p>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <p className="uppercase tracking-widest text-[#1A1A1A]/35 mb-2">Motivators</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.drivers.map((t) => <span key={t} className="px-2.5 py-1 rounded-full text-xs" style={{ background: PEACH }}>{t}</span>)}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="uppercase tracking-widest text-[#1A1A1A]/35 mb-2">Inhibitors</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.inhibitors.map((t) => <span key={t} className="px-2.5 py-1 rounded-full border border-[#1A1A1A]/15 text-xs bg-white/70">{t}</span>)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ─── 03  UX PERSPECTIVE ─── */}
-      <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
-        <Eyebrow n="03">UX Perspective on Indian Parking</Eyebrow>
-        <div className="grid md:grid-cols-[2fr_3fr] gap-12 items-center">
-          <div>
-            <BigTitle heavy="UX PERSPECTIVE" light="on Indian Parking" size="text-3xl md:text-4xl" />
-            <p className="mt-5 text-base leading-relaxed text-[#1A1A1A]/75">
-              Parking in India is more than just finding a spot — it's a daily test of patience,
-              intuition, and sometimes, creativity.
-            </p>
-            <div className="mt-4 flex items-center gap-2">
-              <Arrow color={ACCENT} width={45} />
-              <span className="font-hand text-sm italic text-[#2D5F3F]">source: poidata.io · india</span>
+          {/* Common goals — orange strip */}
+          <div className="mt-5 rounded-2xl px-6 py-4" style={{ background: ACCENT }}>
+            <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 text-center mb-2.5">Common Design Goals</p>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {["Design for Trust", "Design for Security", "Systematic Scheduling", "Defined Pricing Models"].map((g) => (
+                <span key={g} className="px-3.5 py-1.5 rounded-full text-sm text-white font-medium border border-white/25" style={{ background: "rgba(255,255,255,0.12)" }}>{g}</span>
+              ))}
             </div>
           </div>
-          <FadeImage src="/propark/ux-photos.png" alt="Parking problems in India" fadeDir="sides" />
         </div>
       </section>
 
-      {/* ─── 04  INFORMATION ARCHITECTURE ─── */}
-      <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
-        <Eyebrow n="04">Information Architecture for Mobile App</Eyebrow>
-        <FadeImage src="/propark/ia.png" alt="Information Architecture diagram" fadeDir="topbot" />
-      </section>
-
-      {/* ── thin orange divider — marks the shift to product screens ── */}
-      <div className="h-1" style={{ background: ACCENT }} />
-
-      {/* ─── 05  FINAL PRODUCT ─── */}
-      <ScreenSection
-        n="05" label="The Final Product"
-        heavy="THE FINAL" light="Product"
-        description="A parking solution built by leveraging shared economy to ease parking congestions in major Indian cities."
-        note="built in 1 week · dark mode first"
-        image="/propark/product.png" imageAlt="ProPark final product — two phones"
-        fadeDir="radial" layout="center" bg={PEACH}
-      />
-
-      {/* ─── 06  ONBOARDING ─── */}
-      <ScreenSection
-        n="06" label="Onboarding Screens"
-        heavy="ONBOARDING" light="Screens"
-        description="Users start by entering their phone number to receive an OTP, ensuring quick authentication without lengthy registrations. With auto OTP detection and a clean, minimal interface, the process allows seamless entry."
-        image="/propark/onboarding.png" imageAlt="Onboarding screens"
-        fadeDir="radial" layout="right" bg={PAGE}
-      />
-
-      {/* ─── 07  HOME SCREEN ─── */}
-      <ScreenSection
-        n="07" label="Home Screen"
-        heavy="HOME" light="Screen"
-        description="The Home Screen provides users with a seamless way to search, view, and manage their parking needs. Vehicle-first approach: select the car, search for nearby spots, and view upcoming bookings at a glance."
-        image="/propark/home.png" imageAlt="Home screen"
-        fadeDir="sides" layout="wide" bg={PEACH}
-      />
-
-      {/* ─── 08  LOCATOR ─── */}
-      <ScreenSection
-        n="08" label="Parking Locator Screens"
-        heavy="PARKING LOCATOR" light="Screens"
-        description="Users can set their desired date and time, explore available spots on an interactive map, and compare options — each displaying availability, hourly rates, and ratings for full transparency."
-        image="/propark/locator.png" imageAlt="Parking locator screens"
-        fadeDir="radial" layout="left" bg={PAGE}
-      />
-
-      {/* ─── 09  BOOKING ─── */}
-      <ScreenSection
-        n="09" label="Parking Booking Screens"
-        heavy="PARKING BOOKING" light="Screens"
-        description="From reviewing space details and rates to calculating total charges with fees and taxes — the flow ensures complete clarity before payment. A confirmation prompt adds an extra layer of security."
-        image="/propark/booking.png" imageAlt="Booking screens"
-        fadeDir="sides" layout="wide" bg={PEACH}
-      />
-
-      {/* ─── 10  OTHER SCREENS ─── */}
-      <ScreenSection
-        n="10" label="Other Screens"
-        heavy="OTHER" light="Screens"
-        description="Users can manage upcoming or past reservations, while space owners can track availability, unlist spaces, or block them for personal use. Vehicle and space management features streamline bookings for both sides."
-        image="/propark/other.png" imageAlt="Other screens"
-        fadeDir="radial" layout="right" bg={PAGE}
-      />
-
-      {/* ─── 11  NOTIFICATION ─── */}
-      <ScreenSection
-        n="11" label="Notification Screen"
-        heavy="NOTIFICATION" light="Screen"
-        description="The notification widget provides real-time updates on parking reservations, showing exactly how much time is left — helping users plan departures and avoid overstays with ease."
-        note="live activity on lock screen"
-        image="/propark/notification.png" imageAlt="Notification screen"
-        fadeDir="topbot" layout="narrow" bg={PEACH}
-      />
-
-      {/* ─── 12  FINAL SHOWCASE ─── */}
-      <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
-        <Eyebrow n="12">Final Showcase</Eyebrow>
-        <BigTitle heavy="ALL SCREENS" light="in perspective." />
-        <div className="mt-10">
-          <FadeImage src="/propark/showcase.png" alt="ProPark — all screens showcase" fadeDir="sides" />
-        </div>
-      </section>
-
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════
-   ScreenSection
-   layout: "center" | "right" | "left" | "wide" | "narrow"
-════════════════════════════════════════════════════════ */
-function ScreenSection({ n, label, heavy, light, description, note, image, imageAlt, fadeDir, layout, bg }) {
-  const img = <FadeImage src={image} alt={imageAlt} fadeDir={fadeDir} />;
-
-  const textBlock = (
-    <div>
-      <div className="flex items-center gap-3 mb-3">
-        <div className="h-[2px] w-8 rounded-full" style={{ background: ACCENT }} />
-        <span className="text-xs font-semibold tracking-[0.25em] uppercase" style={{ color: ACCENT }}>
-          {n} — {label}
-        </span>
-      </div>
-      <h2 className="font-display font-black leading-none tracking-tight text-3xl md:text-5xl text-[#1A1A1A]">{heavy}</h2>
-      <h2 className="font-display font-light italic leading-none tracking-tight text-3xl md:text-5xl mt-1" style={{ color: ACCENT }}>{light}</h2>
-      <p className="mt-5 text-base leading-relaxed text-[#1A1A1A]/65 max-w-md">{description}</p>
-      {note && (
-        <div className="flex items-center gap-2 mt-3">
-          <Arrow color={ACCENT} width={45} />
-          <span className="font-hand italic text-base" style={{ color: ACCENT }}>{note}</span>
-        </div>
-      )}
-    </div>
-  );
-
-  return (
-    <section className="px-8 md:px-16 py-16" style={{ background: bg }}>
-      {layout === "wide" && (
-        <>
-          <div className="max-w-2xl mb-10">{textBlock}</div>
-          {img}
-        </>
-      )}
-      {layout === "center" && (
-        <>
-          <div className="max-w-2xl mb-10">{textBlock}</div>
-          <div className="max-w-3xl mx-auto">{img}</div>
-        </>
-      )}
-      {layout === "right" && (
-        <div className="grid md:grid-cols-[2fr_3fr] gap-12 items-center">
-          {textBlock}
-          {img}
-        </div>
-      )}
-      {layout === "left" && (
-        <div className="grid md:grid-cols-[3fr_2fr] gap-12 items-center">
-          {img}
-          {textBlock}
-        </div>
-      )}
-      {layout === "narrow" && (
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {textBlock}
-          <div className="flex justify-center">
-            <div className="w-full max-w-[260px]">{img}</div>
+      {/* ══ 03  UX PERSPECTIVE ══════════════════════════
+          Photos 70%, text 30% — image leads            */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
+        <Eyebrow>UX Perspective on Indian Parking</Eyebrow>
+        <div className="grid md:grid-cols-[3fr_2fr] gap-10 items-center">
+          <FadeImage src="/propark/ux-photos.png" alt="Real parking scenes in India" fadeDir="sides" />
+          <div>
+            <Heading heavy="PARKING in" light="India." size="text-3xl md:text-4xl" />
+            <p className="mt-5 text-base leading-relaxed text-[#1A1A1A]/70">
+              More than finding a spot — a daily test of patience, intuition, and sometimes creativity.
+            </p>
+            <Note label="source: poidata.io · india" color="#2D5F3F" />
           </div>
         </div>
-      )}
-    </section>
+      </section>
+
+      {/* ══ 04  INFORMATION ARCHITECTURE ═══════════════
+          Full-bleed, no side padding                   */}
+      <section className="py-16" style={{ background: PAGE }}>
+        <div className="px-8 md:px-16 mb-8">
+          <Eyebrow>Information Architecture</Eyebrow>
+          <Heading heavy="HOW IT ALL" light="connects." size="text-4xl md:text-5xl" />
+        </div>
+        {/* No side padding — edge to edge */}
+        <FadeImage src="/propark/ia.png" alt="Information Architecture" fadeDir="topbot" />
+      </section>
+
+      {/* ══ PRODUCT REVEAL — orange accent strip ═══════ */}
+      <div className="px-8 md:px-16 py-5 flex items-center gap-4" style={{ background: ACCENT }}>
+        <p className="font-hand text-2xl text-white">and here's what we built →</p>
+      </div>
+
+      {/* ══ 05  FINAL PRODUCT ══════════════════════════
+          Centered hero — product takes centre stage    */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
+        <Eyebrow>The Final Product</Eyebrow>
+        <Heading heavy="THE FINAL" light="Product." size="text-5xl md:text-7xl" />
+        <p className="mt-4 text-base text-[#1A1A1A]/60 max-w-lg">
+          A peer-to-peer parking platform built to ease congestion in major Indian cities.
+        </p>
+        <Note label="built in 1 week · dark mode first" />
+        <div className="mt-10 max-w-2xl mx-auto">
+          <FadeImage src="/propark/product.png" alt="ProPark final product" fadeDir="radial" />
+        </div>
+      </section>
+
+      {/* ══ 06  ONBOARDING ═════════════════════════════
+          Text full-width above, image 80% centred below */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
+        <div className="flex items-end justify-between gap-8 mb-10 flex-wrap">
+          <div>
+            <Eyebrow>Onboarding Screens</Eyebrow>
+            <Heading heavy="ONBOARDING" light="Screens." size="text-4xl md:text-6xl" />
+          </div>
+          <p className="text-base leading-relaxed text-[#1A1A1A]/60 max-w-sm">
+            Phone number + OTP — minimal friction, maximum trust. Auto OTP detection means the process
+            completes before you even look at the screen.
+          </p>
+        </div>
+        <div className="max-w-3xl mx-auto">
+          <FadeImage src="/propark/onboarding.png" alt="Onboarding screens" fadeDir="radial" />
+        </div>
+      </section>
+
+      {/* ══ 07  HOME SCREEN ════════════════════════════
+          Image 65% left, text 35% right               */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
+        <div className="grid md:grid-cols-[13fr_7fr] gap-10 items-center">
+          <FadeImage src="/propark/home.png" alt="Home screen" fadeDir="sides" />
+          <div>
+            <Eyebrow>Home Screen</Eyebrow>
+            <Heading heavy="HOME" light="Screen." size="text-3xl md:text-4xl" />
+            <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/65">
+              Vehicle-first: pick your car, search nearby spots, and see upcoming bookings — all in one glance.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 08  LOCATOR ════════════════════════════════
+          Text 40% left, image 60% right               */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
+        <div className="grid md:grid-cols-[2fr_3fr] gap-12 items-center">
+          <div>
+            <Eyebrow>Parking Locator</Eyebrow>
+            <Heading heavy="PARKING" light="Locator." size="text-4xl md:text-5xl" />
+            <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/65">
+              Set date and time, explore an interactive map, compare spots by availability, rate, and rating.
+              Full transparency before committing.
+            </p>
+          </div>
+          <FadeImage src="/propark/locator.png" alt="Parking locator screens" fadeDir="radial" />
+        </div>
+      </section>
+
+      {/* ══ 09  BOOKING ════════════════════════════════
+          Image full-width, text below it              */}
+      <section className="py-16" style={{ background: PEACH }}>
+        <div className="px-8 md:px-16 mb-8">
+          <Eyebrow>Parking Booking</Eyebrow>
+          <Heading heavy="PARKING" light="Booking." size="text-4xl md:text-6xl" />
+          <p className="mt-3 text-base text-[#1A1A1A]/60 max-w-lg">
+            Space details, rates, fees, taxes — all calculated before payment. Confirmation prompt for an extra layer of security.
+          </p>
+        </div>
+        <FadeImage src="/propark/booking.png" alt="Booking screens" fadeDir="sides" />
+      </section>
+
+      {/* ══ 10  OTHER SCREENS ══════════════════════════
+          Equal 50/50 split                            */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
+        <Eyebrow>Other Screens</Eyebrow>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <Heading heavy="EVERYTHING" light="else." size="text-4xl md:text-5xl" />
+            <p className="mt-4 text-base leading-relaxed text-[#1A1A1A]/65">
+              Manage upcoming and past reservations. Space owners can track, unlist, or block availability.
+              Vehicle and space management for both sides of the platform.
+            </p>
+          </div>
+          <FadeImage src="/propark/other.png" alt="Other screens" fadeDir="radial" />
+        </div>
+      </section>
+
+      {/* ══ 11  NOTIFICATION ═══════════════════════════
+          Portrait phone centred, text above           */}
+      <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
+        <div className="max-w-xl mx-auto text-center mb-8">
+          <Eyebrow>Notification Screen</Eyebrow>
+          <Heading heavy="LIVE" light="Activity." size="text-4xl md:text-6xl" />
+          <p className="mt-4 text-base text-[#1A1A1A]/60">
+            Real-time parking countdown on the lock screen — leave on time, every time.
+          </p>
+          <Note label="live activity on lock screen" />
+        </div>
+        <div className="flex justify-center">
+          <div className="w-full max-w-[280px]">
+            <FadeImage src="/propark/notification.png" alt="Notification screen" fadeDir="topbot" />
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 12  FINAL SHOWCASE ══════════════════════════
+          Full-bleed showcase image, text above        */}
+      <section className="py-16" style={{ background: PAGE }}>
+        <div className="px-8 md:px-16 mb-8">
+          <Eyebrow>Final Showcase</Eyebrow>
+          <Heading heavy="ALL SCREENS," light="all at once." size="text-5xl md:text-7xl" />
+        </div>
+        <FadeImage src="/propark/showcase.png" alt="ProPark — all screens showcase" fadeDir="sides" />
+      </section>
+
+    </div>
   );
 }

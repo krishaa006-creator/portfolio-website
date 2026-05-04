@@ -33,8 +33,9 @@ function Sticker({ pos: initPos, rotate, children, zBase = 50 }) {
     >
       {!touched && (
         <div
-          className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap
-            text-[#1A1A1A]/40 text-[9px] font-medium px-2 py-0.5 rounded-full
+          className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap
+            bg-[#1A1A1A]/8 text-[#1A1A1A]/55 text-[10px] font-medium px-2.5 py-1
+            rounded-full border border-[#1A1A1A]/10
             pointer-events-none select-none"
           style={{ letterSpacing: "0.04em" }}
         >
@@ -163,7 +164,7 @@ function TabPill() {
 /* ─── Sticker E: Krishaa avatar doodle ────────────────────────── */
 function AvatarSticker() {
   return (
-    <div className="relative" style={{ width: 120 }}>
+    <div className="relative" style={{ width: 150 }}>
       {/* speech bubble above */}
       <div
         className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap
@@ -174,13 +175,12 @@ function AvatarSticker() {
         <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-white border-r border-b border-[#1A1A1A]/12 rotate-45" />
       </div>
 
-      {/* multiply blends away the white background; outline via drop-shadow */}
       <img
         src="/krishaa-avatar-sticker-nobg.png"
         alt="Krishaa drinking coffee"
         style={{
-          width: 120,
-          height: 120,
+          width: 150,
+          height: 150,
           objectFit: "contain",
           display: "block",
         }}
@@ -217,16 +217,19 @@ export default function DraggableStickers() {
         y: heroTop + 190,
       };
 
-      // E: avatar — bottom-left corner of the "today in Krishaa's world" card
+      // E: avatar — fully outside the left edge of the "today in Krishaa's world" card,
+      //    sitting at the card's bottom so it peeks out beneath/beside it
       const card = document.getElementById("hero-world-card");
       const cardRect = card ? card.getBoundingClientRect() : null;
+      const avatarW = 150;
       const heroE = cardRect
         ? {
-            x: Math.round(cardRect.left + window.scrollX) - 30,
-            y: Math.round(cardRect.bottom + window.scrollY) - 110,
+            // 20px gap between avatar right edge and card left edge
+            x: Math.round(cardRect.left + window.scrollX) - avatarW - 20,
+            y: Math.round(cardRect.bottom + window.scrollY) - avatarW + 20,
           }
         : {
-            x: Math.min(Math.round(vw * 0.57), vw - 135),
+            x: Math.min(Math.round(vw * 0.52), vw - 165),
             y: heroTop + Math.round(window.innerHeight * 0.62),
           };
 

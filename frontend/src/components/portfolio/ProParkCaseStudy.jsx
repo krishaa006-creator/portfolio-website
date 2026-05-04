@@ -71,7 +71,7 @@ export default function ProParkCaseStudy() {
         <div className="grid md:grid-cols-[11fr_9fr] gap-12 items-start">
           <div>
             <Eyebrow>Context Setting</Eyebrow>
-            <Heading heavy="CONTEXT" light="Setting." size="text-5xl md:text-7xl" />
+            <Heading heavy="THE" light="problem space." size="text-5xl md:text-7xl" />
             <p className="mt-6 text-lg leading-relaxed text-[#1A1A1A]/70 max-w-lg">
               Urban areas face a growing parking shortage — limited public spaces, endless circling,
               and many private spots sitting empty and inaccessible.
@@ -215,7 +215,7 @@ export default function ProParkCaseStudy() {
         <div className="grid md:grid-cols-[3fr_2fr] gap-10 items-center">
           <FadeImage src="/propark/ux-photos.png" alt="Real parking scenes in India" fadeDir="sides" />
           <div>
-            <Heading heavy="PARKING in" light="India." size="text-3xl md:text-4xl" />
+            <Heading heavy="CHAOS" light="by numbers." size="text-3xl md:text-4xl" />
             <p className="mt-5 text-base leading-relaxed text-[#1A1A1A]/70">
               More than finding a spot — a daily test of patience, intuition, and sometimes creativity.
             </p>
@@ -244,7 +244,7 @@ export default function ProParkCaseStudy() {
           Centered hero — product takes centre stage    */}
       <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
         <Eyebrow>The Final Product</Eyebrow>
-        <Heading heavy="THE FINAL" light="Product." size="text-5xl md:text-7xl" />
+        <Heading heavy="ONE WEEK," light="twelve screens." size="text-5xl md:text-7xl" />
         <p className="mt-4 text-base text-[#1A1A1A]/60 max-w-lg">
           A peer-to-peer parking platform built to ease congestion in major Indian cities.
         </p>
@@ -260,7 +260,7 @@ export default function ProParkCaseStudy() {
         <div className="flex items-end justify-between gap-8 mb-10 flex-wrap">
           <div>
             <Eyebrow>Onboarding Screens</Eyebrow>
-            <Heading heavy="ONBOARDING" light="Screens." size="text-4xl md:text-6xl" />
+            <Heading heavy="ZERO" light="to parked." size="text-4xl md:text-6xl" />
           </div>
           <p className="text-base leading-relaxed text-[#1A1A1A]/60 max-w-sm">
             Phone number + OTP — minimal friction, maximum trust. Auto OTP detection means the process
@@ -279,7 +279,7 @@ export default function ProParkCaseStudy() {
           <FadeImage src="/propark/home.png" alt="Home screen" fadeDir="sides" />
           <div>
             <Eyebrow>Home Screen</Eyebrow>
-            <Heading heavy="HOME" light="Screen." size="text-3xl md:text-4xl" />
+            <Heading heavy="YOUR" light="dashboard." size="text-3xl md:text-4xl" />
             <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/65">
               Vehicle-first: pick your car, search nearby spots, and see upcoming bookings — all in one glance.
             </p>
@@ -293,7 +293,7 @@ export default function ProParkCaseStudy() {
         <div className="grid md:grid-cols-[2fr_3fr] gap-12 items-center">
           <div>
             <Eyebrow>Parking Locator</Eyebrow>
-            <Heading heavy="PARKING" light="Locator." size="text-4xl md:text-5xl" />
+            <Heading heavy="FIND" light="your spot." size="text-4xl md:text-5xl" />
             <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/65">
               Set date and time, explore an interactive map, compare spots by availability, rate, and rating.
               Full transparency before committing.
@@ -308,7 +308,7 @@ export default function ProParkCaseStudy() {
       <section className="py-16" style={{ background: PEACH }}>
         <div className="px-8 md:px-16 mb-8">
           <Eyebrow>Parking Booking</Eyebrow>
-          <Heading heavy="PARKING" light="Booking." size="text-4xl md:text-6xl" />
+          <Heading heavy="LOCK" light="it in." size="text-4xl md:text-6xl" />
           <p className="mt-3 text-base text-[#1A1A1A]/60 max-w-lg">
             Space details, rates, fees, taxes — all calculated before payment. Confirmation prompt for an extra layer of security.
           </p>

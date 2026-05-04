@@ -9,6 +9,7 @@ import Community from "../components/portfolio/Community";
 import Contact from "../components/portfolio/Contact";
 import Footer from "../components/portfolio/Footer";
 import Marquee from "../components/portfolio/Marquee";
+import DraggableStickers from "../components/portfolio/DraggableStickers";
 
 export default function Portfolio() {
   const [activeProject, setActiveProject] = useState(null);
@@ -27,6 +28,7 @@ export default function Portfolio() {
       </main>
       <Footer />
       <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
+      <DraggableStickers />
     </div>
   );
 }

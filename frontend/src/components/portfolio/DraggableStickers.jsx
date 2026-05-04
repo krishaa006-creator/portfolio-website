@@ -46,27 +46,47 @@ function Sticker({ pos: initPos, rotate, children, zBase = 50 }) {
   );
 }
 
-/* ─── Sticker A: hot-take sticky note ─────────────────────────── */
+/* ─── Sticker A: hot-take sticky note (outline sticker style) ─── */
 function HotTakeNote() {
   return (
     <div
-      className="relative rounded-[14px] border border-[#1A1A1A]/10 p-4 pt-5"
-      style={{ background: "#FFFBF2", width: 196 }}
+      className="relative p-4 pt-5"
+      style={{
+        width: 196,
+        background: "transparent",
+        /* multi-layer outline: thick white die-cut, then dark stroke */
+        outline: "none",
+        borderRadius: 14,
+        boxShadow:
+          "0 0 0 4px #F7F2E7, 0 0 0 6px #1A1A1A",
+      }}
     >
+      {/* tape */}
       <div className="tape absolute -top-3 left-1/2 -translate-x-1/2" />
+
       <div className="flex items-center gap-1.5 mb-2">
         <span className="text-base leading-none">🔥</span>
         <span className="font-hand text-[15px] text-[#E8532C]">hot take →</span>
       </div>
-      <div className="h-px bg-[#1A1A1A]/10 mb-3" />
+
+      {/* dashed divider for outline feel */}
+      <div
+        className="mb-3"
+        style={{
+          height: 1,
+          background: "repeating-linear-gradient(to right, #1A1A1A33 0, #1A1A1A33 5px, transparent 5px, transparent 9px)",
+        }}
+      />
+
       <p className="text-[12px] leading-snug text-[#1A1A1A]/80">
         UX, product, service — pick your favourite label. I'll be over here making things make sense.
       </p>
-      <div className="mt-3 flex items-center gap-1 opacity-40">
+
+      <div className="mt-3 flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-px flex-1 bg-[#1A1A1A]" style={{ opacity: 0.5 - i * 0.08 }} />
+          <div key={i} className="h-px flex-1 bg-[#1A1A1A]" style={{ opacity: 0.18 - i * 0.02 }} />
         ))}
-        <span className="text-[10px]">✦</span>
+        <span className="text-[10px] opacity-30">✦</span>
       </div>
     </div>
   );
@@ -213,10 +233,10 @@ export default function DraggableStickers() {
          Hot take note: top-right, x≈79% from left, y≈53px from top
          Avatar sticker: mid-right, x≈49% from left, y≈220px from top  */
 
-      // A: hot take — top-right, tape peeking behind nav, note body visible below
+      // A: hot take — pushed below nav so tape clears it
       const heroA = {
         x: Math.min(Math.round(vw * 0.77), vw - 215),
-        y: heroTop + 55,
+        y: heroTop + 130,
       };
 
       // E: avatar — bio / CTA row level.

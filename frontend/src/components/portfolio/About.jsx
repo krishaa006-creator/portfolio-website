@@ -152,7 +152,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14 items-start">
         <div ref={leftRef} className="md:col-span-5 md:sticky md:top-32">
           <span className="font-hand text-xl text-[#E8532C]">§ about</span>
-          <h2 className="mt-2 font-display text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
+          <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
             a little<br />
             <span className="italic">about me</span>
             <Heart className="inline-block ml-3 align-middle anim-floaty" color="#E8532C" size={30} />
@@ -190,7 +190,7 @@ export default function About() {
 
           <div ref={brainLeftRef} className="md:col-span-5 order-2 md:order-1">
             <span className="font-hand text-xl text-[#E8532C]">§ what's rattling around in here</span>
-            <h3 className="mt-2 font-display text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight">
+            <h3 className="mt-2 font-display text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight">
               roughly 87% <span className="italic">design</span>,<br />
               13% <span className="marker">snack planning</span>
             </h3>

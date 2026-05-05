@@ -39,7 +39,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14">
         <div ref={leftRef} className="md:col-span-6">
           <span className="font-hand text-xl text-[#F4C430]">§ say hi, i'll say hi back</span>
-          <h2 className="mt-2 font-display text-6xl md:text-8xl font-semibold leading-[0.98] tracking-tight">
+          <h2 className="mt-2 font-display text-5xl sm:text-6xl md:text-8xl font-semibold leading-[0.98] tracking-tight">
             let's make<br />
             <span className="italic text-[#E8532C]">something</span><br />
             good.
@@ -64,15 +64,15 @@ export default function Contact() {
                 className="flex items-baseline gap-4 py-3 border-b border-[#F7F2E7]/20
                   hover:border-[#E8532C] transition-colors group"
               >
-                <span className="text-xs uppercase tracking-widest text-[#F7F2E7]/55 w-20">{label}</span>
-                <span className="font-display text-2xl md:text-3xl font-medium group-hover:text-[#E8532C] transition-colors">
+                <span className="text-xs uppercase tracking-widest text-[#F7F2E7]/55 w-20 shrink-0">{label}</span>
+                <span className="font-display text-lg sm:text-2xl md:text-3xl font-medium group-hover:text-[#E8532C] transition-colors break-all min-w-0">
                   {value}
                 </span>
               </a>
             ))}
           </div>
 
-          <div className="mt-10 font-hand text-2xl text-[#F4C430] flex items-center gap-2">
+          <div className="mt-10 font-hand text-xl md:text-2xl text-[#F4C430] flex items-start gap-2">
             <Arrow color="#F4C430" width={60} className="anim-wiggle" />
             p.s: impatiently, eagerly waiting to hear back!
           </div>

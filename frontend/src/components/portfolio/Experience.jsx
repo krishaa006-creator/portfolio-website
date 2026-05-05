@@ -129,7 +129,7 @@ export default function Experience() {
         <div className="grid md:grid-cols-12 gap-10">
           <div ref={headerRef} className="md:col-span-5">
             <span className="font-hand text-xl text-[#E8532C]">§ the receipts</span>
-            <h2 className="mt-2 font-display text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
+            <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
               places i've<br /><span className="italic">designed at</span>
             </h2>
             <Squiggle width={160} color="#2D5F3F" className="mt-4" />

@@ -100,10 +100,12 @@ export default function DraggableStickers() {
   const [positions, setPositions] = React.useState(null);
 
   React.useEffect(() => {
-    const id = setTimeout(() => {
-      const card = document.getElementById("hero-world-card");
-      const vw   = window.innerWidth;
+    const compute = () => {
+      const vw = window.innerWidth;
+      // Hide entirely on mobile — absolute positions overflow on small screens
+      if (vw < 768) { setPositions(null); return; }
 
+      const card = document.getElementById("hero-world-card");
       const cardRect = card ? card.getBoundingClientRect() : null;
 
       const hotTakeH = 210;
@@ -123,9 +125,11 @@ export default function DraggableStickers() {
         : { x: Math.min(Math.round(vw * 0.52), vw - 165), y: Math.round(window.innerHeight * 0.62) };
 
       setPositions({ heroA, heroE });
-    }, 120);
+    };
 
-    return () => clearTimeout(id);
+    const id = setTimeout(compute, 120);
+    window.addEventListener("resize", compute);
+    return () => { clearTimeout(id); window.removeEventListener("resize", compute); };
   }, []);
 
   if (!positions) return null;

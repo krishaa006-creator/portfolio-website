@@ -73,7 +73,7 @@ export default function Hero() {
         </div>
 
         {/* headline — word by word stagger, spaces preserved with {" "} */}
-        <h1 className="font-display text-[52px] leading-[1.02] md:text-[112px] md:leading-[0.98] font-semibold tracking-tight">
+        <h1 className="font-display text-[38px] leading-[1.05] sm:text-[52px] sm:leading-[1.02] md:text-[88px] md:leading-[0.98] lg:text-[112px] font-semibold tracking-tight">
           <span className="inline-block" style={wordStyle(80)}>i make</span>
           {" "}
           <span className="inline-block italic text-[#E8532C]" style={wordStyle(200)}>messy</span>
@@ -97,7 +97,7 @@ export default function Hero() {
               that feel — well, obvious in hindsight.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
               <a href="#work"
                 className="btn-ink px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2">
                 peek at my work <span>→</span>

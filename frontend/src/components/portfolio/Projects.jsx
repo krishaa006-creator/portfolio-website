@@ -35,10 +35,10 @@ function ProjectCard({ p, idx, onOpen }) {
                     <div className="h-px flex-1 bg-[#1A1A1A]/25" />
                     <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/60">{p.year}</span>
                   </div>
-                  <h3 className="mt-6 font-display text-5xl md:text-6xl font-semibold leading-[1.02] tracking-tight">
+                  <h3 className="mt-6 font-display text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold leading-[1.02] tracking-tight">
                     {p.title}
                   </h3>
-                  <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: p.accent }}>
+                  <p className="mt-3 font-display italic text-lg md:text-2xl" style={{ color: p.accent }}>
                     {p.subtitle}
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/70">{p.description}</p>
@@ -55,7 +55,7 @@ function ProjectCard({ p, idx, onOpen }) {
                   </div>
                 </div>
 
-                <div className="mt-auto pt-6 flex items-center justify-between gap-4">
+                <div className="mt-auto pt-6 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex gap-5 text-sm">
                     <div>
                       <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
@@ -77,22 +77,22 @@ function ProjectCard({ p, idx, onOpen }) {
             </div>
           ) : (
             <div className="grid md:grid-cols-12">
-              <div className="md:col-span-5 p-8 md:p-10">
+              <div className="md:col-span-5 p-6 md:p-10">
                 <div className="flex items-center gap-3">
                   <span className="font-hand text-2xl" style={{ color: p.accent }}>{p.number}</span>
                   <div className="h-px flex-1 bg-[#1A1A1A]/25" />
                   <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/60">{p.year}</span>
                 </div>
-                <h3 className="mt-6 font-display text-5xl md:text-6xl font-semibold leading-[1.02] tracking-tight">
+                <h3 className="mt-6 font-display text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold leading-[1.02] tracking-tight">
                   {p.title}
                 </h3>
-                <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: p.accent }}>
+                <p className="mt-3 font-display italic text-lg md:text-2xl" style={{ color: p.accent }}>
                   {p.subtitle}
                 </p>
               </div>
 
               <div className="md:col-span-7 border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 bg-[#FFFBF2] flex flex-col justify-between">
-                <div className="p-8 md:p-10">
+                <div className="p-6 md:p-10">
                   <p className="text-base md:text-lg leading-relaxed text-[#1A1A1A]/85">{p.description}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {p.tags.map((t) => (
@@ -106,7 +106,7 @@ function ProjectCard({ p, idx, onOpen }) {
                     ))}
                   </div>
                 </div>
-                <div className="px-8 md:px-10 pb-8 md:pb-10 flex items-center justify-between gap-4">
+                <div className="px-6 md:px-10 pb-6 md:pb-10 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex gap-5 text-sm">
                     <div>
                       <div className="uppercase tracking-widest text-[10px] text-[#1A1A1A]/50">role</div>
@@ -148,7 +148,7 @@ export default function Projects({ onOpen }) {
         <div ref={headerRef} className="flex items-end justify-between gap-6 mb-10 md:mb-14 flex-wrap">
           <div>
             <span className="font-hand text-xl text-[#E8532C]">§ selected work</span>
-            <h2 className="mt-2 font-display text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
+            <h2 className="mt-2 font-display text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1] tracking-tight">
               things i've<br />
               <span className="italic">untangled</span>
               <Sparkle color="#F4C430" size={28} className="inline-block ml-3 align-top anim-spinslow" />

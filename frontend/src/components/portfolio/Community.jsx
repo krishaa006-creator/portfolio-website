@@ -74,7 +74,7 @@ export default function Community() {
             <Heart color="#E8532C" size={20} />
             <span className="font-hand text-xl text-[#E8532C]">§ community & stages</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight mb-8 max-w-3xl">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight mb-8 max-w-3xl">
             when i'm not designing, i'm usually{" "}
             <span className="italic">talking about it</span>.
           </h2>

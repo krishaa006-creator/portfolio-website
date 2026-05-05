@@ -89,47 +89,47 @@ function BrainFace() {
 
         {/* ══ LEFT EYE ══ */}
         {/* sclera */}
-        <circle cx="21" cy="43" r="15" fill="white" stroke="#1A1A1A" strokeWidth="1.8" />
-        {/* upper eyelid arc — always visible, gives heavy-lid look */}
+        <circle cx="27" cy="44" r="9" fill="white" stroke="#1A1A1A" strokeWidth="1.5" />
+        {/* upper eyelid arc */}
         <path
-          d="M6,39 Q21,30 36,39"
-          fill="none" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"
+          d="M18,41 Q27,35 36,41"
+          fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round"
         />
         {/* iris + pupil + catchlight — animates to look around */}
         <g className="brain-iris">
-          <circle cx="21" cy="44" r="9.5"  fill="#5B8FB9" />
-          <circle cx="21" cy="44" r="6"    fill="#1A1A1A" />
-          <circle cx="24"  cy="41" r="2.5" fill="white" opacity="0.88" />
+          <circle cx="27" cy="45" r="5.5" fill="#5B8FB9" />
+          <circle cx="27" cy="45" r="3.4" fill="#1A1A1A" />
+          <circle cx="29"  cy="43" r="1.5" fill="white" opacity="0.88" />
         </g>
         {/* eyelid — sweeps down from top to blink */}
-        <circle className="brain-lid" cx="21" cy="43" r="15.3"
+        <circle className="brain-lid" cx="27" cy="44" r="9.3"
           fill="#1A1A1A" opacity="0.92" />
 
         {/* ══ RIGHT EYE ══ */}
-        <circle cx="51" cy="43" r="15" fill="white" stroke="#1A1A1A" strokeWidth="1.8" />
+        <circle cx="50" cy="44" r="9" fill="white" stroke="#1A1A1A" strokeWidth="1.5" />
         <path
-          d="M36,39 Q51,30 66,39"
-          fill="none" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"
+          d="M41,41 Q50,35 59,41"
+          fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round"
         />
         <g className="brain-iris brain-iris-r">
-          <circle cx="51" cy="44" r="9.5"  fill="#5B8FB9" />
-          <circle cx="51" cy="44" r="6"    fill="#1A1A1A" />
-          <circle cx="54"  cy="41" r="2.5" fill="white" opacity="0.88" />
+          <circle cx="50" cy="45" r="5.5" fill="#5B8FB9" />
+          <circle cx="50" cy="45" r="3.4" fill="#1A1A1A" />
+          <circle cx="52"  cy="43" r="1.5" fill="white" opacity="0.88" />
         </g>
-        <circle className="brain-lid brain-lid-r" cx="51" cy="43" r="15.3"
+        <circle className="brain-lid brain-lid-r" cx="50" cy="44" r="9.3"
           fill="#1A1A1A" opacity="0.92" />
 
         {/* ══ MOUTH — wide-open panicked ══ */}
         <g className="brain-mouth-g">
           {/* dark outer */}
-          <ellipse cx="36" cy="70" rx="13" ry="7.5"  fill="#1A1A1A" />
+          <ellipse cx="38" cy="61" rx="12" ry="7"  fill="#1A1A1A" />
           {/* red interior */}
-          <ellipse cx="36" cy="71.5" rx="10.2" ry="5.5" fill="#C13030" />
+          <ellipse cx="38" cy="62.5" rx="9.5" ry="5.2" fill="#C13030" />
           {/* upper teeth */}
-          <rect x="25" y="64.5" width="22" height="5" rx="2.5" fill="white" />
+          <rect x="27.5" y="56" width="21" height="5" rx="2.5" fill="white" />
           {/* bottom lip curve */}
           <path
-            d="M23.5,70 Q36,79 48.5,70"
+            d="M26.5,61 Q38,70 49.5,61"
             fill="none" stroke="#1A1A1A" strokeWidth="1.3" strokeLinecap="round"
           />
         </g>

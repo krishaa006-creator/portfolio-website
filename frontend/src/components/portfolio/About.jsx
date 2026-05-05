@@ -221,16 +221,12 @@ export default function About() {
                   shadow-[0_22px_45px_-22px_rgba(0,0,0,0.45),0_2px_4px_rgba(0,0,0,0.08)]"
                 style={{ transform: "rotate(-1.5deg)" }}
               >
-                {/* image + face overlay container */}
-                <div className="relative">
-                  <img
-                    src={BRAIN_IMG}
-                    alt="What's inside Krishaa's brain"
-                    className="w-full h-auto block"
-                    loading="lazy"
-                  />
-                  <BrainFace />
-                </div>
+                <img
+                  src={BRAIN_IMG}
+                  alt="What's inside Krishaa's brain"
+                  className="w-full h-auto block"
+                  loading="lazy"
+                />
 
                 <div className="absolute left-0 right-0 bottom-3 px-4 flex items-center justify-between">
                   <span className="font-hand text-base text-[#1A1A1A]">

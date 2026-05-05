@@ -106,10 +106,7 @@ export default function Hero() {
                 className="btn-outline-ink px-6 py-3 rounded-full text-sm font-medium">
                 say hi first
               </a>
-              <div className="flex items-center gap-2 ml-2">
-                <EyeBlink size={36} color="#1A1A1A" />
-                <span className="font-hand text-lg text-[#1A1A1A]/70">i don't bite, promise</span>
-              </div>
+              <span className="font-hand text-lg text-[#1A1A1A]/70 ml-2">i don't bite, promise</span>
             </div>
           </div>
 

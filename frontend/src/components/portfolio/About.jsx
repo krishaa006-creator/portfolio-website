@@ -6,21 +6,17 @@ import { useReveal } from "../../hooks/useReveal";
 const BRAIN_IMG =
   "https://customer-assets.emergentagent.com/job_quirky-portfolio-1/artifacts/iwwtv6hz_brain%20map.png";
 
-/* ── Googly-eye panic face — overlaid on the brain polaroid photo ─
-   Style ref: big cartoon eyes (pupils dart around), wide open mouth,
-   spiky starburst speech bubble with lightning bolts shaking.
-   All animation via CSS classes defined in index.css.
+/* ── Googly-eye panic face — matches reference sticker scale ──────
+   viewBox: 0 0 100 80
+   Eyes: LARGE (r=15), nearly touching, dominate the face just like
+   the reference image. Starburst bubble upper-right.
 ──────────────────────────────────────────────────────────────────*/
 function BrainFace() {
   /*
-    SVG viewBox "0 0 100 75" scales 1:1 with the image.
-    Face sits center-left on the image so the starburst bubble
-    (upper-right) has room and doesn't overflow.
-
-    Left eye  center: (27, 44)   sclera r=11
-    Right eye center: (50, 44)   sclera r=11
-    Mouth center:     (38, 60)
-    Starburst center: (76, 22)   8-point star
+    Left eye  center: (21, 43)  sclera r=15
+    Right eye center: (51, 43)  sclera r=15   gap ≈ 0 (touching)
+    Mouth center:     (36, 70)
+    Starburst center: (76, 21)  8-point star outer=17 inner=10
   */
   return (
     <div
@@ -28,103 +24,112 @@ function BrainFace() {
       style={{ overflow: "visible" }}
     >
       <svg
-        viewBox="0 0 100 75"
+        viewBox="0 0 100 80"
         width="100%"
         height="100%"
         style={{ display: "block", overflow: "visible" }}
         aria-hidden
       >
 
-        {/* ══ STARBURST SPEECH BUBBLE (upper-right) ══ */}
+        {/* ══ SPEECH BUBBLE — spiky starburst upper-right ══ */}
+
         {/* Lightning bolt 1 */}
         <path
-          d="M88,5 L85.5,10 L88.5,10 L86,15.5"
-          stroke="#1A1A1A" strokeWidth="1.4" strokeLinecap="round"
+          d="M88,4 L85.5,9.5 L88.5,9.5 L86,15"
+          stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round"
           strokeLinejoin="round" fill="none"
         />
         {/* Lightning bolt 2 */}
         <path
-          d="M92,2.5 L89.5,8 L92.5,8 L90,14"
-          stroke="#1A1A1A" strokeWidth="1.4" strokeLinecap="round"
+          d="M92,2 L89.5,8 L92.5,8 L90,13.5"
+          stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round"
           strokeLinejoin="round" fill="none"
         />
 
-        {/* 8-point starburst — computed at center (76,22) outerR=15 innerR=9 */}
+        {/*
+          8-point starburst: center (76,21) outerR=17 innerR=10
+          M74,3 → computed below, rounding to 1dp
+          angle step = 22.5°, start at -90°
+          outer points: 0,2,4,6,8,10,12,14
+          inner points: 1,3,5,7,9,11,13,15
+        */}
         <g className="brain-bubble">
           <path
-            d="M76,7 L79.5,13.7 L86.6,11.4 L84.3,18.6 L91,22
-               L84.3,25.5 L86.6,32.6 L79.5,30.3 L76,37
-               L72.6,30.3 L65.4,32.6 L67.7,25.5 L61,22
-               L67.7,18.6 L65.4,11.4 L72.6,13.7 Z"
+            d="M76,4 L79.8,10.8 L86,8 L83.2,16.2
+               L91,21 L83.2,25.8 L86,34 L79.8,31.2
+               L76,38 L72.2,31.2 L66,34 L68.8,25.8
+               L61,21 L68.8,16.2 L66,8 L72.2,10.8 Z"
             fill="white"
             stroke="#1A1A1A"
             strokeWidth="1.3"
             strokeLinejoin="round"
           />
-          {/* Text inside starburst */}
-          <text
-            x="76" y="19.5"
-            textAnchor="middle"
-            fontSize="3.8"
-            fontWeight="900"
-            fontFamily="'Arial Black', Impact, sans-serif"
-            fill="#1A1A1A"
-          >
-            SEND HELP
+          {/* 4 lines of text — centered at (76,21) */}
+          <text x="76" y="15.5" textAnchor="middle"
+            fontSize="3.2" fontWeight="900"
+            fontFamily="'Arial Black', Impact, sans-serif" fill="#1A1A1A">
+            ask her to
           </text>
-          <text
-            x="76" y="25"
-            textAnchor="middle"
-            fontSize="3.8"
-            fontWeight="900"
-            fontFamily="'Arial Black', Impact, sans-serif"
-            fill="#1A1A1A"
-          >
-            FAST
+          <text x="76" y="21" textAnchor="middle"
+            fontSize="3.2" fontWeight="900"
+            fontFamily="'Arial Black', Impact, sans-serif" fill="#1A1A1A">
+            give me
+          </text>
+          <text x="76" y="26.5" textAnchor="middle"
+            fontSize="3.2" fontWeight="900"
+            fontFamily="'Arial Black', Impact, sans-serif" fill="#1A1A1A">
+            a rest...
+          </text>
+          <text x="76" y="33" textAnchor="middle"
+            fontSize="4.2" fontWeight="900"
+            fontFamily="'Arial Black', Impact, sans-serif" fill="#C13030">
+            PLEASE!!
           </text>
         </g>
 
         {/* ══ LEFT EYE ══ */}
         {/* sclera */}
-        <circle cx="27" cy="44" r="11" fill="white" stroke="#1A1A1A" strokeWidth="1.6" />
-        {/* upper eyelid arc (always visible — reference has prominent upper lids) */}
+        <circle cx="21" cy="43" r="15" fill="white" stroke="#1A1A1A" strokeWidth="1.8" />
+        {/* upper eyelid arc — always visible, gives heavy-lid look */}
         <path
-          d="M16.5 40 Q27 33 37.5 40"
-          fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round"
+          d="M6,39 Q21,30 36,39"
+          fill="none" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"
         />
-        {/* iris + pupil + highlight — this whole group translates to look around */}
+        {/* iris + pupil + catchlight — animates to look around */}
         <g className="brain-iris">
-          <circle cx="27" cy="45" r="7"   fill="#5B8FB9" />
-          <circle cx="27" cy="45" r="4.2" fill="#1A1A1A" />
-          <circle cx="29.5" cy="42.8" r="2" fill="white" opacity="0.85" />
+          <circle cx="21" cy="44" r="9.5"  fill="#5B8FB9" />
+          <circle cx="21" cy="44" r="6"    fill="#1A1A1A" />
+          <circle cx="24"  cy="41" r="2.5" fill="white" opacity="0.88" />
         </g>
         {/* eyelid — sweeps down from top to blink */}
-        <circle className="brain-lid" cx="27" cy="44" r="11.2" fill="#1A1A1A" opacity="0.9" />
+        <circle className="brain-lid" cx="21" cy="43" r="15.3"
+          fill="#1A1A1A" opacity="0.92" />
 
         {/* ══ RIGHT EYE ══ */}
-        <circle cx="50" cy="44" r="11" fill="white" stroke="#1A1A1A" strokeWidth="1.6" />
+        <circle cx="51" cy="43" r="15" fill="white" stroke="#1A1A1A" strokeWidth="1.8" />
         <path
-          d="M39.5 40 Q50 33 60.5 40"
-          fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinecap="round"
+          d="M36,39 Q51,30 66,39"
+          fill="none" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"
         />
         <g className="brain-iris brain-iris-r">
-          <circle cx="50" cy="45" r="7"   fill="#5B8FB9" />
-          <circle cx="50" cy="45" r="4.2" fill="#1A1A1A" />
-          <circle cx="52.5" cy="42.8" r="2" fill="white" opacity="0.85" />
+          <circle cx="51" cy="44" r="9.5"  fill="#5B8FB9" />
+          <circle cx="51" cy="44" r="6"    fill="#1A1A1A" />
+          <circle cx="54"  cy="41" r="2.5" fill="white" opacity="0.88" />
         </g>
-        <circle className="brain-lid brain-lid-r" cx="50" cy="44" r="11.2" fill="#1A1A1A" opacity="0.9" />
+        <circle className="brain-lid brain-lid-r" cx="51" cy="43" r="15.3"
+          fill="#1A1A1A" opacity="0.92" />
 
-        {/* ══ MOUTH — wide open panicked ══ */}
+        {/* ══ MOUTH — wide-open panicked ══ */}
         <g className="brain-mouth-g">
-          {/* outer dark shape */}
-          <ellipse cx="38" cy="60" rx="13" ry="8.5" fill="#1A1A1A" />
-          {/* red inner */}
-          <ellipse cx="38" cy="61.5" rx="10.2" ry="6.5" fill="#C13030" />
+          {/* dark outer */}
+          <ellipse cx="36" cy="70" rx="13" ry="7.5"  fill="#1A1A1A" />
+          {/* red interior */}
+          <ellipse cx="36" cy="71.5" rx="10.2" ry="5.5" fill="#C13030" />
           {/* upper teeth */}
-          <rect x="27.5" y="54.5" width="21" height="5.5" rx="2.5" fill="white" />
-          {/* bottom lip shadow line */}
+          <rect x="25" y="64.5" width="22" height="5" rx="2.5" fill="white" />
+          {/* bottom lip curve */}
           <path
-            d="M25.5 60 Q38 70 50.5 60"
+            d="M23.5,70 Q36,79 48.5,70"
             fill="none" stroke="#1A1A1A" strokeWidth="1.3" strokeLinecap="round"
           />
         </g>
@@ -224,7 +229,6 @@ export default function About() {
                     className="w-full h-auto block"
                     loading="lazy"
                   />
-                  {/* Googly eyes + panicked mouth + starburst bubble */}
                   <BrainFace />
                 </div>
 

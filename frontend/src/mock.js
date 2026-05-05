@@ -215,7 +215,7 @@ export const projects = [
     year: "2024",
     tags: ["Mobile App", "Sharing Economy", "Urban Mobility"],
     accent: "#E8532C",
-    bg: "#F3E7D9",
+    bg: "#FAF7F2",
     coverImage: "/propark/cover.png",
     slides: [
       { src: "/propark/06.png", section: "Context Setting & Design Brief" },

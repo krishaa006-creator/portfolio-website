@@ -1,17 +1,18 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Arrow } from "./Doodles";
+import React, { useEffect, useRef, useState } from "react";
+import { Arrow, Sparkle, Lightning, Star } from "./Doodles";
 
 const ACCENT = "#E8532C";
 const PEACH  = "#F3E7D9";
 const PAGE   = "#F7F2E7";
 const CREAM  = "#FFFBF2";
 const INK    = "#1A1A1A";
+const GREEN  = "#2D5F3F";
 
-/* ── Global keyframes injected once ──────────────── */
+/* ── keyframes ─────────────────────────────────────────────── */
 const KEYFRAMES = `
 @keyframes ppFloat {
-  0%,100% { transform: translateY(0px); }
-  50%      { transform: translateY(-10px); }
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-10px); }
 }
 @keyframes ppFadeUp {
   from { opacity:0; transform:translateY(28px); }
@@ -33,28 +34,32 @@ const KEYFRAMES = `
   from { opacity:0; transform:scale(0.85); }
   to   { opacity:1; transform:scale(1); }
 }
-@keyframes ppBarGrow {
-  from { width:0; }
-  to   { width:100%; }
-}
 @keyframes ppChipPop {
   0%   { opacity:0; transform:scale(0.7); }
   70%  { transform:scale(1.08); }
   100% { opacity:1; transform:scale(1); }
 }
+@keyframes ppBarGrow {
+  from { width:0; }
+  to   { width:var(--bar-w,100%); }
+}
+@keyframes ppWiggle {
+  0%,100% { transform:rotate(-2deg); }
+  50%      { transform:rotate(2deg); }
+}
 `;
 
 function injectKeyframes() {
-  if (document.getElementById("pp-keyframes")) return;
+  if (document.getElementById("pp-kf")) return;
   const s = document.createElement("style");
-  s.id = "pp-keyframes";
+  s.id = "pp-kf";
   s.textContent = KEYFRAMES;
   document.head.appendChild(s);
 }
 
-/* ── Scroll reveal hook ───────────────────────────── */
-function useReveal(threshold = 0.12) {
-  const ref  = useRef(null);
+/* ── hooks ──────────────────────────────────────────────────── */
+function useReveal(threshold = 0.1) {
+  const ref = useRef(null);
   const [on, setOn] = useState(false);
   useEffect(() => {
     injectKeyframes();
@@ -69,11 +74,10 @@ function useReveal(threshold = 0.12) {
   return [ref, on];
 }
 
-/* ── Counter hook ─────────────────────────────────── */
 function useCountUp(target, duration = 1800) {
-  const ref     = useRef(null);
+  const ref   = useRef(null);
   const [val, setVal] = useState(0);
-  const [go, setGo]   = useState(false);
+  const [go,  setGo]  = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -89,8 +93,7 @@ function useCountUp(target, duration = 1800) {
     const tick = (ts) => {
       if (!start) start = ts;
       const p = Math.min((ts - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      setVal(Math.round(ease * target));
+      setVal(Math.round((1 - Math.pow(1 - p, 3)) * target));
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -98,7 +101,7 @@ function useCountUp(target, duration = 1800) {
   return [ref, val, go];
 }
 
-/* ── Reveal wrapper ───────────────────────────────── */
+/* ── primitives ─────────────────────────────────────────────── */
 function Reveal({ children, anim = "ppFadeUp", delay = 0, duration = 600, className = "", style = {} }) {
   const [ref, on] = useReveal();
   return (
@@ -113,21 +116,10 @@ function Reveal({ children, anim = "ppFadeUp", delay = 0, duration = 600, classN
   );
 }
 
-/* ── Arrow annotation ─────────────────────────────── */
-function Note({ label, color = ACCENT }) {
-  return (
-    <div className="flex items-center gap-2 mt-3">
-      <Arrow color={color} width={48} />
-      <span className="font-hand italic text-base" style={{ color }}>{label}</span>
-    </div>
-  );
-}
-
-/* ── Section eyebrow ──────────────────────────────── */
 function Eyebrow({ children }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <div className="h-[2px] w-6 rounded-full shrink-0" style={{ background: ACCENT }} />
+      <div className="h-[2px] w-5 rounded-full shrink-0" style={{ background: ACCENT }} />
       <span className="text-[11px] font-bold tracking-[0.3em] uppercase" style={{ color: ACCENT }}>
         {children}
       </span>
@@ -135,7 +127,6 @@ function Eyebrow({ children }) {
   );
 }
 
-/* ── Compound heading ─────────────────────────────── */
 function Heading({ heavy, light, size = "text-4xl md:text-6xl" }) {
   return (
     <h2 className={`font-display leading-[1.05] tracking-tight ${size}`}>
@@ -145,43 +136,97 @@ function Heading({ heavy, light, size = "text-4xl md:text-6xl" }) {
   );
 }
 
-/* ═══════════════════════════════════════════════════
+function Note({ label, color = ACCENT }) {
+  return (
+    <div className="flex items-center gap-2 mt-3">
+      <Arrow color={color} width={44} />
+      <span className="font-hand italic text-base" style={{ color }}>{label}</span>
+    </div>
+  );
+}
+
+/* ── PullQuote — big featured user quote ───────────────────── */
+function PullQuote({ quote, bg = PEACH }) {
+  return (
+    <div className="rounded-2xl p-5 relative overflow-hidden" style={{ background: bg }}>
+      <span className="font-display text-6xl leading-none absolute top-2 left-4 opacity-15"
+        style={{ color: ACCENT }}>"</span>
+      <p className="font-display italic text-lg md:text-xl leading-snug text-[#1A1A1A] relative z-10 pl-2 pt-4">
+        {quote}
+      </p>
+    </div>
+  );
+}
+
+/* ── StatCard ────────────────────────────────────────────────── */
+function StatCard({ stat, label, color = ACCENT, delay = 0 }) {
+  return (
+    <Reveal anim="ppCountUp" delay={delay}>
+      <div className="rounded-2xl p-5 h-full border border-[#1A1A1A]/08" style={{ background: CREAM }}>
+        <p className="font-display font-black text-3xl md:text-4xl leading-none" style={{ color }}>
+          {stat}
+        </p>
+        <p className="mt-2 text-sm text-[#1A1A1A]/60 leading-snug">{label}</p>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ── OutcomeCard ─────────────────────────────────────────────── */
+function OutcomeCard({ icon, label, delay = 0 }) {
+  return (
+    <Reveal anim="ppFadeUp" delay={delay}>
+      <div className="rounded-2xl p-5 border border-[#1A1A1A]/10 flex items-start gap-3 h-full"
+        style={{ background: "rgba(255,255,255,0.65)" }}>
+        <span className="text-2xl shrink-0">{icon}</span>
+        <p className="text-sm leading-relaxed text-[#1A1A1A]/75 font-medium">{label}</p>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
    ROOT
-═══════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════════ */
 export default function ProParkCaseStudy() {
   const [statRef, statVal, statGo] = useCountUp(3650);
 
   return (
     <div>
 
-      {/* ══ 01  CONTEXT ══════════════════════════════
-          Text left ~55%, image right ~45%            */}
+      {/* ══ 01  CONTEXT ══════════════════════════════════════════ */}
       <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
         <div className="grid md:grid-cols-[11fr_9fr] gap-12 items-start">
 
           <Reveal anim="ppSlideRight">
             <Eyebrow>Context Setting</Eyebrow>
             <Heading heavy="THE" light="problem space." size="text-5xl md:text-7xl" />
-            <p className="mt-6 text-lg leading-relaxed text-[#1A1A1A]/70 max-w-lg">
+            <p className="mt-5 text-lg leading-relaxed text-[#1A1A1A]/65 max-w-lg">
               Urban areas face a growing parking shortage — limited public spaces, endless circling,
-              and many private spots sitting empty and inaccessible.
-            </p>
-            <p className="mt-3 text-lg font-semibold text-[#1A1A1A]">
-              These idle spaces are a missed opportunity for both income and utility.
+              and many private spots sitting empty and inaccessible. These idle spaces are a
+              <strong className="text-[#1A1A1A]"> missed opportunity</strong> for both income and utility.
             </p>
 
+            {/* Pain-point stat cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8">
+              <StatCard stat="1:3,650"  label="parking spots per car in Indian cities"           color={ACCENT} delay={0}   />
+              <StatCard stat="20+ min"  label="average time lost circling for a single spot"     color={INK}    delay={80}  />
+              <StatCard stat="₹0"       label="earned from the millions of idle private driveways" color={GREEN} delay={160} />
+            </div>
+
+            {/* Design brief */}
             <div className="mt-12">
               <Eyebrow>Design Brief</Eyebrow>
-              <p className="text-sm italic text-[#1A1A1A]/40 mb-6">
-                How Might We — Design a peer to peer parking app that
+              <p className="text-sm italic text-[#1A1A1A]/38 mb-6">
+                How Might We — Design a peer-to-peer parking app that…
               </p>
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {[
-                  { text: <><strong style={{ color: INK }}>MAKES PARKING SPACES MORE ACCESSIBLE</strong> in urban spaces</>, note: "The Goal", color: ACCENT },
-                  { text: <>for a wide range of users by <strong>unlocking and connecting unused private parking spots</strong></>, note: "How to achieve it?" },
-                  { text: <>to reduce parking frustration and <strong>turn idle space into opportunity.</strong></>, note: "The Why?" },
+                  { text: <><strong style={{ color: INK }}>MAKES PARKING SPACES MORE ACCESSIBLE</strong> in urban spaces</>,        note: "The Goal",         color: ACCENT },
+                  { text: <>by <strong>unlocking and connecting unused private parking spots</strong></>,                             note: "How to achieve it?", color: INK },
+                  { text: <>to reduce frustration and <strong>turn idle space into opportunity.</strong></>,                          note: "The Why?"          },
                 ].map(({ text, note, color = INK }, i) => (
-                  <div key={i} className="pl-4 border-l-2 transition-all duration-300"
+                  <div key={i} className="pl-4 border-l-2"
                     style={{ borderColor: i === 0 ? ACCENT : `${INK}22` }}>
                     <p className="text-sm leading-relaxed text-[#1A1A1A]/80">{text}</p>
                     <Note label={note} color={color} />
@@ -201,7 +246,7 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ STAT MOMENT ════════════════════════════════ */}
+      {/* ══ STAT MOMENT ══════════════════════════════════════════ */}
       <div className="border-y border-[#1A1A1A]/10" style={{ background: PEACH }}>
         <div className="px-8 md:px-16 py-14 flex flex-col md:flex-row items-center gap-10 max-w-6xl mx-auto">
           <div ref={statRef} className="shrink-0 text-center md:text-left">
@@ -226,8 +271,8 @@ export default function ProParkCaseStudy() {
         </div>
       </div>
 
-      {/* ══ 02  EMPATHISING ════════════════════════════
-          Full-width persona image, then 2-col cards    */}
+      {/* ══ 02  EMPATHISING ═══════════════════════════════════════
+          Full-width persona image, then 2-col persona cards       */}
       <section className="py-16" style={{ background: PAGE }}>
         <Reveal>
           <div className="mb-10 overflow-hidden">
@@ -246,48 +291,57 @@ export default function ProParkCaseStudy() {
               {
                 title: "Residents",
                 role: "The Space Providers",
+                emoji: "🏠",
                 intro: "Urban residential areas have unused parking spaces during most of the day — often close to crowded commercial zones that desperately lack parking.",
                 quotes: [
                   "I want to make extra income, but I worry about strangers damaging my property.",
                   "Trust is a big issue — how do I know the person parking won't misuse the space?",
                 ],
-                drivers: ["Passive income", "Better space utilization", "Control availability"],
+                drivers:    ["Passive income", "Better space utilization", "Control availability"],
                 inhibitors: ["Trust & security concerns", "Liability issues", "Lack of flexibility"],
               },
               {
                 title: "Drivers",
                 role: "The Space Seekers",
+                emoji: "🚗",
                 intro: "In crowded Indian cities, finding parking near commercial areas is a nightmare. During peak hours, limited spots vanish, leaving drivers in a frustrated endless loop.",
                 quotes: [
                   "I wish I could park in that empty compound. I'm tired of this wild goose chase.",
                   "I avoid certain areas altogether because parking there is a nightmare every time.",
                 ],
-                drivers: ["Convenience & proximity", "Real-time availability", "Cost-effectiveness"],
+                drivers:    ["Convenience & proximity", "Real-time availability", "Cost-effectiveness"],
                 inhibitors: ["Unsafe conditions", "Outdated payments", "Inflexible bookings"],
               },
             ].map((p, idx) => (
               <Reveal key={p.title} anim="ppFadeUp" delay={idx * 100}>
                 <div className="rounded-3xl overflow-hidden border border-[#1A1A1A]/10
-                  transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg cursor-default">
-                  <div className="px-6 pt-5 pb-4" style={{ background: PEACH }}>
-                    <p className="font-display text-3xl font-black tracking-tight">{p.title}</p>
-                    <p className="font-display italic text-lg" style={{ color: ACCENT }}>{p.role}</p>
+                  transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  {/* Card header */}
+                  <div className="px-6 pt-5 pb-4 flex items-center justify-between" style={{ background: PEACH }}>
+                    <div>
+                      <p className="font-display text-3xl font-black tracking-tight">{p.title}</p>
+                      <p className="font-display italic text-lg" style={{ color: ACCENT }}>{p.role}</p>
+                    </div>
+                    <span className="text-4xl">{p.emoji}</span>
                   </div>
+
                   <div className="p-6" style={{ background: CREAM }}>
-                    <p className="text-sm text-[#1A1A1A]/55 leading-relaxed mb-4">{p.intro}</p>
-                    <div className="space-y-2 mb-5">
+                    <p className="text-sm text-[#1A1A1A]/55 leading-relaxed mb-5">{p.intro}</p>
+
+                    {/* Featured quotes */}
+                    <div className="space-y-3 mb-6">
                       {p.quotes.map((q, i) => (
-                        <p key={i} className="font-display italic text-[1.05rem] leading-snug text-[#1A1A1A]">
-                          <span style={{ color: ACCENT }}>"</span>{q}<span style={{ color: ACCENT }}>"</span>
-                        </p>
+                        <PullQuote key={i} quote={q} bg={i === 0 ? PEACH : "rgba(232,83,44,0.06)"} />
                       ))}
                     </div>
+
+                    {/* Drivers & inhibitors */}
                     <div className="grid grid-cols-2 gap-3 text-xs">
                       <div>
                         <p className="uppercase tracking-widest text-[#1A1A1A]/35 mb-2">Motivators</p>
                         <div className="flex flex-wrap gap-1.5">
                           {p.drivers.map((t, ti) => (
-                            <span key={t} className="px-2.5 py-1 rounded-full text-xs"
+                            <span key={t} className="px-2.5 py-1 rounded-full text-xs font-medium"
                               style={{
                                 background: PEACH,
                                 animation: `ppChipPop 400ms ${ti * 60 + 200}ms both`,
@@ -299,8 +353,7 @@ export default function ProParkCaseStudy() {
                         <p className="uppercase tracking-widest text-[#1A1A1A]/35 mb-2">Inhibitors</p>
                         <div className="flex flex-wrap gap-1.5">
                           {p.inhibitors.map((t, ti) => (
-                            <span key={t}
-                              className="px-2.5 py-1 rounded-full border border-[#1A1A1A]/15 text-xs bg-white/70"
+                            <span key={t} className="px-2.5 py-1 rounded-full border border-[#1A1A1A]/15 text-xs bg-white/70"
                               style={{ animation: `ppChipPop 400ms ${ti * 60 + 300}ms both` }}>{t}</span>
                           ))}
                         </div>
@@ -312,6 +365,7 @@ export default function ProParkCaseStudy() {
             ))}
           </div>
 
+          {/* Shared design goals */}
           <Reveal anim="ppFadeUp" delay={80}>
             <div className="mt-5 rounded-2xl px-6 py-4" style={{ background: ACCENT }}>
               <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 text-center mb-2.5">
@@ -321,7 +375,7 @@ export default function ProParkCaseStudy() {
                 {["Design for Trust", "Design for Security", "Systematic Scheduling", "Defined Pricing Models"].map((g, gi) => (
                   <span key={g}
                     className="px-3.5 py-1.5 rounded-full text-sm text-white font-medium border border-white/25
-                      transition-colors duration-200 hover:bg-white/25 cursor-default"
+                      transition-colors duration-200 hover:bg-white/20 cursor-default"
                     style={{ background: "rgba(255,255,255,0.12)", animation: `ppChipPop 350ms ${gi * 70 + 150}ms both` }}>
                     {g}
                   </span>
@@ -332,8 +386,8 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ 03  UX PERSPECTIVE ══════════════════════════
-          Image 60% left, text 40% right               */}
+      {/* ══ 03  UX PERSPECTIVE ════════════════════════════════════
+          Image 60% left, text 40% right                          */}
       <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
         <Reveal>
           <Eyebrow>UX Perspective on Indian Parking</Eyebrow>
@@ -345,20 +399,24 @@ export default function ProParkCaseStudy() {
           </Reveal>
           <Reveal anim="ppSlideLeft" delay={100}>
             <Heading heavy="CHAOS" light="by numbers." size="text-3xl md:text-4xl" />
-            <p className="mt-5 text-base leading-relaxed text-[#1A1A1A]/70">
+            <p className="mt-4 text-base leading-relaxed text-[#1A1A1A]/70">
               More than finding a spot — a daily test of patience, intuition, and sometimes creativity.
             </p>
-            <Note label="source: poidata.io · india" color="#2D5F3F" />
+            <Note label="source: poidata.io · india" color={GREEN} />
           </Reveal>
         </div>
       </section>
 
-      {/* ══ 04  INFORMATION ARCHITECTURE ════════════════
-          Header padded, diagram full-width             */}
+      {/* ══ 04  INFORMATION ARCHITECTURE ═════════════════════════
+          Header padded, diagram full-width                        */}
       <section className="py-16" style={{ background: PAGE }}>
         <Reveal className="px-8 md:px-16 mb-8">
           <Eyebrow>Information Architecture</Eyebrow>
           <Heading heavy="HOW IT ALL" light="connects." size="text-4xl md:text-5xl" />
+          <p className="mt-3 text-base text-[#1A1A1A]/60 max-w-lg">
+            Two parallel user journeys — Space Providers and Space Seekers — share a common trust layer
+            that ties bookings, payments, and live status together.
+          </p>
         </Reveal>
         <Reveal anim="ppFadeUp" delay={80}>
           <img src="/propark/ia.png" alt="Information Architecture"
@@ -366,15 +424,15 @@ export default function ProParkCaseStudy() {
         </Reveal>
       </section>
 
-      {/* ══ PRODUCT REVEAL — orange accent strip ════════ */}
+      {/* ══ PRODUCT REVEAL — accent strip ════════════════════════ */}
       <Reveal anim="ppFadeIn">
         <div className="px-8 md:px-16 py-5 flex items-center gap-4" style={{ background: ACCENT }}>
           <p className="font-hand text-2xl text-white">and here's what we built →</p>
         </div>
       </Reveal>
 
-      {/* ══ 05  FINAL PRODUCT ═══════════════════════════
-          Text left, product image floats right         */}
+      {/* ══ 05  FINAL PRODUCT ═════════════════════════════════════
+          Text left, product image floats right                    */}
       <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
         <div className="grid md:grid-cols-[5fr_7fr] gap-12 items-center">
           <Reveal anim="ppSlideRight">
@@ -394,8 +452,8 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ 06  ONBOARDING ══════════════════════════════
-          Heading + desc side by side, image full below  */}
+      {/* ══ 06  ONBOARDING ════════════════════════════════════════
+          Heading + desc side by side, image full below            */}
       <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
         <div className="flex items-end justify-between gap-8 mb-10 flex-wrap">
           <Reveal anim="ppSlideRight">
@@ -404,8 +462,8 @@ export default function ProParkCaseStudy() {
           </Reveal>
           <Reveal anim="ppSlideLeft" delay={80}>
             <p className="text-base leading-relaxed text-[#1A1A1A]/60 max-w-sm">
-              Phone number + OTP — minimal friction, maximum trust. Auto OTP detection means the process
-              completes before you even look at the screen.
+              Phone number + OTP — minimal friction, maximum trust.
+              Auto OTP detection means the process completes before you even look at the screen.
             </p>
           </Reveal>
         </div>
@@ -417,8 +475,8 @@ export default function ProParkCaseStudy() {
         </Reveal>
       </section>
 
-      {/* ══ 07  HOME SCREEN ═════════════════════════════
-          Image 60% left, text 40% right               */}
+      {/* ══ 07  HOME SCREEN ═══════════════════════════════════════
+          Image 60% left, text 40% right                          */}
       <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
         <div className="grid md:grid-cols-[3fr_2fr] gap-10 items-center">
           <Reveal anim="ppSlideRight">
@@ -435,8 +493,8 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ 08  LOCATOR ═════════════════════════════════
-          Text 40% left, image 60% right               */}
+      {/* ══ 08  LOCATOR ═══════════════════════════════════════════
+          Text 40% left, image 60% right                          */}
       <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
         <div className="grid md:grid-cols-[2fr_3fr] gap-12 items-center">
           <Reveal anim="ppSlideRight">
@@ -454,8 +512,8 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ 09  BOOKING ═════════════════════════════════
-          Text header, image full-width below           */}
+      {/* ══ 09  BOOKING ═══════════════════════════════════════════
+          Text header, image full-width below                      */}
       <section className="py-16" style={{ background: PEACH }}>
         <Reveal className="px-8 md:px-16 mb-8">
           <Eyebrow>Parking Booking</Eyebrow>
@@ -471,8 +529,8 @@ export default function ProParkCaseStudy() {
         </Reveal>
       </section>
 
-      {/* ══ 10  OTHER SCREENS ════════════════════════════
-          Text 50% left, image 50% right                */}
+      {/* ══ 10  OTHER SCREENS ═════════════════════════════════════
+          Text 50% left, image 50% right                          */}
       <section className="px-8 md:px-16 py-16" style={{ background: PAGE }}>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <Reveal anim="ppSlideRight">
@@ -490,8 +548,8 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ 11  NOTIFICATION ════════════════════════════
-          Text centred, portrait phone centred below    */}
+      {/* ══ 11  NOTIFICATION ══════════════════════════════════════
+          Text centred, portrait phone centred below               */}
       <section className="px-8 md:px-16 py-16" style={{ background: PEACH }}>
         <Reveal>
           <div className="max-w-xl mx-auto text-center mb-10">
@@ -515,8 +573,46 @@ export default function ProParkCaseStudy() {
         </Reveal>
       </section>
 
-      {/* ══ 12  FINAL SHOWCASE ══════════════════════════
-          Full-bleed showcase                           */}
+      {/* ══ OUTCOMES ══════════════════════════════════════════════ */}
+      <section className="px-8 md:px-16 py-16" style={{ background: INK }}>
+        <Reveal>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-[2px] w-5 rounded-full shrink-0" style={{ background: ACCENT }} />
+            <span className="text-[11px] font-bold tracking-[0.3em] uppercase" style={{ color: ACCENT }}>
+              Outcomes
+            </span>
+          </div>
+          <h2 className="font-display text-5xl md:text-7xl leading-[1.02] tracking-tight">
+            <span className="font-black text-[#F7F2E7]">WHAT WE </span>
+            <span className="font-light italic" style={{ color: ACCENT }}>shipped.</span>
+          </h2>
+          <p className="mt-4 text-base text-[#F7F2E7]/50 max-w-lg leading-relaxed">
+            One week. One designer. A complete dual-sided platform — from blank canvas to working prototype.
+          </p>
+        </Reveal>
+
+        <div className="grid md:grid-cols-3 gap-4 mt-8">
+          <OutcomeCard icon="🔒" label="End-to-end booking flow with clear trust signals at every step"           delay={0}   />
+          <OutcomeCard icon="👥" label="Dual persona system — Space Providers & Space Seekers — with shared goals" delay={80}  />
+          <OutcomeCard icon="🔔" label="Notification & past-bookings architecture for both user types"             delay={160} />
+        </div>
+
+        {/* Reflection quote */}
+        <Reveal anim="ppFadeUp" delay={200}>
+          <div className="mt-6 rounded-2xl p-6 border border-white/10 relative overflow-hidden"
+            style={{ background: "rgba(255,255,255,0.06)" }}>
+            <Sparkle color={ACCENT} size={24} className="absolute top-4 right-4 opacity-30" />
+            <p className="font-hand text-2xl text-[#F7F2E7]/60 mb-2">in retrospect →</p>
+            <p className="font-display italic text-xl text-[#F7F2E7]/85 leading-snug max-w-xl">
+              "A 1-week sprint taught me how to move fast <em>and</em> design with empathy.
+              Constraints are just hidden design decisions."
+            </p>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ══ 12  FINAL SHOWCASE ════════════════════════════════════
+          Full-bleed showcase                                       */}
       <section className="py-16" style={{ background: PAGE }}>
         <Reveal className="px-8 md:px-16 mb-8">
           <Eyebrow>Final Showcase</Eyebrow>

@@ -128,7 +128,7 @@ function Eyebrow({ children }) {
 function Heading({ heavy, light, size = "text-4xl md:text-6xl" }) {
   return (
     <h2 className={`leading-[1.05] ${size}`}>
-      <span className="font-propark font-bold" style={{ color: TEXT }}>{heavy} </span>
+      <span className="font-propark" style={{ color: TEXT }}>{heavy} </span>
       {light && <span className="font-display font-light italic" style={{ color: GOLD }}>{light}</span>}
     </h2>
   );

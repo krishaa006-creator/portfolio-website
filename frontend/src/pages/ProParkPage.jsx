@@ -123,7 +123,7 @@ export default function ProParkPage() {
                 className="rounded-2xl p-4 border relative"
                 style={{ background: DARK_CARD, borderColor: BORDER }}>
                 <span className="font-hand text-xl opacity-45" style={{ color: GOLD }}>{s.num}</span>
-                <p className="font-propark font-bold text-lg mt-0.5" style={{ color: TEXT }}>{s.step}</p>
+                <p className="font-propark text-lg mt-0.5" style={{ color: TEXT }}>{s.step}</p>
                 <p className="text-xs mt-1 leading-snug" style={{ color: TEXT_MUTED }}>{s.note}</p>
                 {i < 3 && (
                   <span className="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-base z-10 font-bold"

@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Arrow, Sparkle } from "./Doodles";
 
-/* ── ProPark colour palette (dark-mode, matches the app) ───── */
-const ACCENT      = "#E8532C";
-const DARK        = "#0E0E0E";
-const DARK_MID    = "#141414";
-const DARK_CARD   = "#1C1C1C";
-const TEXT        = "#F2EDE4";
-const TEXT_MUTED  = "rgba(242,237,228,0.5)";
-const TEXT_DIM    = "rgba(242,237,228,0.28)";
-const BORDER      = "rgba(255,255,255,0.08)";
-const GREEN       = "#4CAF7D";
+/* ── ProPark brand palette ──────────────────────────────────── */
+const GOLD       = "#F2C040";          // ProPark golden yellow
+const DARK       = "#131210";          // main bg
+const DARK_MID   = "#1A1815";          // alternating section bg
+const DARK_CARD  = "#221F18";          // card surfaces
+const DARK_CARD2 = "#2A2720";          // slightly lighter card
+const TEXT       = "#FFFFFF";
+const TEXT_MUTED = "rgba(255,255,255,0.55)";
+const TEXT_DIM   = "rgba(255,255,255,0.28)";
+const BORDER     = "rgba(255,255,255,0.08)";
+const GOLD_BG    = "rgba(242,192,64,0.12)";  // subtle gold tint for chips
 
 /* ── keyframes ─────────────────────────────────────────────── */
 const KEYFRAMES = `
@@ -115,24 +116,25 @@ function Reveal({ children, anim = "ppFadeUp", delay = 0, duration = 600, classN
 function Eyebrow({ children }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <div className="h-[2px] w-5 rounded-full shrink-0" style={{ background: ACCENT }} />
-      <span className="text-[11px] font-bold tracking-[0.3em] uppercase" style={{ color: ACCENT }}>
+      <div className="h-[2px] w-5 rounded-full shrink-0" style={{ background: GOLD }} />
+      <span className="text-[11px] font-bold tracking-[0.3em] uppercase" style={{ color: GOLD }}>
         {children}
       </span>
     </div>
   );
 }
 
+/* Astro Space for the bold part, Fraunces italic for the light part */
 function Heading({ heavy, light, size = "text-4xl md:text-6xl" }) {
   return (
-    <h2 className={`font-display leading-[1.05] tracking-tight ${size}`}>
-      <span className="font-black" style={{ color: TEXT }}>{heavy} </span>
-      {light && <span className="font-light italic" style={{ color: ACCENT }}>{light}</span>}
+    <h2 className={`leading-[1.05] ${size}`}>
+      <span className="font-propark font-bold" style={{ color: TEXT }}>{heavy} </span>
+      {light && <span className="font-display font-light italic" style={{ color: GOLD }}>{light}</span>}
     </h2>
   );
 }
 
-function Note({ label, color = ACCENT }) {
+function Note({ label, color = GOLD }) {
   return (
     <div className="flex items-center gap-2 mt-3">
       <Arrow color={color} width={44} />
@@ -143,9 +145,9 @@ function Note({ label, color = ACCENT }) {
 
 function PullQuote({ quote }) {
   return (
-    <div className="rounded-xl p-4 relative overflow-hidden border" style={{ background: DARK_CARD, borderColor: BORDER }}>
-      <span className="font-display text-5xl leading-none absolute top-1 left-3 opacity-20"
-        style={{ color: ACCENT }}>"</span>
+    <div className="rounded-xl p-4 relative overflow-hidden border" style={{ background: DARK_CARD2, borderColor: BORDER }}>
+      <span className="font-propark text-5xl leading-none absolute top-1 left-3 opacity-15"
+        style={{ color: GOLD }}>"</span>
       <p className="font-display italic text-base leading-snug relative z-10 pl-2 pt-3"
         style={{ color: TEXT }}>
         {quote}
@@ -154,11 +156,11 @@ function PullQuote({ quote }) {
   );
 }
 
-function StatCard({ stat, label, color = ACCENT, delay = 0 }) {
+function StatCard({ stat, label, color = GOLD, delay = 0 }) {
   return (
     <Reveal anim="ppCountUp" delay={delay}>
       <div className="rounded-2xl p-5 h-full border" style={{ background: DARK_CARD, borderColor: BORDER }}>
-        <p className="font-display font-black text-3xl md:text-4xl leading-none" style={{ color }}>
+        <p className="font-propark font-bold text-3xl md:text-4xl leading-none" style={{ color }}>
           {stat}
         </p>
         <p className="mt-2 text-sm leading-snug" style={{ color: TEXT_MUTED }}>{label}</p>
@@ -203,9 +205,9 @@ export default function ProParkCaseStudy() {
 
             {/* Pain-point stat cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8">
-              <StatCard stat="1:3,650"  label="parking spots per car in Indian cities"             color={ACCENT} delay={0}   />
-              <StatCard stat="20+ min"  label="average time lost circling for a single spot"       color={TEXT}   delay={80}  />
-              <StatCard stat="₹0"       label="earned from millions of idle private driveways"     color={GREEN}  delay={160} />
+              <StatCard stat="1:3,650"  label="parking spots per car in Indian cities"           color={GOLD}  delay={0}   />
+              <StatCard stat="20+ min"  label="average time lost circling for a single spot"     color={TEXT}  delay={80}  />
+              <StatCard stat="₹0"       label="earned from millions of idle private driveways"   color={GOLD}  delay={160} />
             </div>
 
             {/* Design brief */}
@@ -216,12 +218,12 @@ export default function ProParkCaseStudy() {
               </p>
               <div className="space-y-4">
                 {[
-                  { text: <><strong style={{ color: TEXT }}>Makes parking spaces more accessible</strong> in urban spaces</>,   note: "The goal",           color: ACCENT },
-                  { text: <>by <strong style={{ color: TEXT }}>unlocking and connecting unused private parking spots</strong></>, note: "How to achieve it?" },
-                  { text: <>to reduce frustration and <strong style={{ color: TEXT }}>turn idle space into opportunity.</strong></>, note: "The why?" },
-                ].map(({ text, note, color = TEXT_MUTED }, i) => (
+                  { text: <><strong style={{ color: TEXT }}>Makes parking spaces more accessible</strong> in urban spaces</>,     note: "The goal",            color: GOLD },
+                  { text: <>by <strong style={{ color: TEXT }}>unlocking and connecting unused private parking spots</strong></>,  note: "How to achieve it?",  color: TEXT_MUTED },
+                  { text: <>to reduce frustration and <strong style={{ color: TEXT }}>turn idle space into opportunity.</strong></>, note: "The why?",            color: TEXT_MUTED },
+                ].map(({ text, note, color }, i) => (
                   <div key={i} className="pl-4 border-l-2"
-                    style={{ borderColor: i === 0 ? ACCENT : BORDER }}>
+                    style={{ borderColor: i === 0 ? GOLD : BORDER }}>
                     <p className="text-sm leading-relaxed" style={{ color: TEXT_MUTED }}>{text}</p>
                     <Note label={note} color={color} />
                   </div>
@@ -239,23 +241,28 @@ export default function ProParkCaseStudy() {
         </div>
       </section>
 
-      {/* ══ STAT MOMENT — orange pop ══════════════════════════════ */}
-      <div style={{ background: ACCENT }}>
+      {/* ══ STAT MOMENT — gold pop ════════════════════════════════ */}
+      <div style={{ background: GOLD }}>
         <div className="px-8 md:px-16 py-14 flex flex-col md:flex-row items-center gap-10 max-w-6xl mx-auto">
           <div ref={statRef} className="shrink-0 text-center md:text-left">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-white/50 mb-1">India parking reality</p>
-            <p className="font-display font-black leading-none text-white"
+            <p className="text-[10px] tracking-[0.35em] uppercase mb-1" style={{ color: "rgba(19,18,16,0.5)" }}>
+              India parking reality
+            </p>
+            <p className="font-propark font-bold leading-none"
               style={{
                 fontSize: "clamp(4.5rem,13vw,9rem)",
+                color: DARK,
                 animation: statGo ? "ppCountUp 700ms cubic-bezier(.22,1,.36,1) both" : "none",
               }}>
               1:{statVal.toLocaleString()}
             </p>
-            <p className="font-hand text-lg text-white/60 mt-1">parking spots per car</p>
+            <p className="font-hand text-lg mt-1" style={{ color: "rgba(19,18,16,0.55)" }}>
+              parking spots per car
+            </p>
           </div>
-          <div className="hidden md:block w-px self-stretch bg-white/20" />
+          <div className="hidden md:block w-px self-stretch" style={{ background: "rgba(19,18,16,0.2)" }} />
           <Reveal anim="ppFadeUp">
-            <p className="text-base leading-relaxed text-white/75 max-w-sm">
+            <p className="text-base leading-relaxed max-w-sm" style={{ color: "rgba(19,18,16,0.7)" }}>
               Parking in India is more than just finding a spot — it's a daily test of patience, intuition,
               and <em>jugaad</em>. The scarcity makes it chaotic and deeply frustrating.
             </p>
@@ -308,12 +315,10 @@ export default function ProParkCaseStudy() {
                 <div className="rounded-3xl overflow-hidden border transition-transform duration-300 hover:-translate-y-1"
                   style={{ borderColor: BORDER }}>
                   <div className="px-6 pt-5 pb-4 flex items-center justify-between"
-                    style={{ background: "#222222" }}>
+                    style={{ background: DARK_CARD2 }}>
                     <div>
-                      <p className="font-display text-3xl font-black tracking-tight" style={{ color: TEXT }}>
-                        {p.title}
-                      </p>
-                      <p className="font-display italic text-lg" style={{ color: ACCENT }}>{p.role}</p>
+                      <p className="font-propark text-2xl font-bold" style={{ color: TEXT }}>{p.title}</p>
+                      <p className="font-display italic text-lg" style={{ color: GOLD }}>{p.role}</p>
                     </div>
                     <span className="text-4xl">{p.emoji}</span>
                   </div>
@@ -334,8 +339,9 @@ export default function ProParkCaseStudy() {
                           {p.drivers.map((t, ti) => (
                             <span key={t} className="px-2.5 py-1 rounded-full text-xs font-medium"
                               style={{
-                                background: "rgba(232,83,44,0.15)",
-                                color: TEXT,
+                                background: GOLD_BG,
+                                color: GOLD,
+                                border: `1px solid rgba(242,192,64,0.2)`,
                                 animation: `ppChipPop 400ms ${ti * 60 + 200}ms both`,
                               }}>{t}</span>
                           ))}
@@ -364,18 +370,18 @@ export default function ProParkCaseStudy() {
 
           {/* Shared goals strip */}
           <Reveal anim="ppFadeUp" delay={80}>
-            <div className="mt-5 rounded-2xl px-6 py-4 border" style={{ background: "#222222", borderColor: BORDER }}>
+            <div className="mt-5 rounded-2xl px-6 py-4 border" style={{ background: DARK_CARD2, borderColor: `rgba(242,192,64,0.2)` }}>
               <p className="text-[10px] uppercase tracking-[0.35em] text-center mb-3" style={{ color: TEXT_DIM }}>
                 Common design goals
               </p>
               <div className="flex flex-wrap justify-center gap-2.5">
                 {["Design for trust", "Design for security", "Systematic scheduling", "Defined pricing models"].map((g, gi) => (
                   <span key={g}
-                    className="px-3.5 py-1.5 rounded-full text-sm font-medium border transition-colors duration-200"
+                    className="px-3.5 py-1.5 rounded-full text-sm font-medium transition-colors duration-200"
                     style={{
-                      background: "rgba(232,83,44,0.12)",
-                      color: TEXT,
-                      borderColor: "rgba(232,83,44,0.25)",
+                      background: GOLD_BG,
+                      color: GOLD,
+                      border: `1px solid rgba(242,192,64,0.25)`,
                       animation: `ppChipPop 350ms ${gi * 70 + 150}ms both`,
                     }}>
                     {g}
@@ -402,7 +408,7 @@ export default function ProParkCaseStudy() {
             <p className="mt-4 text-base leading-relaxed" style={{ color: TEXT_MUTED }}>
               More than finding a spot — a daily test of patience, intuition, and sometimes creativity.
             </p>
-            <Note label="source: poidata.io · india" color={GREEN} />
+            <Note label="source: poidata.io · india" />
           </Reveal>
         </div>
       </section>
@@ -425,8 +431,8 @@ export default function ProParkCaseStudy() {
 
       {/* ══ PRODUCT REVEAL strip ══════════════════════════════════ */}
       <Reveal anim="ppFadeIn">
-        <div className="px-8 md:px-16 py-5 flex items-center gap-4" style={{ background: ACCENT }}>
-          <p className="font-hand text-2xl text-white">and here's what we built →</p>
+        <div className="px-8 md:px-16 py-5 flex items-center gap-4" style={{ background: GOLD }}>
+          <p className="font-hand text-2xl" style={{ color: DARK }}>and here's what we built →</p>
         </div>
       </Reveal>
 
@@ -574,7 +580,7 @@ export default function ProParkCaseStudy() {
       </section>
 
       {/* ══ OUTCOMES ══════════════════════════════════════════════ */}
-      <section className="px-8 md:px-16 py-16" style={{ background: "#0A0A0A" }}>
+      <section className="px-8 md:px-16 py-16" style={{ background: "#0C0B09" }}>
         <Reveal>
           <Eyebrow>Outcomes</Eyebrow>
           <Heading heavy="What we" light="shipped." size="text-5xl md:text-7xl" />
@@ -591,8 +597,8 @@ export default function ProParkCaseStudy() {
 
         <Reveal anim="ppFadeUp" delay={200}>
           <div className="mt-6 rounded-2xl p-6 border relative overflow-hidden"
-            style={{ background: DARK_CARD, borderColor: BORDER }}>
-            <Sparkle color={ACCENT} size={22} className="absolute top-4 right-4 opacity-25" />
+            style={{ background: DARK_CARD, borderColor: `rgba(242,192,64,0.15)` }}>
+            <Sparkle color={GOLD} size={22} className="absolute top-4 right-4 opacity-30" />
             <p className="font-hand text-xl mb-2" style={{ color: TEXT_MUTED }}>in retrospect →</p>
             <p className="font-display italic text-xl leading-snug max-w-xl" style={{ color: TEXT }}>
               "A 1-week sprint taught me how to move fast <em>and</em> design with empathy.

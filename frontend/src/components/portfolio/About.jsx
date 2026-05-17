@@ -165,8 +165,8 @@ export default function About() {
               transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg cursor-default">
               <div className="font-hand text-lg text-[#2D5F3F]">my superpower</div>
               <div className="mt-1 font-display text-xl leading-snug">
-                seeing how <span className="marker">physical</span> and{" "}
-                <span className="marker-orange">digital</span> experiences connect.
+                seeing how <span className="marker">people</span> and{" "}
+                <span className="marker-orange">design</span> experiences connect.
               </div>
             </div>
           </div>
@@ -238,8 +238,8 @@ export default function About() {
 
               <div className="mt-4 flex items-center justify-between
                 text-xs uppercase tracking-[0.25em] text-[#1A1A1A]/55">
-                <span>fig. 01 — Krishaa's brain, mapped</span>
-                <span>circa right now</span>
+                <span>Fig 01-Your Team's newest member</span>
+                <span className="text-[8px]">circa right now</span>
               </div>
             </div>
           </div>

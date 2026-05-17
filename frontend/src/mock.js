@@ -15,15 +15,15 @@ export const personal = {
   pitch:
     "I take complex problems and craft seamless solutions that work beautifully\u2014 whether you're holding it or clicking it.",
   longIntro:
-    "I started in product design, then dove into UX on my own \u2014 and that's when I discovered my superpower: seeing how physical and digital experiences connect. I love untangling complex problems, spotting the patterns others miss, and designing holistic experiences that just work.",
-  happyPlace: "Solving problems, my happy place!",
+    "I have strong opinions about why things don't work and an equally strong compulsion to figure out what would. This is either a superpower or a personality flaw. Possibly both.",
+  happyPlace: "I'm kinda addicted to solving problems...",
 };
 
 export const funFacts = [
   { label: "currently vibing in", value: "Bangalore\u2009\u2614" },
   { label: "coffee count today", value: "3 \u2014 send help" },
   { label: "favorite word", value: "why?" },
-  { label: "design playlist", value: "lo-fi + Tame Impala" },
+  { label: "design playlist", value: "Daylight by David Kushner on loop" },
 ];
 
 export const brainPieces = [

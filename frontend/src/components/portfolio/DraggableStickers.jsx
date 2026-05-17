@@ -61,7 +61,7 @@ function HotTakeNote() {
       </div>
       <div className="h-px bg-[#1A1A1A]/10 mb-3" />
       <p className="text-[12px] leading-snug text-[#1A1A1A]/80">
-        UX, product, service — pick your favourite label. I'll be over here making things make sense.
+        UX, product, service — pick your favourite label. I simply call in problem solving!
       </p>
       <div className="mt-3 flex items-center gap-1 opacity-40">
         {[...Array(5)].map((_, i) => (

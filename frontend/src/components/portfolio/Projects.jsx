@@ -66,7 +66,7 @@ function ProjectCard({ p, idx, onOpen }) {
                       <div className="font-medium">{p.duration}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
+                  <div className="flex items-center gap-2 font-hand text-xl group-hover:text-[#E8532C] transition-colors text-[#ffc100] bg-[transparent]">
                     open case study
                     <span className="anim-arrow inline-block">
                       <Arrow color="currentColor" width={50} />
@@ -117,7 +117,7 @@ function ProjectCard({ p, idx, onOpen }) {
                       <div className="font-medium">{p.duration}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 font-hand text-xl text-[#1A1A1A] group-hover:text-[#E8532C] transition-colors">
+                  <div className="flex items-center gap-2 font-hand text-xl group-hover:text-[#E8532C] transition-colors text-[#ffc100] bg-[transparent]">
                     open case study
                     <span className="anim-arrow inline-block">
                       <Arrow color="currentColor" width={50} />

@@ -7,11 +7,19 @@ const BG      = "#F7F2E7";
 const BG_ALT  = "#EDE8DA";
 const CARD    = "#FFFFFF";
 const BLUE    = "#1B3F72";
-const BLUE_L  = "#4A6FA5";
 const TEXT    = "#1A1A1A";
 const MUTED   = "rgba(26,26,26,0.5)";
 const DIM     = "rgba(26,26,26,0.32)";
 const BORDER  = "rgba(26,26,26,0.1)";
+
+const PROCESS = [
+  { n: "01", label: "Research"     },
+  { n: "02", label: "Systems"      },
+  { n: "03", label: "Touchpoints"  },
+  { n: "04", label: "Coach Design" },
+];
+
+const HMW = "Design a suburban train that meets the individual preferences of a diverse range of commuters — borrowing the best traits of personal mobility to make the commute genuinely enjoyable.";
 
 export default function AlstomPage() {
   const navigate = useNavigate();
@@ -36,7 +44,7 @@ export default function AlstomPage() {
 
       {/* ══ HERO ══════════════════════════════════════════ */}
       <div style={{ background: BG_ALT, borderBottom: `1px solid ${BORDER}` }}>
-        <div className="max-w-5xl mx-auto px-6 md:px-12 pt-32 pb-0">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 pt-32 pb-16">
 
           {/* eyebrow */}
           <div className="flex items-center gap-3 mb-8">
@@ -59,37 +67,16 @@ export default function AlstomPage() {
               </div>
 
               <h1 className="font-propark font-bold leading-none"
-                style={{ fontSize: "clamp(3rem,10vw,6.5rem)", color: TEXT, letterSpacing: "-0.03em" }}>
+                style={{ fontSize: "clamp(4rem,12vw,8rem)", color: TEXT, letterSpacing: "-0.03em" }}>
                 Namma<br />Sarathi
               </h1>
               <p className="mt-3 font-propark italic leading-snug"
-                style={{ fontSize: "clamp(1rem,2.5vw,1.4rem)", color: BLUE_L, fontWeight: 300 }}>
+                style={{ fontSize: "clamp(1.2rem,3vw,1.65rem)", color: BLUE, fontWeight: 300 }}>
                 A suburban rail for Bangalore 2030.
               </p>
-
-              {/* shortlisted badge */}
-              <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full border"
-                style={{ background: BLUE, borderColor: BLUE }}>
-                <span className="text-white text-xs font-semibold tracking-wide">✦ Shortlisted by Alstom for development</span>
-              </div>
-
-              {/* meta row */}
-              <div className="mt-6 flex flex-wrap gap-6">
-                {[
-                  { l: "Role",     v: "Team · Design Research + Service Design" },
-                  { l: "Duration", v: "16 weeks" },
-                  { l: "Year",     v: "2023" },
-                ].map(({ l, v }) => (
-                  <div key={l}>
-                    <p className="text-[10px] tracking-widest uppercase font-semibold" style={{ color: DIM }}>{l}</p>
-                    <p className="text-sm font-medium mt-0.5" style={{ color: TEXT }}>{v}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            {/* hero image */}
-            <div className="flex items-end justify-end shrink-0" style={{ height: 340 }}>
+            <div className="flex items-end justify-end shrink-0" style={{ height: 360 }}>
               <img src="/alstom/37.png" alt="Namma Sarathi Comfort Coach"
                 className="h-full w-auto block object-contain object-bottom rounded-tl-[24px] rounded-tr-[24px] overflow-hidden shadow-lg"
               />
@@ -98,15 +85,35 @@ export default function AlstomPage() {
 
           <div className="mt-10 h-px" style={{ background: BORDER }} />
 
-          {/* HMW */}
-          <div className="py-8">
-            <p className="text-[10px] tracking-[0.3em] uppercase mb-3 font-semibold" style={{ color: DIM }}>
-              How might we
-            </p>
-            <p className="font-propark italic text-base leading-relaxed max-w-2xl" style={{ color: MUTED, fontWeight: 300 }}>
-              "Design a suburban train that meets the individual preferences of a diverse range of commuters —
-              borrowing the best traits of personal mobility to make the commute genuinely enjoyable?"
-            </p>
+          {/* process + HMW */}
+          <div className="mt-8 grid md:grid-cols-2 gap-8">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-4 font-semibold" style={{ color: DIM }}>
+                Design process
+              </p>
+              <div className="flex items-center gap-1 flex-wrap">
+                {PROCESS.map((s, i) => (
+                  <React.Fragment key={s.n}>
+                    <div className="flex items-center gap-2 py-1">
+                      <span className="font-propark text-sm" style={{ color: BLUE, fontWeight: 500 }}>{s.n}</span>
+                      <span className="text-sm font-medium" style={{ color: TEXT }}>{s.label}</span>
+                    </div>
+                    {i < PROCESS.length - 1 && (
+                      <span className="text-xs mx-1" style={{ color: DIM }}>→</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-3 font-semibold" style={{ color: DIM }}>
+                How might we
+              </p>
+              <p className="font-propark italic text-base leading-relaxed" style={{ color: MUTED, fontWeight: 300 }}>
+                "{HMW}"
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +123,7 @@ export default function AlstomPage() {
       {/* footer */}
       <div style={{ borderTop: `1px solid ${BORDER}`, background: BG_ALT }}>
         <div className="max-w-5xl mx-auto px-6 md:px-12 py-8 flex items-center justify-between flex-wrap gap-4">
-          <p className="font-propark text-base" style={{ color: MUTED, fontWeight: 300 }}>thanks for reading ✦</p>
+          <p className="font-propark text-lg" style={{ color: MUTED, fontWeight: 300 }}>thanks for reading ✦</p>
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm border transition-all duration-200 shadow-sm"

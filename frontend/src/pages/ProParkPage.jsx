@@ -2,160 +2,150 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/portfolio/Navbar";
 import ProParkCaseStudy from "../components/portfolio/ProParkCaseStudy";
-import { Dots, Sparkle } from "../components/portfolio/Doodles";
 import { projects } from "../mock";
 
 const proj = projects.find((p) => p.id === "propark");
 
-const GOLD      = "#F2C040";
-const DARK      = "#131210";
-const DARK_MID  = "#1A1815";
-const DARK_CARD = "#221F18";
-const TEXT      = "#FFFFFF";
-const TEXT_MUTED = "rgba(255,255,255,0.5)";
-const TEXT_DIM   = "rgba(255,255,255,0.28)";
-const BORDER     = "rgba(255,255,255,0.08)";
+/* ── palette ── */
+const GOLD    = "#F2C040";
+const DARK    = "#0E0D0C";
+const SURFACE = "#171512";
+const CARD    = "#1E1B15";
+const TEXT    = "#F0EDE6";
+const MUTED   = "rgba(240,237,230,0.5)";
+const DIM     = "rgba(240,237,230,0.22)";
+const BORDER  = "rgba(240,237,230,0.07)";
 
 const PROCESS = [
-  { num: "01", step: "Empathise", note: "Interviews with residents & drivers" },
-  { num: "02", step: "Define",    note: "Mapped motivators & inhibitors for both sides" },
-  { num: "03", step: "Structure", note: "IA balancing trust + speed" },
-  { num: "04", step: "Design",    note: "Dark-mode flows: onboarding → locator → booking" },
+  { n: "01", label: "Empathise" },
+  { n: "02", label: "Define" },
+  { n: "03", label: "Structure" },
+  { n: "04", label: "Design" },
 ];
-
-function Meta({ label, value }) {
-  return (
-    <div className="px-3 py-2 rounded-xl border" style={{ background: "rgba(255,255,255,0.06)", borderColor: BORDER }}>
-      <div className="text-[10px] uppercase tracking-widest" style={{ color: TEXT_DIM }}>{label}</div>
-      <div className="font-medium text-sm" style={{ color: TEXT }}>{value}</div>
-    </div>
-  );
-}
 
 export default function ProParkPage() {
   const navigate = useNavigate();
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: DARK, color: TEXT }}>
+    <div className="min-h-screen" style={{ background: DARK, color: TEXT }}>
       <Navbar dark />
 
-      {/* ── Fixed floating back button ─────────────────── */}
+      {/* ── fixed back pill ── */}
       <div className="fixed bottom-6 left-6 z-50">
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium
-            shadow-xl backdrop-blur-sm transition-all duration-200"
-          style={{
-            background: "rgba(19,18,16,0.92)",
-            color: TEXT_MUTED,
-            border: `1px solid ${BORDER}`,
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = GOLD; e.currentTarget.style.color = GOLD; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = TEXT_MUTED; }}
+          className="flex items-center gap-2 px-4 py-2 rounded-full text-sm backdrop-blur-sm
+            transition-all duration-200 border"
+          style={{ background: "rgba(14,13,12,0.85)", color: MUTED, borderColor: BORDER }}
+          onMouseEnter={e => { e.currentTarget.style.color = GOLD; e.currentTarget.style.borderColor = `rgba(242,192,64,0.4)`; }}
+          onMouseLeave={e => { e.currentTarget.style.color = MUTED; e.currentTarget.style.borderColor = BORDER; }}
         >
           ← portfolio
         </button>
       </div>
 
-      {/* ── HERO HEADER ───────────────────────────────── */}
-      <div className="border-b" style={{ background: DARK_MID, borderColor: BORDER }}>
+      {/* ══════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════ */}
+      <div style={{ background: SURFACE, borderBottom: `1px solid ${BORDER}` }}>
+        <div className="max-w-5xl mx-auto px-6 md:px-12 pt-32 pb-16">
 
-        {/* Back nav (inline) */}
-        <div className="px-8 md:px-14 pt-28 pb-2">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 font-hand text-lg transition-colors"
-            style={{ color: TEXT_DIM }}
-            onMouseEnter={e => e.currentTarget.style.color = GOLD}
-            onMouseLeave={e => e.currentTarget.style.color = TEXT_DIM}
-          >
-            ← back to work
-          </button>
-        </div>
+          {/* eyebrow */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-6 h-[1.5px]" style={{ background: GOLD }} />
+            <span className="text-[11px] tracking-[0.3em] uppercase font-medium" style={{ color: GOLD }}>
+              UX Case Study · 2024
+            </span>
+          </div>
 
-        {/* Title + HMW two-column */}
-        <div className="px-8 md:px-14 py-8 grid md:grid-cols-[3fr_2fr] gap-8 md:gap-12 items-end">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="font-hand text-2xl" style={{ color: GOLD }}>01</span>
-              <div className="h-px w-8" style={{ background: BORDER }} />
-              <span className="text-[11px] tracking-[0.25em] uppercase" style={{ color: TEXT_DIM }}>
-                2024 · UX Case Study
-              </span>
+          {/* title + HMW */}
+          <div className="grid md:grid-cols-[1fr_auto] gap-10 items-end">
+            <div>
+              <h1 className="font-propark leading-none" style={{ fontSize: "clamp(4rem, 12vw, 8rem)", color: TEXT }}>
+                ProPark
+              </h1>
+              <p className="mt-3 font-display italic leading-snug"
+                style={{ fontSize: "clamp(1.25rem, 3vw, 1.75rem)", color: GOLD }}>
+                {proj.subtitle}
+              </p>
             </div>
-            <h1 className="font-propark text-6xl sm:text-7xl md:text-8xl font-bold leading-[0.93]"
-              style={{ color: TEXT }}>
-              ProPark
-            </h1>
-            <p className="mt-3 font-display italic text-xl md:text-2xl" style={{ color: GOLD }}>
-              {proj.subtitle}
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Meta label="role"     value={proj.role} />
-              <Meta label="duration" value={proj.duration} />
-              <Meta label="year"     value={proj.year} />
+
+            {/* meta pills */}
+            <div className="flex md:flex-col gap-2 flex-wrap pb-1">
+              {[
+                { l: "Role",     v: proj.role },
+                { l: "Sprint",   v: proj.duration },
+                { l: "Year",     v: proj.year },
+              ].map(({ l, v }) => (
+                <div key={l} className="rounded-xl px-4 py-2.5 border"
+                  style={{ background: CARD, borderColor: BORDER, minWidth: 140 }}>
+                  <p className="text-[10px] tracking-widest uppercase" style={{ color: DIM }}>{l}</p>
+                  <p className="text-sm font-medium mt-0.5" style={{ color: TEXT }}>{v}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* HMW callout */}
-          <div className="rounded-2xl p-5 md:p-6 relative overflow-hidden border"
-            style={{ background: DARK_CARD, borderColor: `rgba(242,192,64,0.18)` }}>
-            <Sparkle color={GOLD} size={26} className="absolute top-4 right-4 opacity-25" />
-            <p className="text-[10px] uppercase tracking-[0.35em] mb-3" style={{ color: TEXT_DIM }}>
-              How Might We
-            </p>
-            <p className="font-display italic text-base md:text-lg leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.85)" }}>
-              "{proj.hmw}"
-            </p>
-          </div>
-        </div>
+          {/* divider */}
+          <div className="mt-12 h-px" style={{ background: BORDER }} />
 
-        {/* Process strip */}
-        <div className="px-8 md:px-14 pb-10">
-          <p className="text-[10px] uppercase tracking-[0.35em] mb-4" style={{ color: TEXT_DIM }}>
-            the process
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {PROCESS.map((s, i) => (
-              <div key={s.step}
-                className="rounded-2xl p-4 border relative"
-                style={{ background: DARK_CARD, borderColor: BORDER }}>
-                <span className="font-hand text-xl opacity-45" style={{ color: GOLD }}>{s.num}</span>
-                <p className="font-propark text-lg mt-0.5" style={{ color: TEXT }}>{s.step}</p>
-                <p className="text-xs mt-1 leading-snug" style={{ color: TEXT_MUTED }}>{s.note}</p>
-                {i < 3 && (
-                  <span className="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-base z-10 font-bold"
-                    style={{ color: TEXT_DIM }}>→</span>
-                )}
+          {/* process + HMW — two columns */}
+          <div className="mt-8 grid md:grid-cols-[1fr_1fr] gap-8">
+
+            {/* process steps */}
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: DIM }}>
+                Design process
+              </p>
+              <div className="flex items-center gap-1 flex-wrap">
+                {PROCESS.map((s, i) => (
+                  <React.Fragment key={s.n}>
+                    <div className="flex items-center gap-2 py-1">
+                      <span className="font-hand text-base" style={{ color: GOLD }}>{s.n}</span>
+                      <span className="text-sm font-medium" style={{ color: TEXT }}>{s.label}</span>
+                    </div>
+                    {i < PROCESS.length - 1 && (
+                      <span className="text-xs mx-1" style={{ color: DIM }}>→</span>
+                    )}
+                  </React.Fragment>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* HMW */}
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: DIM }}>
+                How might we
+              </p>
+              <p className="font-display italic text-base leading-relaxed" style={{ color: MUTED }}>
+                "{proj.hmw}"
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Case study body */}
+      {/* case study body */}
       <ProParkCaseStudy />
 
-      {/* Footer */}
-      <div className="px-8 md:px-14 py-10 border-t flex items-center justify-between flex-wrap gap-4"
-        style={{ background: DARK, borderColor: BORDER }}>
-        <div className="flex items-center gap-2">
-          <Dots color={GOLD} count={4} />
-          <span className="font-hand text-xl" style={{ color: TEXT_MUTED }}>
-            thanks for scrolling — pretty cool, right?
-          </span>
+      {/* footer */}
+      <div style={{ borderTop: `1px solid ${BORDER}`, background: SURFACE }}>
+        <div className="max-w-5xl mx-auto px-6 md:px-12 py-8 flex items-center justify-between flex-wrap gap-4">
+          <p className="font-hand text-lg" style={{ color: MUTED }}>
+            thanks for reading ✦
+          </p>
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm border
+              transition-all duration-200"
+            style={{ color: TEXT, borderColor: BORDER, background: CARD }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = `rgba(242,192,64,0.4)`; e.currentTarget.style.color = GOLD; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = TEXT; }}
+          >
+            ← back to portfolio
+          </button>
         </div>
-        <button
-          onClick={() => navigate("/")}
-          className="px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200"
-          style={{ color: TEXT, background: "rgba(255,255,255,0.06)", borderColor: BORDER }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = GOLD; e.currentTarget.style.color = GOLD; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = TEXT; }}
-        >
-          back to the portfolio
-        </button>
       </div>
     </div>
   );

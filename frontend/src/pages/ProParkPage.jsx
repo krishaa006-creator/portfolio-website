@@ -64,8 +64,8 @@ export default function ProParkPage() {
                 style={{ fontSize: "clamp(4rem,12vw,8rem)", color: TEXT, letterSpacing: "-0.03em" }}>
                 ProPark
               </h1>
-              <p className="mt-3 font-display italic leading-snug"
-                style={{ fontSize: "clamp(1.2rem,3vw,1.65rem)", color: GOLD }}>
+              <p className="mt-3 font-propark italic leading-snug"
+                style={{ fontSize: "clamp(1.2rem,3vw,1.65rem)", color: GOLD, fontWeight: 300 }}>
                 {proj.subtitle}
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function ProParkPage() {
                 {PROCESS.map((s, i) => (
                   <React.Fragment key={s.n}>
                     <div className="flex items-center gap-2 py-1">
-                      <span className="font-hand text-base" style={{ color: GOLD }}>{s.n}</span>
+                      <span className="font-propark text-sm" style={{ color: GOLD, fontWeight: 500 }}>{s.n}</span>
                       <span className="text-sm font-medium" style={{ color: TEXT }}>{s.label}</span>
                     </div>
                     {i < PROCESS.length - 1 && (
@@ -107,7 +107,7 @@ export default function ProParkPage() {
               <p className="text-[10px] tracking-[0.3em] uppercase mb-3 font-semibold" style={{ color: DIM }}>
                 How might we
               </p>
-              <p className="font-display italic text-base leading-relaxed" style={{ color: MUTED }}>
+              <p className="font-propark italic text-base leading-relaxed" style={{ color: MUTED, fontWeight: 300 }}>
                 "{proj.hmw}"
               </p>
             </div>
@@ -120,7 +120,7 @@ export default function ProParkPage() {
       {/* footer */}
       <div style={{ borderTop: `1px solid ${BORDER}`, background: BG_ALT }}>
         <div className="max-w-5xl mx-auto px-6 md:px-12 py-8 flex items-center justify-between flex-wrap gap-4">
-          <p className="font-hand text-lg" style={{ color: MUTED }}>thanks for reading ✦</p>
+          <p className="font-propark text-lg" style={{ color: MUTED, fontWeight: 300 }}>thanks for reading ✦</p>
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm border

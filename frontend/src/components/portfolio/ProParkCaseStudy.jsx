@@ -57,7 +57,7 @@ function Section({ children, alt = false }) {
 function Label({ num, children }) {
   return (
     <div className="flex items-center gap-3 mb-6">
-      <span className="font-hand text-base" style={{ color: GOLD }}>{num}</span>
+      <span className="font-propark text-sm font-medium" style={{ color: GOLD }}>{num}</span>
       <div className="h-px w-5" style={{ background: BORDER }} />
       <span className="text-[11px] tracking-[0.28em] uppercase font-semibold" style={{ color: GOLD }}>
         {children}
@@ -68,7 +68,7 @@ function Label({ num, children }) {
 
 function H2({ children, size = "text-4xl md:text-5xl" }) {
   return (
-    <h2 className={`font-display font-semibold leading-[1.06] tracking-tight ${size}`}
+    <h2 className={`font-propark font-semibold leading-[1.06] tracking-tight ${size}`}
       style={{ color: TEXT }}>
       {children}
     </h2>
@@ -79,7 +79,7 @@ function Note({ children }) {
   return (
     <div className="flex items-center gap-2 mt-3">
       <Arrow color={GOLD} width={36} />
-      <span className="font-hand italic text-sm" style={{ color: GOLD }}>{children}</span>
+      <span className="font-propark italic text-sm" style={{ color: GOLD, fontWeight: 300 }}>{children}</span>
     </div>
   );
 }
@@ -88,7 +88,7 @@ function Quote({ children }) {
   return (
     <blockquote className="border-l-2 pl-4 py-1 my-3"
       style={{ borderColor: `rgba(200,146,10,0.35)` }}>
-      <p className="font-display italic text-sm leading-relaxed" style={{ color: MUTED }}>
+      <p className="font-propark italic text-sm leading-relaxed" style={{ color: MUTED, fontWeight: 300 }}>
         "{children}"
       </p>
     </blockquote>
@@ -158,7 +158,7 @@ export default function ProParkCaseStudy() {
             <p className="text-[10px] tracking-[0.3em] uppercase font-semibold mb-4" style={{ color: DIM }}>
               Design brief
             </p>
-            <p className="font-display italic text-base leading-relaxed" style={{ color: MUTED }}>
+            <p className="font-propark italic text-base leading-relaxed" style={{ color: MUTED, fontWeight: 300 }}>
               How might we design a peer-to-peer parking app that{" "}
               <strong style={{ color: TEXT }}>makes parking spaces more accessible</strong>{" "}
               in urban spaces — by unlocking unused private spots and{" "}
@@ -176,7 +176,7 @@ export default function ProParkCaseStudy() {
               style={{ fontSize: "clamp(3.5rem,10vw,7rem)", color: TEXT, letterSpacing: "-0.03em" }}>
               1:3650
             </p>
-            <p className="font-hand text-lg mt-1" style={{ color: "rgba(26,26,26,0.5)" }}>
+            <p className="font-propark text-base mt-1" style={{ color: "rgba(26,26,26,0.5)", fontWeight: 300 }}>
               cars to parking spots — India
             </p>
           </div>
@@ -234,8 +234,8 @@ export default function ProParkCaseStudy() {
                 <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b"
                   style={{ background: CARD2, borderColor: BORDER }}>
                   <div>
-                    <p className="font-display font-semibold text-2xl" style={{ color: TEXT }}>{p.title}</p>
-                    <p className="font-display italic text-base" style={{ color: GOLD }}>{p.role}</p>
+                    <p className="font-propark font-semibold text-2xl" style={{ color: TEXT }}>{p.title}</p>
+                    <p className="font-propark italic text-base" style={{ color: GOLD, fontWeight: 300 }}>{p.role}</p>
                   </div>
                   <span className="text-3xl">{p.emoji}</span>
                 </div>
@@ -312,7 +312,7 @@ export default function ProParkCaseStudy() {
       <div style={{ background: GOLDBG, borderTop: `1px solid rgba(26,26,26,0.08)`, borderBottom: `1px solid rgba(26,26,26,0.08)` }}>
         <div className="max-w-5xl mx-auto px-6 md:px-12 py-4 flex items-center gap-3">
           <Sparkle color={TEXT} size={16} />
-          <p className="font-hand text-xl" style={{ color: TEXT }}>and here's what we built →</p>
+          <p className="font-propark text-base" style={{ color: TEXT, fontWeight: 400 }}>and here's what we built →</p>
         </div>
       </div>
 
@@ -350,7 +350,7 @@ export default function ProParkCaseStudy() {
               <img src="/propark/onboarding.png" alt="Onboarding" className="w-full h-auto block" loading="lazy" />
             </div>
             <div>
-              <p className="font-display font-semibold text-xl" style={{ color: TEXT }}>Onboarding</p>
+              <p className="font-propark font-semibold text-xl" style={{ color: TEXT }}>Onboarding</p>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>
                 Phone number + auto OTP. Zero friction from first tap to account creation.
               </p>
@@ -368,7 +368,7 @@ export default function ProParkCaseStudy() {
                 style={{ borderColor: BORDER, background: CARD }}>
                 <img src={s.src} alt={s.label} className="w-full h-auto block" loading="lazy" />
                 <div className="px-5 py-4 border-t" style={{ borderColor: BORDER }}>
-                  <p className="font-display font-semibold text-base" style={{ color: TEXT }}>{s.label}</p>
+                  <p className="font-propark font-semibold text-base" style={{ color: TEXT }}>{s.label}</p>
                   <p className="mt-1 text-xs leading-relaxed" style={{ color: MUTED }}>{s.desc}</p>
                 </div>
               </div>
@@ -387,7 +387,7 @@ export default function ProParkCaseStudy() {
                 style={{ borderColor: BORDER, background: CARD }}>
                 <img src={s.src} alt={s.label} className="w-full h-auto block" loading="lazy" />
                 <div className="px-4 py-3 border-t" style={{ borderColor: BORDER }}>
-                  <p className="font-display font-semibold text-sm" style={{ color: TEXT }}>{s.label}</p>
+                  <p className="font-propark font-semibold text-sm" style={{ color: TEXT }}>{s.label}</p>
                   <p className="mt-1 text-xs leading-relaxed" style={{ color: MUTED }}>{s.desc}</p>
                 </div>
               </div>
@@ -424,7 +424,7 @@ export default function ProParkCaseStudy() {
               <div className="rounded-[24px] border p-6 h-full shadow-sm"
                 style={{ background: CARD, borderColor: BORDER }}>
                 <span className="text-2xl">{o.icon}</span>
-                <p className="mt-3 font-display font-semibold text-base" style={{ color: TEXT }}>{o.title}</p>
+                <p className="mt-3 font-propark font-semibold text-base" style={{ color: TEXT }}>{o.title}</p>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>{o.body}</p>
               </div>
             </Reveal>
@@ -434,8 +434,8 @@ export default function ProParkCaseStudy() {
         <Reveal delay={120}>
           <div className="mt-4 rounded-[24px] p-6 border shadow-sm"
             style={{ background: CARD, borderColor: `rgba(200,146,10,0.15)` }}>
-            <p className="font-hand text-base mb-2" style={{ color: MUTED }}>in retrospect →</p>
-            <p className="font-display italic text-xl leading-snug max-w-2xl" style={{ color: TEXT }}>
+            <p className="font-propark text-sm mb-2" style={{ color: MUTED, fontWeight: 300 }}>in retrospect →</p>
+            <p className="font-propark italic text-xl leading-snug max-w-2xl" style={{ color: TEXT, fontWeight: 300 }}>
               "A 1-week sprint taught me how to move fast <em>and</em> design with care.
               Constraints aren't blockers — they're just hidden design decisions."
             </p>

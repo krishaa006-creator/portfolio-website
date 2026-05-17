@@ -142,13 +142,13 @@ export default function ProParkCaseStudy() {
           <Reveal delay={80}>
             <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
               <img src="/propark/context-bg.png" alt="Urban scene"
-                className="w-full h-auto block" loading="lazy" />
+                className="w-full h-auto block border-t-[#d4ccc400] border-r-[#d4ccc400] border-b-[#d4ccc400] border-l-[#d4ccc400]" loading="lazy" />
             </div>
           </Reveal>
         </div>
 
         <div className="grid grid-cols-3 gap-3 mt-10">
-          <Stat value="1:3,650"   label="parking spots per car in Indian cities"               delay={0}   />
+          <Stat value="1:3650"   label="parking spots per car in Indian cities"               delay={0}   />
           <Stat value="20+ min"   label="average time lost circling for a spot per trip"       delay={60}  />
           <Stat value="₹0 earned" label="from millions of idle private driveways every day"   delay={120} />
         </div>
@@ -174,7 +174,7 @@ export default function ProParkCaseStudy() {
           <div className="shrink-0 text-center md:text-left">
             <p className="font-propark font-bold leading-none"
               style={{ fontSize: "clamp(3.5rem,10vw,7rem)", color: TEXT, letterSpacing: "-0.03em" }}>
-              1:3,650
+              1:3650
             </p>
             <p className="font-hand text-lg mt-1" style={{ color: "rgba(26,26,26,0.5)" }}>
               cars to parking spots — India

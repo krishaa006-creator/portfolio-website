@@ -102,8 +102,8 @@ export default function AlstomCaseStudy() {
         </Reveal>
 
         <Reveal delay={60}>
-          <div className="mt-8">
-            <SlideImg src="/alstom/27.png" alt="The team" />
+          <div className="mt-8 rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER, background: CARD }}>
+            <img src="/alstom/team-photo.png" alt="The team" className="w-full h-auto block" loading="lazy" />
           </div>
         </Reveal>
 
@@ -148,7 +148,13 @@ export default function AlstomCaseStudy() {
         </Reveal>
 
         <Reveal delay={60}>
-          <SlideImg src="/alstom/28.png" alt="Industry brief and rebrief" className="mt-6" />
+          <SlideImg src="/alstom/negative-narratives.png" alt="Indian Railways negative narratives" className="mt-6"
+            caption="Field observations: Indian Railways are synonymous with negative narratives" />
+        </Reveal>
+
+        <Reveal delay={70}>
+          <SlideImg src="/alstom/research-cards.png" alt="Research insights and problem areas" className="mt-4"
+            caption="Research synthesis: problems identified across waiting, boarding, the journey, and exiting" />
         </Reveal>
 
         <Reveal delay={80}>
@@ -179,7 +185,8 @@ export default function AlstomCaseStudy() {
         </Reveal>
 
         <Reveal delay={60}>
-          <SlideImg src="/alstom/29.png" alt="User personas and commute patterns" className="mt-8" />
+          <SlideImg src="/alstom/commute-map.png" alt="Bangalore commute patterns — white and blue collar" className="mt-8"
+            caption="White collar commuters cluster inside Bengaluru's ring; blue collar workers radiate in from surrounding towns" />
         </Reveal>
 
         <div className="mt-6 grid md:grid-cols-2 gap-4">
@@ -227,7 +234,12 @@ export default function AlstomCaseStudy() {
         </Reveal>
 
         <Reveal delay={60}>
-          <SlideImg src="/alstom/30.png" alt="Diversity gap in public transit" className="mt-8" />
+          <div className="mt-8 grid md:grid-cols-2 gap-4">
+            <SlideImg src="/alstom/journey-map-1.png" alt="Journey comparison — Private vs Bus vs Train (part 1)"
+              caption="From identifying a route to boarding — three very different experiences" />
+            <SlideImg src="/alstom/journey-map-2.png" alt="Journey comparison — Private vs Bus vs Train (part 2)"
+              caption="Arriving, finding space, and exiting — where public transit consistently loses" />
+          </div>
         </Reveal>
 
         <Reveal delay={80}>
@@ -262,7 +274,8 @@ export default function AlstomCaseStudy() {
           </p>
         </Reveal>
         <Reveal delay={60}>
-          <SlideImg src="/alstom/31.png" alt="System map" className="mt-8" />
+          <SlideImg src="/alstom/system-map.png" alt="Full service system map" className="mt-8"
+            caption="Five zones: buying the ticket → entering the train → boarding → in the train → exiting" />
         </Reveal>
       </Section>
 

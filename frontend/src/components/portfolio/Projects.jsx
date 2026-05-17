@@ -11,7 +11,11 @@ function ProjectCard({ p, idx, onOpen }) {
   return (
     <div ref={cardRef}>
       <button
-        onClick={() => (p.id === "propark" ? navigate("/work/propark") : onOpen(p))}
+        onClick={() =>
+          p.id === "propark" ? navigate("/work/propark") :
+          p.id === "namma-sarathi" ? navigate("/work/namma-sarathi") :
+          onOpen(p)
+        }
         className="group text-left block relative w-full"
       >
         <article

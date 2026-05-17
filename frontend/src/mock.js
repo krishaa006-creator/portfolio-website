@@ -283,6 +283,7 @@ export const projects = [
     ],
   },
   {
+    coverImage: "/alstom/34.png",
     id: "namma-sarathi",
     number: "03",
     title: "Namma Sarathi",

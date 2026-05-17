@@ -71,7 +71,7 @@ export default function ProParkPage() {
             </div>
 
             <div className="flex items-end justify-center md:justify-end shrink-0"
-              style={{ height: 260, marginBottom: "-4rem" }}>
+              style={{ height: 360, marginBottom: "-4rem" }}>
               <img
                 src="/propark/cover-hand.png"
                 alt="ProPark app on phone"

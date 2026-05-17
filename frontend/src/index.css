@@ -53,7 +53,7 @@ body {
 .font-display { font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'opsz' 144, 'SOFT' 80; }
 .font-hand { font-family: 'Caveat', cursive; }
 .font-body { font-family: 'Inter', sans-serif; }
-.font-propark { font-family: 'Astro Space', 'Inter', sans-serif; letter-spacing: 0.01em; }
+.font-propark { font-family: 'Space Grotesk', 'Inter', sans-serif; letter-spacing: -0.02em; }
 
 /* Balanced headings */
 h1, h2, h3 { text-wrap: balance; }

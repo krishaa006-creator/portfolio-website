@@ -46,7 +46,7 @@ export default function ProParkPage() {
       </div>
 
       {/* ══ HERO ══════════════════════════════════════════ */}
-      <div style={{ background: BG_ALT, borderBottom: `1px solid ${BORDER}`, overflow: "visible" }}>
+      <div style={{ background: BG_ALT, borderBottom: `1px solid ${BORDER}` }}>
         <div className="max-w-5xl mx-auto px-6 md:px-12 pt-32 pb-16">
 
           {/* eyebrow */}
@@ -71,7 +71,7 @@ export default function ProParkPage() {
             </div>
 
             <div className="flex items-end justify-center md:justify-end shrink-0"
-              style={{ height: 360, marginBottom: "-4rem" }}>
+              style={{ height: 360 }}>
               <img
                 src="/propark/cover-hand.png"
                 alt="ProPark app on phone"

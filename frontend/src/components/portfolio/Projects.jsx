@@ -20,7 +20,7 @@ function ProjectCard({ p, idx, onOpen }) {
         >
           {p.coverImage ? (
             <div className="grid md:grid-cols-[5fr_7fr] items-stretch">
-              <div className="flex items-center justify-center p-8 md:p-10 max-h-[420px]">
+              <div className="flex items-center justify-center p-8 md:p-10 max-h-[420px] bg-[#212121]">
                 <img
                   src={p.coverImage}
                   alt={`${p.title} cover`}
@@ -31,14 +31,14 @@ function ProjectCard({ p, idx, onOpen }) {
               <div className="border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 p-8 md:p-10 flex flex-col">
                 <div>
                   <div className="flex items-center gap-3">
-                    <span className="font-hand text-2xl" style={{ color: p.accent }}>{p.number}</span>
+                    <span className="font-hand text-2xl text-[#ffc100]">{p.number}</span>
                     <div className="h-px flex-1 bg-[#1A1A1A]/25" />
                     <span className="text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/60">{p.year}</span>
                   </div>
                   <h3 className="mt-6 font-display text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold leading-[1.02] tracking-tight">
                     {p.title}
                   </h3>
-                  <p className="mt-3 font-display italic text-lg md:text-2xl" style={{ color: p.accent }}>
+                  <p className="mt-3 font-display italic text-lg md:text-2xl text-[#ffc100]">
                     {p.subtitle}
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-[#1A1A1A]/70">{p.description}</p>

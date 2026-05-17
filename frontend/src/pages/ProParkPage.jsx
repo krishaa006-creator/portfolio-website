@@ -57,8 +57,8 @@ export default function ProParkPage() {
             </span>
           </div>
 
-          {/* title + meta */}
-          <div className="grid md:grid-cols-[1fr_auto] gap-10 items-end">
+          {/* title + image */}
+          <div className="grid md:grid-cols-[1fr_auto] gap-6 items-end">
             <div>
               <h1 className="font-propark font-bold leading-none"
                 style={{ fontSize: "clamp(4rem,12vw,8rem)", color: TEXT, letterSpacing: "-0.03em" }}>
@@ -70,18 +70,12 @@ export default function ProParkPage() {
               </p>
             </div>
 
-            <div className="flex md:flex-col gap-2 flex-wrap pb-1">
-              {[
-                { l: "Role",   v: proj.role },
-                { l: "Sprint", v: proj.duration },
-                { l: "Year",   v: proj.year },
-              ].map(({ l, v }) => (
-                <div key={l} className="rounded-xl px-4 py-2.5 border"
-                  style={{ background: CARD, borderColor: BORDER, minWidth: 140 }}>
-                  <p className="text-[10px] tracking-widest uppercase" style={{ color: DIM }}>{l}</p>
-                  <p className="text-sm font-semibold mt-0.5" style={{ color: TEXT }}>{v}</p>
-                </div>
-              ))}
+            <div className="flex items-end justify-center md:justify-end shrink-0" style={{ height: 220 }}>
+              <img
+                src="/propark/cover-hand.png"
+                alt="ProPark app on phone"
+                className="h-full w-auto block object-contain object-bottom"
+              />
             </div>
           </div>
 

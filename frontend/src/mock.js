@@ -216,7 +216,7 @@ export const projects = [
     tags: ["Mobile App", "Sharing Economy", "Urban Mobility"],
     accent: "#E8532C",
     bg: "#FAF7F2",
-    coverImage: "/propark/cover.png",
+    coverImage: "/propark/cover-hand.png",
     slides: [
       { src: "/propark/06.png", section: "Context Setting & Design Brief" },
       { src: "/propark/07.png", section: "Empathising with Our Users" },

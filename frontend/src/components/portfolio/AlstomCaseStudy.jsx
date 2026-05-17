@@ -77,7 +77,7 @@ function TeamSection() {
 
         {/* LEFT — photo */}
         <Reveal>
-          <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+          <div className="rounded-[24px] overflow-hidden">
             <img src="/alstom/team-photo.png" alt="Meet the team" className="w-full h-auto block" loading="lazy" />
           </div>
         </Reveal>
@@ -152,7 +152,7 @@ function BriefSection() {
           </Reveal>
 
           <Reveal delay={60}>
-            <div className="mt-6 rounded-[20px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+            <div className="mt-6 rounded-[20px] overflow-hidden">
               <img src="/alstom/negative-narratives.png" alt="Indian Railways negative narratives"
                 className="w-full h-auto block" loading="lazy" />
             </div>
@@ -165,7 +165,7 @@ function BriefSection() {
         {/* RIGHT */}
         <div>
           <Reveal delay={40}>
-            <div className="rounded-[20px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+            <div className="rounded-[20px] overflow-hidden">
               <img src="/alstom/research-cards.png" alt="Research insights"
                 className="w-full h-auto block" loading="lazy" />
             </div>
@@ -283,7 +283,7 @@ function UsersSection() {
 
         {/* RIGHT — commute map */}
         <Reveal delay={60}>
-          <div className="rounded-[20px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+          <div className="rounded-[20px] overflow-hidden">
             <img src="/alstom/commute-map.png" alt="Bangalore commute patterns"
               className="w-full h-auto block" loading="lazy" />
           </div>
@@ -324,7 +324,7 @@ function DiversitySection() {
 
         {/* LEFT — table */}
         <Reveal>
-          <div className="rounded-[20px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+          <div className="rounded-[20px] overflow-hidden">
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr style={{ background: CARD2, borderBottom: `1px solid ${BORDER}` }}>
@@ -373,13 +373,13 @@ function DiversitySection() {
         {/* RIGHT — journey maps, tilted stacked */}
         <Reveal delay={80}>
           <div className="relative" style={{ height: 380 }}>
-            <div className="absolute inset-0 rounded-[20px] overflow-hidden border shadow-md"
-              style={{ transform: "rotate(2deg) translateY(8px)", borderColor: BORDER, zIndex: 1 }}>
+            <div className="absolute inset-0 rounded-[20px] overflow-hidden shadow-md"
+              style={{ transform: "rotate(2deg) translateY(8px)", zIndex: 1 }}>
               <img src="/alstom/journey-map-2.png" alt="Journey map part 2"
                 className="w-full h-full object-cover object-top" loading="lazy" />
             </div>
-            <div className="absolute inset-0 rounded-[20px] overflow-hidden border shadow-lg"
-              style={{ transform: "rotate(-1deg)", borderColor: BORDER, zIndex: 2 }}>
+            <div className="absolute inset-0 rounded-[20px] overflow-hidden shadow-lg"
+              style={{ transform: "rotate(-1deg)", zIndex: 2 }}>
               <img src="/alstom/journey-map-1.png" alt="Journey map part 1"
                 className="w-full h-full object-cover object-top" loading="lazy" />
             </div>
@@ -399,7 +399,7 @@ function SystemSection() {
       {/* full-bleed image */}
       <Reveal className="max-w-5xl mx-auto px-6 md:px-12 pt-16">
         <Label num="05" children="Systems thinking" />
-        <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+        <div className="rounded-[24px] overflow-hidden">
           <img src="/alstom/system-map.png" alt="Service system map"
             className="w-full h-auto block" loading="lazy" />
         </div>
@@ -470,10 +470,10 @@ function BoardingSection() {
         </Reveal>
         <Reveal delay={80}>
           <div className="flex flex-col gap-4">
-            <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+            <div className="rounded-[24px] overflow-hidden">
               <img src="/alstom/32.png" alt="Boarding and deboarding" className="w-full h-auto block" loading="lazy" />
             </div>
-            <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+            <div className="rounded-[24px] overflow-hidden">
               <img src="/alstom/33.png" alt="Station digital screens" className="w-full h-auto block" loading="lazy" />
             </div>
           </div>
@@ -503,14 +503,14 @@ function EssentialSection() {
       </Reveal>
 
       <Reveal delay={60}>
-        <div className="mt-8 rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+        <div className="mt-8 rounded-[24px] overflow-hidden">
           <img src="/alstom/34.png" alt="The Essential Coach" className="w-full h-auto block" loading="lazy" />
         </div>
       </Reveal>
 
       <Reveal delay={80}>
         <div className="mt-4 grid md:grid-cols-[3fr_2fr] gap-6 items-center">
-          <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+          <div className="rounded-[24px] overflow-hidden">
             <img src="/alstom/35.png" alt="Seating" className="w-full h-auto block" loading="lazy" />
           </div>
           <div>
@@ -529,7 +529,7 @@ function EssentialSection() {
       </Reveal>
 
       <Reveal delay={60}>
-        <div className="mt-4 rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+        <div className="mt-4 rounded-[24px] overflow-hidden">
           <img src="/alstom/36.png" alt="Usability" className="w-full h-auto block" loading="lazy" />
         </div>
         <p className="mt-2 text-xs text-center" style={{ color: DIM }}>
@@ -558,7 +558,7 @@ function ComfortSection() {
       </Reveal>
 
       <Reveal delay={60}>
-        <div className="mt-8 rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+        <div className="mt-8 rounded-[24px] overflow-hidden">
           <img src="/alstom/37.png" alt="The Comfort Coach" className="w-full h-auto block" loading="lazy" />
         </div>
       </Reveal>
@@ -572,7 +572,7 @@ function ComfortSection() {
               exact seat, and download an e-ticket — the whole flow in under two minutes.
             </p>
           </div>
-          <div className="rounded-[24px] overflow-hidden border shadow-sm" style={{ borderColor: BORDER }}>
+          <div className="rounded-[24px] overflow-hidden">
             <img src="/alstom/38.png" alt="Pre-book app" className="w-full h-auto block" loading="lazy" />
           </div>
         </div>

@@ -20,11 +20,11 @@ function ProjectCard({ p, idx, onOpen }) {
         >
           {p.coverImage ? (
             <div className="grid md:grid-cols-[5fr_7fr] items-stretch">
-              <div className="flex items-center justify-center p-8 md:p-10 max-h-[420px] bg-[#f9f6f1]">
+              <div className="flex items-center justify-center overflow-hidden max-h-[420px] bg-[#f9f6f1]">
                 <img
                   src={p.coverImage}
                   alt={`${p.title} cover`}
-                  className="w-full h-full object-contain block transition-transform duration-500 group-hover:scale-[1.04]"
+                  className="h-full w-auto block transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </div>
 
